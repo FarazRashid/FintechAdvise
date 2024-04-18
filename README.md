@@ -1,5 +1,8 @@
 # FinTechAdvise - Revolutionizing Financial Wellness
 
+![Logo](./logo.png)
+
+
 ## Overview:
 
 FinTechAdvise is an innovative project at the forefront of the financial technology (FinTech) domain, aiming to revolutionize the way individuals approach and manage their financial well-being. With a comprehensive suite of tools and services, FinTechAdvise empowers users to make informed decisions, optimize their financial health, and navigate the complexities of the modern financial landscape.
