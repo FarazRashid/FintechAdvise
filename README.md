@@ -1,6 +1,6 @@
 # FinTechAdvise - Revolutionizing Financial Wellness
 
-![Logo](./logo.png)
+![Logo](./fintechadvise.png)
 
 
 ## Overview:
