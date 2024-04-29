@@ -23,13 +23,15 @@
         app:layout_constraintStart_toStartOf="parent"
         />
 
+    <!-- activity_home.xml -->
+    <!-- activity_home.xml -->
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNavigationView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/bottom_nav_primary"
-        app:itemIconTint="@color/icon_primary"
-        app:itemTextColor="@color/white"
+        android:background="@color/icon_secondary"
+        app:itemIconTint="@color/bottom_nav_color"
+        app:itemTextColor="@color/bottom_nav_color"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

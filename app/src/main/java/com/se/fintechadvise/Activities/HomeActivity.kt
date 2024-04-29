@@ -5,6 +5,8 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.se.fintechadvise.Fragments.HomeFragment
+import com.se.fintechadvise.HelperClasses.BottomNavigationHelper
 import com.se.fintechadvise.R
 
 class HomeActivity : AppCompatActivity() {
@@ -17,5 +19,8 @@ class HomeActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+
+        BottomNavigationHelper(this).loadFragment(HomeFragment())
+        BottomNavigationHelper(this).setUpBottomNavigation()
     }
 }

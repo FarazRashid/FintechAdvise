@@ -23,6 +23,8 @@
 
         android:layout_width="40dp"
         android:layout_height="40dp"
+        android:layout_marginStart="28dp"
+        android:layout_marginTop="56dp"
         android:src="@drawable/left_arrow"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -83,27 +85,19 @@
         app:layout_constraintStart_toStartOf="@+id/emailEditText"
         app:layout_constraintTop_toBottomOf="@+id/emailEditText" />
 
-    <EditText
+    <Spinner
         android:id="@+id/countryEditText"
         android:layout_width="300dp"
         android:layout_height="40dp"
         android:layout_marginTop="24dp"
-        android:background="@drawable/edittext_stroke"
-        android:drawableStart="@drawable/location"
-        android:drawablePadding="10dp"
-        android:fontFamily="@font/abeezee"
-        android:hint="Country"
-        android:inputType="textEmailAddress"
-        android:paddingStart="10dp"
+        android:background="@drawable/spinner_background"
+        android:paddingHorizontal="10dp"
+        android:paddingStart="30dp"
         android:paddingEnd="10dp"
-        android:textColor="@color/text_secondary"
-        android:textColorHint="@color/text_secondary"
-        android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="@+id/emailEditText"
         app:layout_constraintHorizontal_bias="0.55"
         app:layout_constraintStart_toStartOf="@+id/emailEditText"
         app:layout_constraintTop_toBottomOf="@+id/phoneEditText" />
-
     <EditText
         android:id="@+id/passwordEditText"
         android:layout_width="300dp"
@@ -125,6 +119,21 @@
         app:layout_constraintHorizontal_bias="0.507"
         app:layout_constraintStart_toStartOf="@+id/imageView"
         app:layout_constraintTop_toBottomOf="@+id/countryEditText" />
+
+    <ProgressBar
+        android:id="@+id/passwordStrengthProgressBar"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:max="5"
+        android:progress="0"
+        android:progressTint="@color/icon_secondary"
+        app:layout_constraintBottom_toTopOf="@+id/reEnterPasswordEditText"
+        app:layout_constraintEnd_toEndOf="@+id/passwordEditText"
+        app:layout_constraintStart_toStartOf="@+id/passwordEditText"
+        app:layout_constraintTop_toBottomOf="@+id/passwordEditText"
+        app:layout_constraintVertical_bias="0.0" />
 
     <EditText
         android:id="@+id/reEnterPasswordEditText"
@@ -193,5 +202,6 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/TextView"
         app:layout_constraintTop_toTopOf="@+id/TextView" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
