@@ -118,6 +118,7 @@ class SignUpActivity : AppCompatActivity() {
             emailEditText.error = "Please enter an email"
             emailEditText.requestFocus()
             CallBack(false)
+            return
         }
 
 
@@ -131,6 +132,7 @@ class SignUpActivity : AppCompatActivity() {
             emailEditText.error = "Please enter a valid email"
             emailEditText.requestFocus()
             CallBack(false)
+            return
         }
 
         //country must be selected and should not be equal to "Select A Country"
@@ -138,24 +140,29 @@ class SignUpActivity : AppCompatActivity() {
         if (countrySpinner.selectedItem.toString() == "Select A Country") {
             CustomToastMaker().showToast(this, "Please select a country")
             CallBack(false)
+            return
         }
 
         if (password.isEmpty()) {
             passwordEditText.error = "Please enter a password"
             passwordEditText.requestFocus()
             CallBack(false)
+            return
         }
 
         if (confirmPassword.isEmpty()) {
             confirmPasswordEditText.error = "Please confirm your password"
             confirmPasswordEditText.requestFocus()
             CallBack(false)
+            return
         }
 
         if (phoneNumber.isEmpty()) {
             phoneNumberEditText.error = "Please enter a phone number"
             phoneNumberEditText.requestFocus()
             CallBack(false)
+            return
+
         }
 
         // Check if phone number is valid
@@ -163,6 +170,7 @@ class SignUpActivity : AppCompatActivity() {
             phoneNumberEditText.error = "Phone number must begin with + and be 13 digits long"
             phoneNumberEditText.requestFocus()
             CallBack(false)
+            return
         }
 
         // Check if password is strong
@@ -173,13 +181,19 @@ class SignUpActivity : AppCompatActivity() {
             passwordEditText.error = "Password must be greater than 8 characters, must have one upper case, one special character, and have a numeric value"
             passwordEditText.requestFocus()
             CallBack(false)
+            return
+
         }
 
         if (password != confirmPassword) {
             confirmPasswordEditText.error = "Password and confirm password must be the same"
             confirmPasswordEditText.requestFocus()
             CallBack(false)
+            return
         }
+
+        CallBack(true)
+        return
 
     }
 
