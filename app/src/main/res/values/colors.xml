@@ -2,4 +2,43 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="transparent">#00FFFFFF</color>
+    <!-- login and main pages -->
+    <color name="home_gradient_start">#FFFFFF</color>
+    <color name="home_gradient_end">#704432</color>
+    <!-- reset pages -->
+    <color name="reset_gradient_start">#FFD702</color>
+    <color name="reset_gradient_end">#FF8B02</color>
+    <!-- primary -->
+    <color name="surmaiya">#FFD600</color>
+    <color name="splash_primary">#F4CD00</color>
+    <color name="icon_primary">#FFFF</color>
+    <color name="icon_secondary">#442E25</color>
+
+    <!-- Genre Background -->
+    <color name="genre_background">#636060</color>
+
+    <!-- text -->
+    <color name="text_primary">#442E25</color>
+    <color name="text_secondary">#704425</color>
+    <!-- bottom navigation -->
+    <color name="bottom_nav_primary">#00A136</color>
+    <color name="bottom_nav_secondary">#FFFF</color>
+    <!-- add album -->
+    <color name="add_album">#00755D</color>
+    <!-- player -->
+    <color name="closed_player">#550A1C</color>
+    <color name="open_player_end_gradient">#F88703</color>
+    <color name="open_player_start_gradient">#FFB800</color>
+
+    <!-- album -->
+    <color name="album_start_gradient">#FFD600</color>
+    <color name="album_end_gradient">#17151C</color>
+
+    <color name="forgot_password_end_gradient">#D9FF8B02</color>
+
+    <!-- album card -->
+    <color name="playlist_card_gradient_start">#C8E4F1</color>
+    <color name="playlist_card_gradient_end">#DAEFF8</color>
+
 </resources>
