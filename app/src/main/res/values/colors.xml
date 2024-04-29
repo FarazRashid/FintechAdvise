@@ -22,7 +22,7 @@
     <color name="text_primary">#442E25</color>
     <color name="text_secondary">#704425</color>
     <!-- bottom navigation -->
-    <color name="bottom_nav_primary">#00A136</color>
+    <color name="bottom_nav_primary">#442E25</color>
     <color name="bottom_nav_secondary">#FFFF</color>
     <!-- add album -->
     <color name="add_album">#00755D</color>

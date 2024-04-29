@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:id="@+id/settingsButton"
+        android:title="Profile"
+        />
+
+    <item android:id="@+id/monthlyRankingsButton"
+        android:title="Tasks"
+        />
+    <item android:id="@+id/popularPLaylistsButton"
+        android:title="Settings"
+        />
+
+    <item android:id="@+id/notificataionsButton"
+        android:title="About"
+
+        />
+
+</menu>

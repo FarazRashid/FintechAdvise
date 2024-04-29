@@ -13,16 +13,25 @@
         android:theme="@style/Theme.FintechAdvise"
         tools:targetApi="31">
         <activity
+            android:name=".Activities.HomeActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Activities.ResetPasswordActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Activities.ForgotPasswordActivity"
+            android:exported="false" />
+        <activity
             android:name=".Activities.SignUpActivity"
             android:exported="false" />
         <activity
             android:name=".Activities.LoginActivity"
             android:exported="false" />
         <activity
-            android:name=".Activities.Activities.SplashScreenActivity"
+            android:name=".Activities.SplashScreenActivity"
             android:exported="false" />
         <activity
-            android:name=".Activities.Activities.MainActivity"
+            android:name=".Activities.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

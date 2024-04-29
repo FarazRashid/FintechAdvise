@@ -11,27 +11,31 @@ import androidx.core.view.WindowInsetsCompat
 import com.se.fintechadvise.HelperClasses.Navigator
 import com.se.fintechadvise.R
 
-class SignUpActivity : AppCompatActivity() {
+class ResetPasswordActivity : AppCompatActivity() {
 
+    private lateinit var resetButton: Button
     private lateinit var loginTextView: TextView
     private lateinit var backButton: ImageView
-    private lateinit var signUpButton: Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_sign_up)
+        setContentView(R.layout.activity_reset_password)
 
         initializeViews()
         setUpOnClickListeners()
     }
 
     private fun initializeViews() {
+        resetButton = findViewById(R.id.resetButton)
         loginTextView = findViewById(R.id.loginTextView)
         backButton = findViewById(R.id.backButton)
-        signUpButton = findViewById(R.id.signUpButton)
     }
 
     private fun setUpOnClickListeners() {
+        resetButton.setOnClickListener {
+            Navigator.navigateToActivity(this,LoginActivity::class.java)
+        }
+
         loginTextView.setOnClickListener {
             Navigator.navigateToActivity(this,LoginActivity::class.java)
         }
@@ -39,9 +43,6 @@ class SignUpActivity : AppCompatActivity() {
         backButton.setOnClickListener {
             onBackPressed()
         }
-
-        signUpButton.setOnClickListener {
-            Navigator.navigateToActivity(this,HomeActivity::class.java)
-        }
     }
+
 }

@@ -33,7 +33,7 @@ class LoginActivity : AppCompatActivity() {
 
     private fun setUpOnClickListeners() {
         loginButton.setOnClickListener {
-          //  Navigator.navigateToActivity(this, HomeActivity::class.java)
+            Navigator.navigateToActivity(this, HomeActivity::class.java)
         }
 
         signUpButton.setOnClickListener {
@@ -45,7 +45,7 @@ class LoginActivity : AppCompatActivity() {
         }
 
         forgotPasswordTextView.setOnClickListener {
-           // Navigator.navigateToActivity(this, ForgotPasswordActivity::class.java)
+           Navigator.navigateToActivity(this, ForgotPasswordActivity::class.java)
         }
     }
 

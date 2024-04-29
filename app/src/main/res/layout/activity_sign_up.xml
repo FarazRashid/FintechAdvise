@@ -3,7 +3,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".Activities.SignUpActivity"
+    >
 
     <ImageView
         android:id="@+id/imageView"
@@ -167,28 +169,29 @@
         android:id="@+id/TextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="36dp"
+        android:layout_marginBottom="24dp"
         android:fontFamily="@font/abeezee"
         android:text="Already have an account?"
         android:textColor="#9C5B3F"
         android:textFontWeight="600"
         android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/signUpButton"
-        app:layout_constraintTop_toBottomOf="@+id/signUpButton" />
+        app:layout_constraintStart_toStartOf="@+id/reEnterPasswordEditText" />
 
     <TextView
         android:id="@+id/loginTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="4dp"
+        android:layout_width="36dp"
+        android:layout_height="14dp"
+        android:layout_marginStart="11dp"
         android:fontFamily="@font/abeezee"
         android:text="Login"
         android:textColor="@color/text_primary"
         android:textFontWeight="600"
         android:textSize="14sp"
-        app:layout_constraintBottom_toBottomOf="@+id/TextView"
-        app:layout_constraintEnd_toEndOf="@+id/signUpButton"
-        app:layout_constraintHorizontal_bias="0.31"
-        app:layout_constraintStart_toEndOf="@+id/TextView" />
+        app:layout_constraintEnd_toEndOf="@+id/reEnterPasswordEditText"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/TextView"
+        app:layout_constraintTop_toTopOf="@+id/TextView" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
