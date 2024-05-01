@@ -15,3 +15,6 @@
 local.properties
 /backend/config.py
 /backend/DigiCertGlobalRootCA.crt (1).pem
+backend/__pycache__/config.cpython-312.pyc
+backend/__pycache__/DatabaseConnection.cpython-312.pyc
+backend/DigiCertGlobalRootCA.crt_1.pem
