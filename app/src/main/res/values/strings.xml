@@ -5,6 +5,9 @@
     <string name="loginUnderline"> <u>Login</u></string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="intro">This Privacy Policy describes how your personal information is collected, used, and shared when you visit or take advise from FintechAdvise.</string>
+    <string name="security_standards">FintechAdvise takes data protection and user privacy seriously, implementing a robust framework to ensure the security of sensitive information.</string>
+    <string name="protection_tech">FintechAdvise employs a robust data protection policy centered around AES 256 encryption, TLS protocols, and Azure servers.</string>
     <string-array name="goal_types">
         <item>Select goal type</item>
         <item>Emergency Fund</item>

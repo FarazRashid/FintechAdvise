@@ -42,6 +42,8 @@
             android:exported="false" />
         <activity android:name=".Activities.RiskAssessmentActivity"
             android:exported="false" />
+        <activity android:name=".Activities.PrivacyPolicy"
+            android:exported="false" />
         <activity
             android:name=".Activities.MainActivity"
             android:exported="true">
