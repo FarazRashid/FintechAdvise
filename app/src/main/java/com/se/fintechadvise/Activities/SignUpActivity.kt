@@ -36,6 +36,7 @@ import android.widget.Toast
 import com.google.android.material.internal.ViewUtils.dpToPx
 import com.se.fintechadvise.DataClasses.User
 import com.se.fintechadvise.HelperClasses.CustomToastMaker
+import com.se.fintechadvise.ManagerClasses.UserManager
 import com.se.fintechadvise.ManagerClasses.WebserviceManger
 import java.util.UUID
 
@@ -51,7 +52,6 @@ class SignUpActivity : AppCompatActivity() {
     private lateinit var phoneNumberEditText: EditText
     private lateinit var passwordStrengthProgressBar: ProgressBar
     private lateinit var countrySpinner: Spinner
-    private lateinit var nameEditText: EditText
     private lateinit var tooltip: PopupWindow
     private var isSignUpInProgress = false
 
@@ -78,7 +78,6 @@ class SignUpActivity : AppCompatActivity() {
         passwordStrengthProgressBar = findViewById(R.id.passwordStrengthProgressBar)
         passwordEditText.tooltipText = "Password must be greater than 8 characters, must have one upper case, one special character, and have a numeric value"
         countrySpinner = findViewById(R.id.countryEditText)
-        nameEditText = findViewById(R.id.nameEditText)
         setupCountrySpinner()
 
     }
@@ -118,26 +117,6 @@ class SignUpActivity : AppCompatActivity() {
         val confirmPassword = confirmPasswordEditText.text.toString()
         val phoneNumber = phoneNumberEditText.text.toString()
 
-        if(nameEditText.text.toString().isEmpty()){
-            nameEditText.error = "Please enter a name"
-            nameEditText.requestFocus()
-            CallBack(false)
-            return
-        }
-
-        //name must be of characters no special characters and no numbers can have spaces if there
-        //are multiple names
-
-        val namePattern = Pattern.compile("^[a-zA-Z]+( [a-zA-Z]+)*\$")
-
-        val nameMatcher = namePattern.matcher(nameEditText.text.toString())
-
-        if (!nameMatcher.matches()) {
-            nameEditText.error = "Please enter a valid name"
-            nameEditText.requestFocus()
-            CallBack(false)
-            return
-        }
 
         // Check if any field is empty
         if (email.isEmpty()) {
@@ -268,14 +247,10 @@ class SignUpActivity : AppCompatActivity() {
                 verifyFields {
                     if(it) {
 
-                        var user = User(UUID.randomUUID().toString(), nameEditText.text.toString(), emailEditText.text.toString(), countrySpinner.selectedItem.toString(), passwordEditText.text.toString(), phoneNumberEditText.text.toString(), "", "")
-
-                        WebserviceManger.getInstance().saveUserToWebService(user, this){
-                            if(it){
-                                Navigator.navigateToActivity(this, HomeActivity::class.java)
-
-                            }}
-
+                        var user = User(UUID.randomUUID().toString(), "", emailEditText.text.toString(), countrySpinner.selectedItem.toString(), passwordEditText.text.toString(), phoneNumberEditText.text.toString(), "", "")
+                        UserManager.setCurrentUser(user)
+                        Navigator.navigateToActivity(this, RiskAssessmentActivity::class.java)
+                        finish()
                     }
                     isSignUpInProgress = false
 

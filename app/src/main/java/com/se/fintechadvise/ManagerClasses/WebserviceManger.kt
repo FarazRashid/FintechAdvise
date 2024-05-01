@@ -74,6 +74,12 @@
             params.put("name", user.name)
             params.put("email", user.email)
             params.put("country", user.country)
+            params.put("phone", user.phone)
+            params.put("password", user.password)
+            params.put("occupation", user.occupation)
+            params.put("age", user.age)
+            params.put("income", user.income)
+            params.put("riskTolerance", user.riskTolerance)
 
             // Generate the encryption key and IV and store them in SharedPreferences
             val (key, iv1) = SecurityHelper.generateKeyAndStoreInSharedPreferences(context)
@@ -164,6 +170,10 @@
                     user.country = jsonResponse.getString("country")
                     user.password = decryptedPasswordString
                     user.phone = jsonResponse.getString("phone")
+                    user.occupation = jsonResponse.getString("occupation")
+                    user.age = jsonResponse.getString("age")
+                    user.income = jsonResponse.getString("income")
+                    user.riskTolerance = jsonResponse.getString("riskTolerance")
 
                     Log.d("Users","${user.id}, ${user.name}, ${user.email}, ${user.country}, ${user.phone}")
 

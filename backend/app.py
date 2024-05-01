@@ -41,6 +41,10 @@ def create_users_table():
                     phone VARCHAR(15),
                     fcmToken VARCHAR(256) DEFAULT NULL,
                     profilePictureUrl VARCHAR(256) DEFAULT NULL
+                    age VARCHAR(20),
+                    INCOME VARCHAR(20),
+                    occupation VARCHAR(20),
+                    riskTolerance VARCHAR(20),
                 )
             """)
             conn.commit()
@@ -56,8 +60,8 @@ def signup():
             cursor = conn.cursor()
             user = request.get_json()
             hashed_password = user['password']
-            query = "INSERT INTO users (id, name, email, country, password, phone) VALUES (%s, %s, %s, %s, %s, %s)"
-            values = (user['id'], user['name'], user['email'], user['country'], hashed_password, user['phone'])
+            query = "INSERT INTO users (id, name, email, country, password, phone, age, INCOME, occupation, riskTolerance) VALUES (% s, % s, % s, % s, % s, % s, % s, % s, % s, % s)"
+            values = (user['id'], user['name'], user['email'], user['country'], hashed_password, user['phone'], user['age'], user['INCOME'], user['occupation'], user['riskTolerance'])
             cursor.execute(query, values)
             conn.commit()
             cursor.close()
@@ -90,6 +94,7 @@ def login():
     except Exception as e:
         print(f'Error: {e}')
         return jsonify({'error': f'Failed to login user: {e}'}), 400
+    
 
 if __name__ == '__main__':
     app.run(debug=True)

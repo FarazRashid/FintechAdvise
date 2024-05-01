@@ -15,7 +15,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.029" />
+        app:layout_constraintVertical_bias="0.079" />
 
     <ImageView
         android:id="@+id/backButton"
@@ -47,7 +47,7 @@
         android:id="@+id/emailEditText"
         android:layout_width="300dp"
         android:layout_height="40dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="20dp"
         android:background="@drawable/edittext_stroke"
         android:drawableStart="@drawable/mail"
         android:drawablePadding="10dp"
@@ -62,26 +62,6 @@
         app:layout_constraintEnd_toEndOf="@+id/imageView"
         app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="@+id/imageView"
-        app:layout_constraintTop_toBottomOf="@+id/nameEditText" />
-
-    <EditText
-        android:id="@+id/nameEditText"
-        android:layout_width="300dp"
-        android:layout_height="40dp"
-        android:layout_marginTop="24dp"
-        android:background="@drawable/edittext_stroke"
-        android:drawableStart="@drawable/profile"
-        android:drawablePadding="10dp"
-        android:drawableTint="@color/icon_secondary"
-        android:fontFamily="@font/abeezee"
-        android:hint="Name"
-        android:inputType="textEmailAddress"
-        android:paddingStart="10dp"
-        android:paddingEnd="10dp"
-        android:textColor="@color/text_secondary"
-        android:textColorHint="@color/text_secondary"
-        android:textSize="14sp"
-        app:layout_constraintStart_toStartOf="@+id/emailEditText"
         app:layout_constraintTop_toBottomOf="@+id/textView4" />
 
     <EditText
@@ -182,7 +162,7 @@
         android:id="@+id/signUpButton"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="40dp"
         android:background="@drawable/rounded_border"
         android:backgroundTint="@color/icon_secondary"
         android:paddingTop="4dp"

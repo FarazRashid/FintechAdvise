@@ -14,6 +14,8 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isEmpty
 import com.se.fintechadvise.HelperClasses.CustomToastMaker
+import com.se.fintechadvise.ManagerClasses.UserManager
+import com.se.fintechadvise.ManagerClasses.WebserviceManger
 import com.se.fintechadvise.R
 
 class RiskAssessmentActivity: AppCompatActivity() {
@@ -106,7 +108,6 @@ class RiskAssessmentActivity: AppCompatActivity() {
         
         riskToleranceRadioGroup = findViewById(R.id.riskToleranceRadioGroup)
 
-
         val submitButton = findViewById<Button>(R.id.submitFormButton)
         submitButton.setOnClickListener {
             val name = findViewById<TextView>(R.id.nameEditText).text.toString()
@@ -159,28 +160,88 @@ class RiskAssessmentActivity: AppCompatActivity() {
             } else {
                 // All fields are valid, proceed with form submission
 
+                val calculatedRiskTolerance = calculateRiskTolerance(
+                    selectedFinancialStability,
+                    selectedRiskLevel,
+                    selectedRiskTolerance,
+                    selectedPreviousExperience
+                )
 
-                // clear all fields
-                findViewById<TextView>(R.id.nameEditText).text = ""
-                findViewById<TextView>(R.id.ageEditText).text = ""
-                findViewById<TextView>(R.id.occupationEditText).text = ""
-                findViewById<TextView>(R.id.incomeEditText).text = ""
-                findViewById<TextView>(R.id.goalsEditText).text = ""
-                findViewById<TextView>(R.id.goalTimeEditText).text = ""
-                findViewById<TextView>(R.id.additionalCommentsEditText).text = ""
-                experienceSpinner.setSelection(0)
-                riskLevelSpinner.setSelection(0)
-                investmentTimeSpinner.setSelection(0)
-                financialStabilitySpinner.setSelection(0)
-                previousExperienceSpinner.setSelection(0)
-                riskToleranceRadioGroup.clearCheck()
-                CustomToastMaker().showToast(this, "Form submitted successfully")
-                intent = Intent(this, MainActivity::class.java)
-                startActivity(intent)
+                UserManager.getInstance().setUserRiskToleranceItems(age,occupation,income, calculatedRiskTolerance.toString())
+
+                WebserviceManger.getInstance().saveUserToWebService(UserManager.getInstance().getCurrentUser()!!, this) { isSuccess ->
+                    if (isSuccess) {
+                        CustomToastMaker().showToast(this, "Form submitted successfully")
+                        intent = Intent(this, LoginOrSignupActivity::class.java)
+                        startActivity(intent)
+                    } else {
+                        CustomToastMaker().showToast(this, "Failed to submit form")
+                    }
+                }
+
 
             }
         }
 
+    }
+
+    fun calculateRiskTolerance(
+        incomeStability: String,
+        debtLevel: String,
+        riskPreference: String,
+        experienceLevel: String
+    ): Double {
+        var riskTolerance = 1.0
+
+        // Adjust risk tolerance based on income stability
+        when (incomeStability) {
+            "I have a stable income and no debt." -> riskTolerance *= 1.2
+            "I have a stable income and minimal debt." -> riskTolerance *= 1.1
+            "I have a stable income and moderate debt." -> riskTolerance *= 0.9
+            "I have a stable income and high debt." -> riskTolerance *= 0.8
+            "I have an unstable income and minimal debt." -> riskTolerance *= 0.2
+            "I have an unstable income and high debt." -> riskTolerance *= 0
+        }
+
+        // Adjust risk tolerance based on debt level
+            when (debtLevel) {
+            "High" -> riskTolerance *= 0
+            "Moderate" -> riskTolerance *= 0.5
+            "Low" -> riskTolerance *= 1
+        }
+
+        // Adjust risk tolerance based on risk preference
+        when (riskPreference) {
+            "I prefer to avoid risk." -> riskTolerance *= 0
+            "I am willing to take on some risk ." -> riskTolerance *= 0.5
+            "I am comfortable with high risk." -> riskTolerance *= 1
+        }
+
+        // Adjust risk tolerance based on experience level
+        when (experienceLevel) {
+            "Beginner" -> riskTolerance *= 0.5
+            "Intermediate" -> riskTolerance *= 0.75
+            "Advanced" -> riskTolerance *= 1
+        }
+
+        //radio options
+
+        val selectedRiskToleranceRadioButtonId = riskToleranceRadioGroup.checkedRadioButtonId
+        val selectedRiskTolerance = if (selectedRiskToleranceRadioButtonId != -1) {
+            findViewById<RadioButton>(selectedRiskToleranceRadioButtonId).text.toString()
+        } else {
+            ""
+        }
+
+        when (selectedRiskTolerance) {
+            "Very Low" -> riskTolerance *= 0.2
+            "Low" -> riskTolerance *= 0.4
+            "Medium" -> riskTolerance *= 0.6
+            "High" -> riskTolerance *= 0.8
+            "Very High" -> riskTolerance *= 1
+        }
+
+        return riskTolerance * 100
     }
 
 

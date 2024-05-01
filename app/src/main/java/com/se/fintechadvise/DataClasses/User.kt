@@ -8,8 +8,15 @@ data class User(
     var password: String = "",
     var phone: String = "",
     var profilePictureUrl: String = "",
-    var fcmToken:String=""
+    var fcmToken:String="",
+    var age:String="",
+    var occupation:String="",
+    var income:String="",
+    var riskTolerance:String="",
 
 ) {
-    constructor() : this("", "", "", "", "", "", "", "")
+    constructor() : this("", "", "", "", "", "", "", "", "", "", "", "")
+
+    //set income,age, risktolerance, and name
+
 }

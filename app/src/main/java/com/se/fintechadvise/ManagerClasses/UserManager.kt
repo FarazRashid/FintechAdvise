@@ -61,6 +61,13 @@ object UserManager {
         return this.currentUser.profilePictureUrl
     }
 
+    fun setUserRiskToleranceItems(age:String, occupation:String, income:String, riskTolerance:String){
+        this.currentUser.age = age
+        this.currentUser.occupation = occupation
+        this.currentUser.income = income
+        this.currentUser.riskTolerance = riskTolerance
+    }
+
     fun logUser(user: User){
         Log.d(ContentValues.TAG, "loadUserInformation: ${currentUser.id}")
         Log.d(ContentValues.TAG, "loadUserInformation: ${currentUser.name}")
