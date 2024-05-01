@@ -23,11 +23,12 @@ class MainActivity : AppCompatActivity() {
         }
 
         Handler().postDelayed(Runnable {
-            startActivity(Intent(this@MainActivity, OnboardingActivity::class.java))
+//         startActivity(Intent(this@MainActivity, OnboardingActivity::class.java))
+        // startActivity(Intent(this@MainActivity, PlanningActivity::class.java))
+            startActivity(Intent(this@MainActivity, RiskAssessmentActivity::class.java))
             finish()
         }, MainActivity.SPLASH_DELAY)
     }
-
     companion object {
         private const val SPLASH_DELAY: Long = 2000 // 2 seconds
     }

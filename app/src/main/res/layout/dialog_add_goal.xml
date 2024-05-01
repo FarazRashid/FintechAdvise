@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <EditText
+        android:id="@+id/goalNameEditText"
+        android:layout_width="300dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="30dp"
+        android:background="@drawable/edittext_stroke"
+        android:drawableStart="@drawable/goal"
+        android:drawablePadding="10dp"
+        android:fontFamily="@font/abeezee"
+        android:hint="Goal Name"
+        android:paddingStart="10dp"
+        android:paddingEnd="10dp"
+        android:textColor="@color/text_secondary"
+        android:textColorHint="@color/text_secondary"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="@+id/imageView"
+        app:layout_constraintStart_toStartOf="@+id/imageView"
+        app:layout_constraintTop_toBottomOf="@+id/textView4" />
+
+    <Spinner
+        android:id="@+id/goalTypeEditText"
+        android:layout_width="300dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="24dp"
+        android:background="@drawable/spinner_background_goal"
+        android:paddingHorizontal="10dp"
+        android:paddingStart="30dp"
+        android:paddingEnd="10dp" />
+
+
+    <EditText
+        android:id="@+id/currentAmountEditText"
+        android:layout_width="300dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="24dp"
+        android:background="@drawable/edittext_stroke"
+        android:drawableStart="@drawable/money_dollar"
+        android:drawablePadding="10dp"
+        android:fontFamily="@font/abeezee"
+        android:hint="Enter Current Amount in $"
+        android:inputType="textEmailAddress"
+        android:paddingStart="10dp"
+        android:paddingEnd="10dp"
+        android:textColor="@color/text_secondary"
+        android:textColorHint="@color/text_secondary"
+        android:textSize="14sp" />
+    <EditText
+        android:id="@+id/goalAmountEditText"
+        android:layout_width="300dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="24dp"
+        android:background="@drawable/edittext_stroke"
+        android:drawableStart="@drawable/money"
+        android:drawablePadding="10dp"
+        android:fontFamily="@font/abeezee"
+        android:hint="Enter Target Amount in $"
+        android:inputType="textEmailAddress"
+        android:paddingStart="10dp"
+        android:paddingEnd="10dp"
+        android:textColor="@color/text_secondary"
+        android:textColorHint="@color/text_secondary"
+        android:textSize="14sp" />
+
+    <EditText
+        android:id="@+id/goalDateEditText"
+        android:layout_width="300dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="24dp"
+        android:background="@drawable/edittext_stroke"
+        android:drawableStart="@drawable/calender_svgrepo_com"
+        android:drawablePadding="10dp"
+        android:fontFamily="@font/abeezee"
+        android:inputType="textEmailAddress"
+        android:hint="Enter Target Date"
+        android:paddingStart="10dp"
+        android:paddingEnd="10dp"
+        android:textColor="@color/text_secondary"
+        android:textColorHint="@color/text_secondary"
+        android:textSize="14sp" />
+    <Spinner
+        android:id="@+id/goalPriorityEditText"
+        android:layout_width="300dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="24dp"
+        android:background="@drawable/priority_spinner_background"
+        android:paddingHorizontal="10dp"
+        android:paddingStart="30dp"
+        android:paddingEnd="10dp" />
+
+
+
+
+
+
+
+
+    <!-- Add more fields as needed -->
+
+</LinearLayout>
