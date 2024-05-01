@@ -6,6 +6,7 @@ import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Button
+import android.widget.ImageView
 import android.widget.RadioButton
 import android.widget.RadioGroup
 import android.widget.Spinner
@@ -30,6 +31,10 @@ class RiskAssessmentActivity: AppCompatActivity() {
         setContentView(R.layout.activity_risk_assessment)
         experienceSpinner = findViewById(R.id.experienceSpinner)
 
+        val backButton = findViewById<ImageView>(R.id.backButton)
+        backButton.setOnClickListener {
+            onBackPressedDispatcher.onBackPressed()
+        }
         val experienceSpinnerAdapter = object : ArrayAdapter<String>(
             this,
             android.R.layout.simple_spinner_item,
