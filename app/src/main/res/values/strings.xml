@@ -5,4 +5,20 @@
     <string name="loginUnderline"> <u>Login</u></string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string-array name="goal_types">
+        <item>Select goal type</item>
+        <item>Emergency Fund</item>
+        <item>Vacation</item>
+        <item>Retirement</item>
+        <item>Budgeting</item>
+        <item>Custom</item>
+        <!-- Add more items as needed -->
+    </string-array>
+    <string-array name="goal_priorities">
+        <item>Select priority</item>
+        <item>Low</item>
+        <item>Medium</item>
+        <item>High</item>
+        <!-- Add more items as needed -->
+    </string-array>
 </resources>
