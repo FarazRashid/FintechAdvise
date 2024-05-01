@@ -1,17 +1,24 @@
 package com.se.fintechadvise.Activities
 
+
 import android.annotation.SuppressLint
 import android.os.Bundle
 import android.text.InputType
+import android.util.Log
 import android.view.MotionEvent
 import android.widget.Button
+import android.widget.CheckBox
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.internal.ViewUtils
+import com.se.fintechadvise.HelperClasses.CustomToastMaker
 import com.se.fintechadvise.HelperClasses.Navigator
+import com.se.fintechadvise.ManagerClasses.WebserviceManger
 import com.se.fintechadvise.R
+import  com.se.fintechadvise.ManagerClasses.UserManager
+
 
 
 class LoginActivity : AppCompatActivity() {
@@ -22,6 +29,7 @@ class LoginActivity : AppCompatActivity() {
     private lateinit var forgotPasswordTextView: TextView
     private lateinit var emailEditText: EditText
     private lateinit var passwordEditText: EditText
+    private lateinit var rememberMeCheckBox: CheckBox
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,17 +47,41 @@ class LoginActivity : AppCompatActivity() {
         forgotPasswordTextView = findViewById(R.id.forgotPasswordTextView)
         emailEditText = findViewById(R.id.emailEditText)
         passwordEditText = findViewById(R.id.passwordEditText)
+        rememberMeCheckBox = findViewById(R.id.rememberMeCheckBox)
     }
 
     private fun setUpOnClickListeners() {
+
         loginButton.setOnClickListener {
-            verifyFields(){
-                if(it)
-                    Navigator.navigateToActivity(this, HomeActivity::class.java)
+            verifyFields { isValid ->
+                if (isValid) {
+                    WebserviceManger.getInstance().loginUser(
+                        emailEditText.text.toString(),
+                        passwordEditText.text.toString(),
+                        this
+                    ) { isSuccess, user ->
+                        if (isSuccess) {
+                            if (user != null) {
+                                UserManager.getInstance().setCurrentUser(user)
+                            }
+                            if(rememberMeCheckBox.isChecked){
+                                Log.d("LoginActivity", "Remember me is checked")
+                                UserManager.saveUserLoggedInSP(
+                                    true,
+                                    getSharedPreferences("USER_LOGIN", MODE_PRIVATE)
+                                )
+                                UserManager.saveUserEmailSP(emailEditText.text.toString(), getSharedPreferences("USER_LOGIN", MODE_PRIVATE))
+                            }
+
+                            Navigator.navigateToActivity(this, HomeActivity::class.java)
+                        }
+                    }
+                }
             }
         }
 
         signUpButton.setOnClickListener {
+            // Navigate to SignUpActivity
             Navigator.navigateToActivity(this, SignUpActivity::class.java)
         }
 
@@ -58,7 +90,8 @@ class LoginActivity : AppCompatActivity() {
         }
 
         forgotPasswordTextView.setOnClickListener {
-           Navigator.navigateToActivity(this, ForgotPasswordActivity::class.java)
+            // Navigate to ForgotPasswordActivity
+            Navigator.navigateToActivity(this, ForgotPasswordActivity::class.java)
         }
     }
 

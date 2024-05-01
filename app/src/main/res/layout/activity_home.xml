@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
+
+
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -37,5 +39,23 @@
         app:layout_constraintStart_toStartOf="parent"
         app:menu="@menu/bottom_navigation_menu" />
 
+
+
+        <com.google.android.material.navigation.NavigationView
+            android:id="@+id/nav_view"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="start"
+            app:itemTextAppearanceActiveBoldEnabled="true"
+            app:itemTextColor="@color/white"
+            app:itemIconTint="@color/white"
+            app:itemTextAppearance="@style/navBarTextStyle"
+            android:background="@color/icon_secondary"
+            android:padding="5dp"
+            app:itemIconPadding="15dp"
+            app:itemIconSize="25dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:menu="@menu/navigation_menu_drawer" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

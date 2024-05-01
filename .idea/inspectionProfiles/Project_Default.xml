@@ -6,6 +6,7 @@
         <list>
           <option value="backend.app.flask" />
           <option value="backend.app.*" />
+          <option value="backend.DatabaseConnection.mysql" />
         </list>
       </option>
     </inspection_tool>
