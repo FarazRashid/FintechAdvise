@@ -100,7 +100,7 @@
             android:textColorHint="@color/text_secondary"
 
 
-            android:hint="Annual Income"
+            android:hint="Annual Income in $"
             android:inputType="numberDecimal" />
 
         <!-- Financial Goals -->

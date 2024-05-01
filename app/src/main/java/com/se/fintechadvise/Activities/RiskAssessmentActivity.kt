@@ -134,11 +134,11 @@ class RiskAssessmentActivity: AppCompatActivity() {
             }
             else if (name.isEmpty() || name.matches(nameRegex).not()) {
                 CustomToastMaker().showToast(this, "Please enter a valid Name")
-            } else if (age.isBlank() ||income.any { it !in '0'..'9' }|| age.toDouble() < 18) {
+            } else if (age.isBlank() ||income.any { it !in '0'..'9' }|| age.toDouble() < 18 || age.toDouble() > 100) {
                 CustomToastMaker().showToast(this, "You must be 18+ to use this app")
             } else if (occupation.isEmpty()) {
                 CustomToastMaker().showToast(this, "Please enter your occupation")
-            } else if (income.isBlank()|| income.any { it !in '0'..'9' } || income.toDouble() <= 0) {
+            } else if (income.isBlank()|| income.any { it !in '0'..'9' } || income.toDouble() <= 0 || income.toDouble() > 1000000000) {
                 CustomToastMaker().showToast(this, "Please enter a valid income")
             } else if (goals.isEmpty()) {
                 CustomToastMaker().showToast(this, "Please enter your financial goals")

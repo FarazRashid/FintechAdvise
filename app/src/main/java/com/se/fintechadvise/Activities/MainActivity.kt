@@ -22,7 +22,6 @@ class MainActivity : AppCompatActivity() {
             finish()
         }, MainActivity.SPLASH_DELAY)
     }
-
     companion object {
         private const val SPLASH_DELAY: Long = 2000 // 2 seconds
     }
