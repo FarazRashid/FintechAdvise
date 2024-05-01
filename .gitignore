@@ -13,3 +13,5 @@
 .externalNativeBuild
 .cxx
 local.properties
+/backend/config.py
+/backend/DigiCertGlobalRootCA.crt (1).pem

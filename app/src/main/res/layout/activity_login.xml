@@ -114,7 +114,7 @@
 
     <Button
         android:id="@+id/loginButton"
-        android:layout_width="250dp"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
         android:background="@drawable/rounded_border"
@@ -125,6 +125,7 @@
         android:elevation="25dp"
         android:textAllCaps="false"
         android:textColor="@color/white"
+        app:layout_constraintWidth_percent="0.75"
         app:layout_constraintEnd_toEndOf="@+id/passwordEditText"
         app:layout_constraintStart_toStartOf="@+id/passwordEditText"
         app:layout_constraintTop_toBottomOf="@+id/textView2" />
@@ -154,8 +155,10 @@
         android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/forgotPasswordTextView"
+        app:layout_constraintHorizontal_bias="0.814"
         app:layout_constraintStart_toStartOf="@+id/loginButton"
-        app:layout_constraintTop_toBottomOf="@+id/forgotPasswordTextView" />
+        app:layout_constraintTop_toBottomOf="@+id/forgotPasswordTextView"
+        app:layout_constraintVertical_bias="0.503" />
 
     <TextView
         android:id="@+id/signUpTextView"
@@ -169,7 +172,7 @@
         android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="@+id/TextView"
         app:layout_constraintEnd_toEndOf="@+id/loginButton"
-        app:layout_constraintHorizontal_bias="0.31"
+        app:layout_constraintHorizontal_bias="0.027"
         app:layout_constraintStart_toEndOf="@+id/TextView" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
