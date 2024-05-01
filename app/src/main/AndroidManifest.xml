@@ -35,6 +35,8 @@
             android:exported="false" />
         <activity android:name=".Activities.PlanningActivity"
             android:exported="false" />
+        <activity android:name=".Activities.RiskAssessmentActivity"
+            android:exported="false" />
         <activity
             android:name=".Activities.MainActivity"
             android:exported="true">

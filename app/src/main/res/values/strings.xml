@@ -21,4 +21,39 @@
         <item>High</item>
         <!-- Add more items as needed -->
     </string-array>
+    <string-array name="experience_levels">
+        <item>Select experience level</item>
+        <item>Beginner</item>
+        <item>Intermediate</item>
+        <item>Advanced</item>
+        <!-- Add more items as needed -->
+    </string-array>
+    <string-array name="risk_levels">
+        <item>Select risk level</item>
+        <item>I prefer to avoid risk.</item>
+        <item>I am willing to take on some risk .</item>
+        <item>I am comfortable with high risk.</item>
+    </string-array>
+    <string-array name="investment_time_horizons">
+        <item>Select investment time horizon</item>
+        <item>Short–term (1–3 years)</item>
+        <item>Medium–term (3–5 years)</item>
+        <item>Long-term (5+ years)</item>
+    </string-array>
+    <string-array name="financial_stability_levels">
+        <item>Select financial stability level</item>
+        <item>I have a stable income and no debt.</item>
+        <item>I have a stable income and minimal debt.</item>
+        <item>I have a stable income and moderate debt.</item>
+        <item>I have a stable income and high debt.</item>
+        <item>I have an unstable income and minimal debt.</item>
+        <item>I have an unstable income and high debt.</item>
+    </string-array>
+    <string-array name="previousExperience">
+        <item>Select previous experience</item>
+        <item>None</item>
+        <item>Some</item>
+        <item>Extensive</item>
+    </string-array>
+
 </resources>

@@ -16,8 +16,9 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         Handler().postDelayed(Runnable {
-           startActivity(Intent(this@MainActivity, OnboardingActivity::class.java))
-           // startActivity(Intent(this@MainActivity, PlanningActivity::class.java))
+//         startActivity(Intent(this@MainActivity, OnboardingActivity::class.java))
+        // startActivity(Intent(this@MainActivity, PlanningActivity::class.java))
+            startActivity(Intent(this@MainActivity, RiskAssessmentActivity::class.java))
             finish()
         }, MainActivity.SPLASH_DELAY)
     }
