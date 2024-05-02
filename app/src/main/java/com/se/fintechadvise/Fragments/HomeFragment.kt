@@ -5,7 +5,11 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import androidx.cardview.widget.CardView
+import androidx.core.view.GravityCompat
+import androidx.drawerlayout.widget.DrawerLayout
+import com.google.android.material.navigation.NavigationView
 import com.se.fintechadvise.HelperClasses.BottomNavigationHelper
 import com.se.fintechadvise.HelperClasses.FragmentHelper
 import com.se.fintechadvise.R
@@ -45,6 +49,32 @@ class HomeFragment : Fragment() {
         goalsCardView.setOnClickListener {
             // navigate to goals fragment
             FragmentHelper(requireActivity().supportFragmentManager).loadFragment(PlanningFragment())
+        }
+
+        val menuOpener = view.findViewById<ImageView>(R.id.menu_opener)
+        val drawerLayout = view.findViewById<DrawerLayout>(R.id.drawer_layout)
+
+        menuOpener.setOnClickListener {
+            drawerLayout.openDrawer(GravityCompat.START)
+        }
+        val navigationView = requireActivity().findViewById<NavigationView>(R.id.side_nav)
+        navigationView.setNavigationItemSelectedListener { menuItem ->
+            when (menuItem.itemId) {
+                R.id.settingsButton -> {
+                    // android:title="Profile"
+                    true
+                }
+                R.id.monthlyRankingsButton -> {
+                    //  android:title="Tasks"
+                    true
+                }
+                R.id.notificataionsButton -> {
+                    // android:title="About"
+                    true
+                }
+                // Add more cases for other menu items if needed
+                else -> false
+            }
         }
         return view
     }
