@@ -26,7 +26,7 @@ def create_table():
         return jsonify({'error': f'Failed to create table: {err}'})
 
     
-@app.route('/create_user_table', methods=['POST'])n
+@app.route('/create_user_table', methods=['POST'])
 def create_users_table():
     try:
         with DatabaseConnection() as conn:

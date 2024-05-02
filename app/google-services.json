@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "565219195665",
+    "project_id": "fintechadvise-7777e",
+    "storage_bucket": "fintechadvise-7777e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:565219195665:android:f59d1b973a742d25246ab0",
+        "android_client_info": {
+          "package_name": "com.se.fintechadvise"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCID3UibL76kqRb2E3a1Es0l-KWcAlKHTk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
