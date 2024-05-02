@@ -5,6 +5,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.cardview.widget.CardView
+import com.se.fintechadvise.HelperClasses.BottomNavigationHelper
+import com.se.fintechadvise.HelperClasses.FragmentHelper
 import com.se.fintechadvise.R
 
 // TODO: Rename parameter arguments, choose names that match
@@ -35,7 +38,15 @@ class HomeFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_home, container, false)
+//        return inflater.inflate(R.layout.fragment_home, container, false)
+        // add on click listener for goals card view
+        val view = inflater.inflate(R.layout.fragment_home, container, false)
+        val goalsCardView = view.findViewById<CardView>(R.id.goalsCardView)
+        goalsCardView.setOnClickListener {
+            // navigate to goals fragment
+            FragmentHelper(requireActivity().supportFragmentManager).loadFragment(PlanningFragment())
+        }
+        return view
     }
 
     companion object {

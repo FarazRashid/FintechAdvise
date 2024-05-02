@@ -68,6 +68,42 @@
             )
             queue.add(jsonObjectRequest)
         }
+        fun getRequest(
+            endpoint: String,
+            context: Context,
+            successHandler: (String) -> Unit,
+            errorHandler: (String?) -> Unit
+        ) {
+            val queue = Volley.newRequestQueue(context)
+
+            val url = BASE_URL + endpoint
+
+            val jsonObjectRequest = object : JsonObjectRequest(
+                Method.GET, url, null,
+                Response.Listener { response ->
+                    successHandler(response.toString())
+                },
+                Response.ErrorListener { error ->
+                    Log.e(ContentValues.TAG, "Error: $error")
+                    errorHandler(error.toString())
+                }
+            ) {
+                @Throws(AuthFailureError::class)
+                override fun getHeaders(): Map<String, String> {
+                    val headers = HashMap<String, String>()
+                    headers["Content-Type"] = "application/json"
+                    return headers
+                }
+            }
+            jsonObjectRequest.setRetryPolicy(
+                DefaultRetryPolicy(
+                    5000,
+                    DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                    DefaultRetryPolicy.DEFAULT_BACKOFF_MULT
+                )
+            )
+            queue.add(jsonObjectRequest)
+        }
         fun saveUserToWebService(user: User, context: Context, Callback:(Boolean)->Unit) {
             val params = JSONObject()
             params.put("id", user.id)
