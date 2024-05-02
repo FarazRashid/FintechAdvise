@@ -25,9 +25,8 @@ def create_table():
     except mysql.connector.Error as err:
         return jsonify({'error': f'Failed to create table: {err}'})
 
-
     
-@app.route('/create_user_table', methods=['POST'])
+@app.route('/create_user_table', methods=['POST'])n
 def create_users_table():
     try:
         with DatabaseConnection() as conn:
@@ -52,9 +51,59 @@ def create_users_table():
             cursor.close()
             return jsonify({'message': 'Users table created successfully'})
     except mysql.connector.Error as err:
-        return jsonify({'error': f'Failed to create users table: {err}'})
-    
+        print(f'Failed to create table: {err}')
+        
+# @app.route('/create_goals_table', methods=['POST'])        
+def create_goals_table():
+    try:
+        with DatabaseConnection() as conn:
+            cursor = conn.cursor()
+            cursor.execute("CREATE TABLE IF NOT EXISTS Goal (goalId varchar(50), name VARCHAR(50) NOT NULL, target varchar(50) NOT NULL, goalDate varchar(20) NOT NULL, currentAmount varchar(20) NOT NULL, goalAmount varchar(20) NOT NULL, goalType varchar(20) NOT NULL, goalPriority varchar(10) NOT NULL, userId varchar(256) NOT NULL, PRIMARY KEY (goalId))")
+            conn.commit()
+            cursor.close()
+            return jsonify({'message': 'Table created successfully'})
+    except mysql.connector.Error as err:
+        return jsonify({'error': f'Failed to create table: {err}'})
 
+@app.route('/add_goal', methods=['POST'])
+def add_goal():
+    try:
+        with DatabaseConnection() as conn:
+            cursor = conn.cursor()
+            goal = request.get_json()
+            query = "INSERT INTO Goal (goalId, name, target, goalDate, currentAmount, goalAmount, goalType, goalPriority, userId) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)"
+            values = (goal['goalId'], goal['name'], goal['target'], goal['goalDate'], goal['currentAmount'], goal['goalAmount'], goal['goalType'], goal['goalPriority'], goal['userId'])
+            cursor.execute(query, values)
+            conn.commit()
+            cursor.close()
+            return jsonify({'message': 'Goal added successfully'}), 201
+    except mysql.connector.Error as err:
+        print(f'Error: {err}')
+        print(f'Request data: {request.data}')
+        return jsonify({'error': f'Failed to add goal: {err}'}), 400
+    
+@app.route('/get_goals', methods=['POST'])
+def get_goals():
+        try:
+           with DatabaseConnection() as conn:
+                    cursor = conn.cursor()
+                    user = request.get_json()
+                    query = "SELECT * FROM Goal WHERE userId = %s"
+                    values = (user[0]['userId'],)
+                    cursor.execute(query, values)
+                    results = cursor.fetchall()
+                    goals = []
+                    for result in results:
+                        columns = [column[0] for column in cursor.description]
+                        goal = dict(zip(columns, result))
+                        goals.append(goal)
+                    print(f'Goals: {goals}')
+                    return goals, 200
+        except mysql.connector.Error as err:
+                print(f'Error: {err}')
+                print(f'Request data: {request.data}')
+                return jsonify({'error': f'Failed to get goals: {err}'}), 400
+    
 @app.route('/signup', methods=['POST'])
 def signup():
     #create_users_table()
@@ -102,7 +151,7 @@ def login():
         with DatabaseConnection() as conn:
             cursor = conn.cursor()
             user = request.get_json()
-            query = "SELECT * FROM users WHERE email = %s and password = %s"
+            query = "SELECT * FROM users1 WHERE email = %s and password = %s"
             values = (user['email'], user['password'])
             cursor.execute(query, values)
             result = cursor.fetchone()
