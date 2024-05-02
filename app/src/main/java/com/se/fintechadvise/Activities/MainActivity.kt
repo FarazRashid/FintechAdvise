@@ -25,7 +25,7 @@ class MainActivity : AppCompatActivity() {
         Handler().postDelayed(Runnable {
 //         startActivity(Intent(this@MainActivity, OnboardingActivity::class.java))
         // startActivity(Intent(this@MainActivity, PlanningActivity::class.java))
-            startActivity(Intent(this@MainActivity, RiskAssessmentActivity::class.java))
+            startActivity(Intent(this@MainActivity, LoginOrSignupActivity::class.java))
             finish()
         }, MainActivity.SPLASH_DELAY)
     }

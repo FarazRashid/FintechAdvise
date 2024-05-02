@@ -1,6 +1,8 @@
 package com.se.fintechadvise.Activities
 
 import android.annotation.SuppressLint
+import android.app.AlertDialog
+import android.content.ContentValues.TAG
 import android.content.Context
 import android.content.res.ColorStateList
 import android.os.Build
@@ -27,6 +29,7 @@ import java.util.Locale
 import java.util.regex.Pattern
 import android.graphics.Color
 import android.text.InputType
+import android.util.Log
 import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
@@ -34,11 +37,20 @@ import android.widget.ArrayAdapter
 import android.widget.Spinner
 import android.widget.Toast
 import com.google.android.material.internal.ViewUtils.dpToPx
+import com.google.firebase.FirebaseException
+import com.google.firebase.FirebaseTooManyRequestsException
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException
+import com.google.firebase.auth.FirebaseAuthMissingActivityForRecaptchaException
+import com.google.firebase.auth.PhoneAuthCredential
+import com.google.firebase.auth.PhoneAuthOptions
+import com.google.firebase.auth.PhoneAuthProvider
 import com.se.fintechadvise.DataClasses.User
 import com.se.fintechadvise.HelperClasses.CustomToastMaker
 import com.se.fintechadvise.ManagerClasses.UserManager
 import com.se.fintechadvise.ManagerClasses.WebserviceManger
 import java.util.UUID
+import java.util.concurrent.TimeUnit
 
 
 class SignUpActivity : AppCompatActivity() {
@@ -54,6 +66,10 @@ class SignUpActivity : AppCompatActivity() {
     private lateinit var countrySpinner: Spinner
     private lateinit var tooltip: PopupWindow
     private var isSignUpInProgress = false
+    private var storedVerificationId: String? = ""
+
+
+    private lateinit var mauth: FirebaseAuth
 
 
     @RequiresApi(Build.VERSION_CODES.O)
@@ -79,6 +95,10 @@ class SignUpActivity : AppCompatActivity() {
         passwordEditText.tooltipText = "Password must be greater than 8 characters, must have one upper case, one special character, and have a numeric value"
         countrySpinner = findViewById(R.id.countryEditText)
         setupCountrySpinner()
+        mauth = FirebaseAuth.getInstance()
+        var settings= mauth.firebaseAuthSettings
+        settings.forceRecaptchaFlowForTesting(true)
+        //mauth.firebaseAuthSettings = settings
 
     }
 
@@ -231,6 +251,36 @@ class SignUpActivity : AppCompatActivity() {
         return score
     }
 
+    fun showOtpDialog() {
+        // Inflate the dialog layout
+        val inflater = layoutInflater
+        val dialogView = inflater.inflate(R.layout.dialog_otp, null)
+
+        // Create the AlertDialog
+        val dialog = AlertDialog.Builder(this)
+            .setView(dialogView)
+            .setCancelable(false) // Prevent the user from dismissing the dialog by pressing back
+            .create()
+
+        // Get the EditText and Button from the dialog layout
+        val otpEditText = dialogView.findViewById<EditText>(R.id.phoneOtpEditText)
+        val verifyOtpButton = dialogView.findViewById<Button>(R.id.verifyOtpButton)
+
+        // Set a click listener for the "Verify OTP" button
+        verifyOtpButton.setOnClickListener {
+            val otp = otpEditText.text.toString()
+            if (otp.isNotEmpty()) {
+                verifyCode(otp)
+                dialog.dismiss()
+            } else {
+                otpEditText.error = "Please enter the OTP"
+            }
+        }
+
+        // Show the dialog
+        dialog.show()
+    }
+
     private fun setUpOnClickListeners() {
         loginTextView.setOnClickListener {
             Navigator.navigateToActivity(this,LoginActivity::class.java)
@@ -242,15 +292,16 @@ class SignUpActivity : AppCompatActivity() {
         }
 
         signUpButton.setOnClickListener {
+
+
+
             if(!isSignUpInProgress){
                 isSignUpInProgress = true
                 verifyFields {
                     if(it) {
 
-                        var user = User(UUID.randomUUID().toString(), "", emailEditText.text.toString(), countrySpinner.selectedItem.toString(), passwordEditText.text.toString(), phoneNumberEditText.text.toString(), "", "")
-                        UserManager.setCurrentUser(user)
-                        Navigator.navigateToActivity(this, RiskAssessmentActivity::class.java)
-                        finish()
+                        sendPhoneVerificationCode(phoneNumberEditText.text.toString())
+                        showOtpDialog()
                     }
                     isSignUpInProgress = false
 
@@ -418,5 +469,67 @@ class SignUpActivity : AppCompatActivity() {
                 // No action needed here
             }
         })
+    }
+
+    fun sendPhoneVerificationCode(phoneNumber:String)
+    {
+        Log.d("SignUpActivity", "sendPhoneVerificationCode: $phoneNumber") // Debug statement
+
+        val options = PhoneAuthOptions.newBuilder(mauth)
+            .setPhoneNumber(phoneNumber) // Phone number to verify
+            .setTimeout(60L, TimeUnit.SECONDS) // Timeout and unit
+            .setActivity(this) // Activity (for callback binding)
+            .setCallbacks(callbacks) // OnVerificationStateChangedCallbacks
+            .build()
+        PhoneAuthProvider.verifyPhoneNumber(options)
+    }
+
+    var callbacks = object: PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
+
+        override fun onVerificationCompleted(credential: PhoneAuthCredential) {
+           val code:String= credential.smsCode.toString()
+            Log.d("SignUpActivity", "onVerificationCompleted: $code") // Debug statement
+            if(code!=null)
+            {
+                verifyCode(code)
+            }
+        }
+
+        override fun onVerificationFailed(e: FirebaseException) {
+            Log.d("SignUpActivity", "onVerificationFailed: ${e.message}") // Debug statement
+           // CustomToastMaker().showToast(this@SignUpActivity, "Verification failed")
+        }
+
+        override fun onCodeSent(
+            verificationId: String,
+            token: PhoneAuthProvider.ForceResendingToken,
+        ) {
+            // The SMS verification code has been sent to the provided phone number, we
+            // now need to ask the user to enter the code and then construct a credential
+            // by combining the code with a verification ID.
+            Log.d(TAG, "onCodeSent:$verificationId")
+
+            // Save verification ID and resending token so we can use them later
+            storedVerificationId = verificationId
+
+            CustomToastMaker().showToast(this@SignUpActivity, "Code sent")
+        }
+    }
+
+
+
+    fun verifyCode(code:String)
+    {
+        Log.d("SignUpActivity", "verifyCode: $code") // Debug statement
+
+        var credential: PhoneAuthCredential? =
+            storedVerificationId?.let { PhoneAuthProvider.getCredential(it, code) }
+
+        var user = User(UUID.randomUUID().toString(), "", emailEditText.text.toString(), countrySpinner.selectedItem.toString(), passwordEditText.text.toString(), phoneNumberEditText.text.toString(), "", "")
+        UserManager.setCurrentUser(user)
+
+        Navigator.navigateToActivity(this, RiskAssessmentActivity::class.java)
+        finish()
+
     }
 }

@@ -61,7 +61,8 @@ object UserManager {
         return this.currentUser.profilePictureUrl
     }
 
-    fun setUserRiskToleranceItems(age:String, occupation:String, income:String, riskTolerance:String){
+    fun setUserRiskToleranceItems(name:String,age:String, occupation:String, income:String, riskTolerance:String){
+        this.currentUser.name = name
         this.currentUser.age = age
         this.currentUser.occupation = occupation
         this.currentUser.income = income

@@ -7,6 +7,7 @@
     import android.widget.Toast
     import com.android.volley.AuthFailureError
     import com.android.volley.DefaultRetryPolicy
+    import com.android.volley.Request
     import com.android.volley.Response
     import com.android.volley.toolbox.JsonObjectRequest
     import com.android.volley.toolbox.StringRequest
@@ -20,7 +21,7 @@
 
         private var instance: WebserviceManger? = null
 
-        private val BASE_URL = "http://10.0.2.2:5000/"
+        private val BASE_URL = "http://192.168.18.54:5000/"
 
         @JvmStatic
         fun getInstance(): WebserviceManger {
@@ -28,6 +29,24 @@
                 instance = WebserviceManger
             }
             return instance!!
+        }
+
+        //run a basic function to hit the base_url on the /add_table endpoint
+
+        fun testRequest(context: Context)    {
+            val queue = Volley.newRequestQueue(context)
+            val url = BASE_URL + "add_table"
+            val stringRequest = StringRequest(
+                Request.Method.GET, url,
+                { response ->
+                    Log.d(ContentValues.TAG, "Response: $response")
+
+                },
+                { error ->
+                    Log.e(ContentValues.TAG, "Error: $error")
+                }
+            )
+            queue.add(stringRequest)
         }
 
 

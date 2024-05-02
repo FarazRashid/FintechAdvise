@@ -167,7 +167,7 @@ class RiskAssessmentActivity: AppCompatActivity() {
                     selectedPreviousExperience
                 )
 
-                UserManager.getInstance().setUserRiskToleranceItems(age,occupation,income, calculatedRiskTolerance.toString())
+                UserManager.getInstance().setUserRiskToleranceItems(name,age,occupation,income, calculatedRiskTolerance.toString())
 
                 WebserviceManger.getInstance().saveUserToWebService(UserManager.getInstance().getCurrentUser()!!, this) { isSuccess ->
                     if (isSuccess) {

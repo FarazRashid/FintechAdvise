@@ -18,15 +18,16 @@ def create_table():
     try:
         with DatabaseConnection() as conn:
             cursor = conn.cursor()
-            cursor.execute("CREATE TABLE IF NOT EXISTS inventory2 (id INT AUTO_INCREMENT PRIMARY KEY, name VARCHAR(50), quantity INTEGER)")
+            cursor.execute("CREATE TABLE IF NOT EXISTS inventory7(id INT AUTO_INCREMENT PRIMARY KEY, name VARCHAR(50), quantity INTEGER)")
             conn.commit()
             cursor.close()
             return jsonify({'message': 'Table created successfully'})
     except mysql.connector.Error as err:
         return jsonify({'error': f'Failed to create table: {err}'})
-    
-    
 
+
+    
+@app.route('/create_user_table', methods=['POST'])
 def create_users_table():
     try:
         with DatabaseConnection() as conn:
@@ -40,17 +41,19 @@ def create_users_table():
                     password VARCHAR(256),
                     phone VARCHAR(15),
                     fcmToken VARCHAR(256) DEFAULT NULL,
-                    profilePictureUrl VARCHAR(256) DEFAULT NULL
+                    profilePictureUrl VARCHAR(256) DEFAULT NULL,
                     age VARCHAR(20),
-                    INCOME VARCHAR(20),
+                    income VARCHAR(20),
                     occupation VARCHAR(20),
-                    riskTolerance VARCHAR(20),
+                    riskTolerance VARCHAR(20)
                 )
             """)
             conn.commit()
             cursor.close()
+            return jsonify({'message': 'Users table created successfully'})
     except mysql.connector.Error as err:
-        print(f'Failed to create table: {err}')
+        return jsonify({'error': f'Failed to create users table: {err}'})
+    
 
 @app.route('/signup', methods=['POST'])
 def signup():
@@ -60,13 +63,34 @@ def signup():
             cursor = conn.cursor()
             user = request.get_json()
             hashed_password = user['password']
-            query = "INSERT INTO users (id, name, email, country, password, phone, age, INCOME, occupation, riskTolerance) VALUES (% s, % s, % s, % s, % s, % s, % s, % s, % s, % s)"
-            values = (user['id'], user['name'], user['email'], user['country'], hashed_password, user['phone'], user['age'], user['INCOME'], user['occupation'], user['riskTolerance'])
+            query = """
+                INSERT INTO users 
+                (id, name, email, country, password, phone,fcmToken,profilePictureUrl, age, income, occupation, riskTolerance) 
+                VALUES 
+                (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s,%s,%s)
+            """
+            values = (
+                user.get('id'), 
+                user.get('name'), 
+                user.get('email'), 
+                user.get('country'), 
+                hashed_password, 
+                user.get('phone'), 
+                None,
+                None,
+                user.get('age'), 
+                user.get('income'), 
+                user.get('occupation'), 
+                user.get('riskTolerance')
+            )
+            # log the query and values for debugging
+            print(f'Query: {query} with values: {values}')
             cursor.execute(query, values)
             conn.commit()
             cursor.close()
             return jsonify({'message': 'User registered successfully'}), 201
     except mysql.connector.Error as err:
+        # log the error and request data for debugging
         print(f'Error: {err}')
         print(f'Request data: {request.data}')
         return jsonify({'error': f'Failed to register user: {err}'}), 400
@@ -96,5 +120,22 @@ def login():
         return jsonify({'error': f'Failed to login user: {e}'}), 400
     
 
+
+@app.route('/users', methods=['GET'])
+def get_users():
+    try:
+        with DatabaseConnection() as conn:
+            cursor = conn.cursor(dictionary=True)
+            cursor.execute("SELECT * FROM users1")
+            print(cursor.description)
+            #print data
+            print(cursor.fetchall())
+            users = cursor.fetchall()   
+            cursor.close()
+            return jsonify(users), 200
+    except mysql.connector.Error as err:
+        return jsonify({'error': f'Failed to get users: {err}'}), 400
+    
+
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(host='0.0.0.0', port=5000)
