@@ -8,12 +8,14 @@
     import com.android.volley.AuthFailureError
     import com.android.volley.DefaultRetryPolicy
     import com.android.volley.Response
+    import com.android.volley.toolbox.JsonArrayRequest
     import com.android.volley.toolbox.JsonObjectRequest
     import com.android.volley.toolbox.StringRequest
     import com.android.volley.toolbox.Volley
     import com.se.fintechadvise.DataClasses.User
     import com.se.fintechadvise.HelperClasses.CustomToastMaker
     import com.se.fintechadvise.HelperClasses.SecurityHelper
+    import org.json.JSONArray
     import org.json.JSONObject
 
     object WebserviceManger {
@@ -68,8 +70,49 @@
             )
             queue.add(jsonObjectRequest)
         }
+
+        fun jsonArrayGetRequest(
+            endpoint: String,
+            params: JSONObject,
+            context: Context,
+            successHandler: (JSONArray) -> Unit,
+            errorHandler: (String?) -> Unit
+        ) {
+            val queue = Volley.newRequestQueue(context)
+
+            val url = BASE_URL + endpoint
+
+            val jsonObjectRequest = object : JsonArrayRequest(
+                Method.POST, url, JSONArray().put(params),
+                Response.Listener { response ->
+                    successHandler(response)
+                },
+                Response.ErrorListener { error ->
+                    Log.e(ContentValues.TAG, "Error: $error")
+                    errorHandler(error.toString())
+                }
+            ) {
+                @Throws(AuthFailureError::class)
+                override fun getHeaders(): Map<String, String> {
+                    val headers = HashMap<String, String>()
+                    headers["Content-Type"] = "application/json"
+                    return headers
+                }
+            }
+            jsonObjectRequest.setRetryPolicy(
+                DefaultRetryPolicy(
+                    5000,
+                    DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                    DefaultRetryPolicy.DEFAULT_BACKOFF_MULT
+                )
+            )
+            queue.add(jsonObjectRequest)
+        }
+
+
         fun getRequest(
             endpoint: String,
+            params: JSONObject,
             context: Context,
             successHandler: (String) -> Unit,
             errorHandler: (String?) -> Unit
@@ -79,7 +122,7 @@
             val url = BASE_URL + endpoint
 
             val jsonObjectRequest = object : JsonObjectRequest(
-                Method.GET, url, null,
+                Method.GET, url, params,
                 Response.Listener { response ->
                     successHandler(response.toString())
                 },
@@ -87,6 +130,7 @@
                     Log.e(ContentValues.TAG, "Error: $error")
                     errorHandler(error.toString())
                 }
+
             ) {
                 @Throws(AuthFailureError::class)
                 override fun getHeaders(): Map<String, String> {

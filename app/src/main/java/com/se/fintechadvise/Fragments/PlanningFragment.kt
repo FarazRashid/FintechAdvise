@@ -26,8 +26,10 @@ import com.se.fintechadvise.DataClasses.Goal
 import com.se.fintechadvise.ManagerClasses.UserManager
 import com.se.fintechadvise.ManagerClasses.WebserviceManger
 import com.se.fintechadvise.R
+import org.json.JSONArray
 import org.json.JSONObject
 import java.util.Calendar
+import java.util.UUID
 
 class PlanningFragment : Fragment(), GoalAdapter.OnItemClickListener {
 
@@ -50,8 +52,9 @@ class PlanningFragment : Fragment(), GoalAdapter.OnItemClickListener {
         }
         goals = mutableListOf()
 
-        goals.add(Goal("Buy a new car", "Car", "31/10/2024", "1000", "100000", "Planning", "1","High"))
-        goals.add(Goal("Save money to retire", "More Money", "12/5/2023", "1000", "1000000", "Retirement", "2","Medium"))
+        getUserGoals()
+//        goals.add(Goal("Buy a new car", "Car", "31/10/2024", "1000", "100000", "Planning", "1","High"))
+//        goals.add(Goal("Save money to retire", "More Money", "12/5/2023", "1000", "1000000", "Retirement", "2","Medium"))
         recyclerView = view.findViewById(R.id.goalsRecyclerView)
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
         adapter = GoalAdapter(goals, this)
@@ -246,7 +249,24 @@ class PlanningFragment : Fragment(), GoalAdapter.OnItemClickListener {
         // For example, replace 'this' in LinearLayoutManager(this) with 'requireContext()'
     }
 
-    fun addNewGoal(goal: Goal){
+    private fun getUserGoals() {
+        val params = JSONObject()
+        params.put("userId", UserManager.getCurrentUser()!!.id)
+
+        WebserviceManger.getInstance().jsonArrayGetRequest("get_goals", params, requireContext(), { response ->
+            Log.d("PlanningFragment", "Response: $response")
+            val goalsArray = response
+            for (i in 0 until goalsArray.length()) {
+                val goal = goalsArray.getJSONObject(i)
+                goals.add(Goal(goal.getString("name"), goal.getString("target"), goal.getString("goalDate"), goal.getString("currentAmount"), goal.getString("goalAmount"), goal.getString("goalType"), goal.getString("goalId"), goal.getString("goalPriority")))
+            }
+            adapter.notifyDataSetChanged()
+        }, { error ->
+            Log.e("PlanningFragment", "Error: $error")
+        })
+    }
+
+    private fun addNewGoal(goal: Goal){
         // Add the goal to the database
         // Create a JSONObject
         val params = JSONObject()
@@ -256,7 +276,7 @@ class PlanningFragment : Fragment(), GoalAdapter.OnItemClickListener {
         params.put("currentAmount", goal.currentAmount)
         params.put("goalAmount", goal.goalAmount)
         params.put("goalType", goal.goalType)
-        params.put("goalId", goal.goalId)
+        params.put("goalId", UUID.randomUUID().toString())
         params.put("goalPriority", goal.goalPriority)
         params.put("userId", UserManager.getCurrentUser()!!.id)
 

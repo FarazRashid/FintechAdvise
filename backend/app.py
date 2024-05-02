@@ -76,27 +76,28 @@ def add_goal():
         print(f'Error: {err}')
         print(f'Request data: {request.data}')
         return jsonify({'error': f'Failed to add goal: {err}'}), 400
-
-@app.route('/get_goals', methods=['GET'])
+    
+@app.route('/get_goals', methods=['POST'])
 def get_goals():
-    try:
-        with DatabaseConnection() as conn:
-            cursor = conn.cursor()
-            user = request.get_json()
-            query = "SELECT * FROM Goal WHERE userId = %s"
-            values = (user['userId'],)
-            cursor.execute(query, values)
-            results = cursor.fetchall()
-            goals = []
-            for result in results:
-                columns = [column[0] for column in cursor.description]
-                goal = dict(zip(columns, result))
-                goals.append(goal)
-            return jsonify(goals), 200
-    except mysql.connector.Error as err:
-        print(f'Error: {err}')
-        print(f'Request data: {request.data}')
-        return jsonify({'error': f'Failed to get goals: {err}'}), 400
+        try:
+           with DatabaseConnection() as conn:
+                    cursor = conn.cursor()
+                    user = request.get_json()
+                    query = "SELECT * FROM Goal WHERE userId = %s"
+                    values = (user[0]['userId'],)
+                    cursor.execute(query, values)
+                    results = cursor.fetchall()
+                    goals = []
+                    for result in results:
+                        columns = [column[0] for column in cursor.description]
+                        goal = dict(zip(columns, result))
+                        goals.append(goal)
+                    print(f'Goals: {goals}')
+                    return goals, 200
+        except mysql.connector.Error as err:
+                print(f'Error: {err}')
+                print(f'Request data: {request.data}')
+                return jsonify({'error': f'Failed to get goals: {err}'}), 400
     
 @app.route('/signup', methods=['POST'])
 def signup():
@@ -106,7 +107,7 @@ def signup():
             cursor = conn.cursor()
             user = request.get_json()
             hashed_password = user['password']
-            query = "INSERT INTO users (id, name, email, country, password, phone) VALUES (%s, %s, %s, %s, %s, %s)"
+            query = "INSERT INTO users1 (id, name, email, country, password, phone) VALUES (%s, %s, %s, %s, %s, %s)"
             values = (user['id'], user['name'], user['email'], user['country'], hashed_password, user['phone'])
             cursor.execute(query, values)
             conn.commit()
@@ -124,7 +125,7 @@ def login():
         with DatabaseConnection() as conn:
             cursor = conn.cursor()
             user = request.get_json()
-            query = "SELECT * FROM users WHERE email = %s and password = %s"
+            query = "SELECT * FROM users1 WHERE email = %s and password = %s"
             values = (user['email'], user['password'])
             cursor.execute(query, values)
             result = cursor.fetchone()
