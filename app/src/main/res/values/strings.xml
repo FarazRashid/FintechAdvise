@@ -59,4 +59,33 @@
         <item>Extensive</item>
     </string-array>
 
+    <string name="title_activity_main">Link demo</string>
+    <string name="title_activity_main_java">Link demo (java)</string>
+    <string name="public_token_result">public_token:\n%s</string>
+    <string name="content_success">
+    Bank Connected!
+
+    </string>
+    <string name="content_cancelled">Institution Id:\n%1$s\n\n Institution Name:\n%2$s\n\n Link Session Id:\n%3$s\n\n Status:\n%4$s</string>
+
+    <string name="content_exit">
+    Uh-oh! It seems something went wrong:\n\"%1$s\"
+
+    \n\nVisit <a href="https://plaid.com/docs/#errors">https://plaid.com/docs/#errors</a> for more information on the error code below
+    \nError Code: <b>%2$s</b>
+  </string>
+    <string name="content_cancel">You left Link without completing the flow. Reason: %1$s</string>
+    <string name="content_exception">Exception Class:\n%1$s\n\n Exception Message:\n%2$s</string>
+    <string name="landing_text">
+    Link Your Account to A Bank
+</string>
+    <string name="open_java">Open Java demo</string>
+    <string name="open_kotlin">Open Kotlin demo</string>
+    <string name="prepare_link">Prepare Link</string>
+    <string name="open_link">Open Link</string>
+    <string name="open_activity_result">Open startActivityForResult demo (Kotlin)</string>
+    <string name="title_activity_main_activity_result_contract">Link demo (startActivityForResult)</string>
+    <string name="open_activity_result_java">Open startActivityForResult demo (Java)</string>
+    <string name="title_activity_main_activity_result_contract_java">Link demo (startActivityForResult Java)</string>
+
 </resources>

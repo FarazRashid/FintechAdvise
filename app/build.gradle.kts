@@ -53,5 +53,13 @@ dependencies {
     implementation("com.google.firebase:firebase-auth")
 
     implementation("com.google.android.gms:play-services-auth:21.1.0")
+    implementation ("com.plaid.link:sdk-core:4.3.1")
+    implementation ("io.reactivex.rxjava3:rxandroid:3.0.0")
+    implementation ("com.squareup.retrofit2:adapter-rxjava3:2.9.0")
+
+    implementation ("com.squareup.retrofit2:retrofit:2.9.0")
+    implementation ("com.squareup.retrofit2:converter-gson:2.9.0")
+    implementation ("com.google.code.gson:gson:2.10.1")
+
 
 }
