@@ -9,12 +9,18 @@
         android:iconTint="@color/icon_secondary"
         android:title="Home"
         app:showAsAction="always"/>
-
     <item
-        android:id="@+id/navigation_profile"
-        android:icon="@drawable/profile"
+        android:id="@+id/navigation_investment"
+        android:icon="@drawable/investment"
         android:iconTint="@color/icon_secondary"
-        android:title="Profile"
+        android:title="Portfolio"
         app:showAsAction="always"/>
+    <item
+        android:id="@+id/navigation_exploration"
+        android:icon="@drawable/explore"
+        android:iconTint="@color/icon_secondary"
+        android:title="Explore"
+        app:showAsAction="always"/>
+
 
 </menu>
