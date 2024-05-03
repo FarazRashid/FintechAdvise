@@ -1,6 +1,10 @@
 package com.se.fintechadvise.HelperClasses
 
+import android.transition.TransitionManager
 import android.util.Log
+import android.view.View
+import android.view.ViewGroup
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -31,5 +35,14 @@ class BottomNavigationHelper(private val activity: AppCompatActivity) {
         transaction.commit()
 
         Log.d("BottomNavigationHelper", "Fragment loaded: ${fragment.javaClass.simpleName}")
+    }
+
+    fun setupVisibilityToggleWithTransition(trigger: TextView, container: ViewGroup, vararg views: View) {
+        trigger.setOnClickListener {
+            TransitionManager.beginDelayedTransition(container)
+            views.forEach { view ->
+                view.visibility = if (view.visibility == View.VISIBLE) View.GONE else View.VISIBLE
+            }
+        }
     }
 }

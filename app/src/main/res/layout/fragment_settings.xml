@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <androidx.drawerlayout.widget.DrawerLayout
+        android:id="@+id/drawer_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        android:fitsSystemWindows="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="25dp"
+        android:orientation="vertical"
+        android:padding="16dp"
+        >
+
+
+        <ImageView
+            android:id="@+id/menu_opener"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginBottom="30dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_gravity="start"
+            app:srcCompat="@drawable/menu" />
+        <TextView
+            android:id="@+id/request_deletion"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Request Data Deletion"
+        android:fontFamily="@font/poppins_semi_bold"
+        android:textSize="26sp"
+        android:textColor="@color/black"
+            android:layout_marginStart="30dp"
+        android:layout_marginBottom="10dp"/>
+        <Button
+            android:id="@+id/delete_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="30dp"
+
+            android:layout_marginBottom="8dp"
+            android:background="@drawable/rounded_border"
+            android:backgroundTint="@color/text_primary"
+            android:capitalize="none"
+            android:fontFamily="@font/poppins_medium"
+            android:paddingHorizontal="35dp"
+            android:text="Submit Request"
+            android:textAllCaps="false"
+            android:visibility="gone"
+            android:textColor="@color/white"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+        <TextView
+            android:id="@+id/deletion_info"
+            android:layout_marginStart="30dp"
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="*Data deletion may take upto 3 days. \n*You will be informed on mail when the process is completed"
+            android:fontFamily="@font/poppins_semi_bold"
+            android:textSize="11sp"
+            android:textColor="@color/text_secondary"
+            android:visibility="gone"
+
+            android:layout_marginBottom="10dp"/>
+        <TextView
+            android:id="@+id/request_data"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Request Personal Data"
+            android:fontFamily="@font/poppins_semi_bold"
+            android:textSize="26sp"
+            android:textColor="@color/black"
+            android:layout_marginStart="30dp"
+            android:layout_marginBottom="10dp"/>
+        <Button
+            android:id="@+id/request_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="30dp"
+
+            android:layout_marginBottom="8dp"
+            android:background="@drawable/rounded_border"
+            android:backgroundTint="@color/text_primary"
+            android:capitalize="none"
+            android:fontFamily="@font/poppins_medium"
+            android:paddingHorizontal="35dp"
+            android:text="Submit Request"
+            android:textAllCaps="false"
+            android:visibility="gone"
+            android:textColor="@color/white"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+        <TextView
+            android:id="@+id/request_info"
+            android:layout_marginStart="30dp"
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="*Data retrieval requests may take upto 3 days. \n*You will be mailed your data when the process is completed"
+            android:fontFamily="@font/poppins_semi_bold"
+            android:textSize="11sp"
+            android:textColor="@color/text_secondary"
+            android:visibility="gone"
+
+            android:layout_marginBottom="10dp"/>
+
+
+        <TextView
+            android:id="@+id/update_data"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Update Data Preferences"
+            android:fontFamily="@font/poppins_semi_bold"
+            android:textSize="26sp"
+            android:textColor="@color/black"
+            android:layout_marginStart="30dp"
+            android:layout_marginBottom="10dp"/>
+        <CheckBox
+            android:id="@+id/checkbox_preference1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Send Usage Statistics"
+            android:buttonTint="@color/text_secondary"
+
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="10dp"/>
+
+        <CheckBox
+            android:id="@+id/checkbox_preference2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:buttonTint="@color/text_secondary"
+
+            android:text="Share Data with Partners"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="10dp"/>
+
+        <CheckBox
+            android:id="@+id/checkbox_preference3"
+            android:layout_width="wrap_content"
+            android:buttonTint="@color/text_secondary"
+
+            android:layout_height="wrap_content"
+            android:text="Share Data for Model Training"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="10dp"/>
+
+
+        <Button
+            android:id="@+id/update_pref_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="8dp"
+            android:background="@drawable/rounded_border"
+            android:backgroundTint="@color/text_primary"
+            android:capitalize="none"
+            android:fontFamily="@font/poppins_medium"
+            android:paddingHorizontal="35dp"
+            android:text="Update Your Preferences"
+            android:textAllCaps="false"
+            android:visibility="gone"
+            android:textColor="@color/white"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+    </LinearLayout>
+    <com.google.android.material.navigation.NavigationView
+        android:id="@+id/side_nav"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        android:background="@color/icon_secondary"
+        android:padding="5dp"
+        app:itemIconPadding="15dp"
+        app:itemIconSize="25dp"
+        app:itemIconTint="@color/white"
+        app:itemTextAppearance="@style/navBarTextStyle"
+        app:itemTextAppearanceActiveBoldEnabled="true"
+        app:itemTextColor="@color/white"
+        app:menu="@menu/navigation_menu_drawer" />
+    </androidx.drawerlayout.widget.DrawerLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
