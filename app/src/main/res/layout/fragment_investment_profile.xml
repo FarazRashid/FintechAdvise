@@ -25,7 +25,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
-            android:id="@+id/investmentImage"
+            android:id="@+id/currentInvestmentImage"
             android:layout_width="70dp"
             android:layout_height="70dp"
             android:src="@drawable/common_google_signin_btn_icon_dark_normal"
@@ -44,7 +44,7 @@
             android:textSize="28sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/investmentImage" />
+            app:layout_constraintTop_toBottomOf="@+id/currentInvestmentImage" />
 
         <TextView
             android:id="@+id/textView14"

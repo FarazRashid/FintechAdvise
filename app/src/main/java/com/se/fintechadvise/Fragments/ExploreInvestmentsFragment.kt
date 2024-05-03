@@ -20,6 +20,7 @@ import com.se.fintechadvise.DataClasses.InvestmentPerformance
 import com.se.fintechadvise.DataClasses.InvestmentType
 import com.se.fintechadvise.DataClasses.Plans
 import com.se.fintechadvise.HelperClasses.FragmentHelper
+import com.se.fintechadvise.ManagerClasses.InvestmentManager
 import com.se.fintechadvise.R
 import com.smd.surmaiya.Fragments.InvestmentProfileFragment
 
@@ -77,13 +78,6 @@ class ExploreInvestmentsFragment : Fragment() {
         }
     }
 
-    private fun getPlans(): List<Plans> {
-        return listOf(
-            Plans("Platinum", "Invest in mutual funds", "@drawable/investment.xml", "200"),
-            Plans("Gold", "Invest in stocks", "@drawable/investment.xml", "130"),
-            Plans("Silver", "Invest in bonds", "@drawable/investment.xml", "50"),
-        )
-    }
 
     private fun setupRecyclerView(view: View) {
         val investments: List<Investment> = getInvestments() // Replace with your actual implementation
@@ -94,8 +88,8 @@ class ExploreInvestmentsFragment : Fragment() {
             override fun onInvestmentClick(investment: Investment) {
                 // Handle click event
 //                FragmentHelper(requireActivity().supportFragmentManager,requireContext()).loadFragment(InvestmentProfileFragment())
+                InvestmentManager.setCurrentInvestment(investment)
                 showPlayerBottomSheetDialog()
-
             }
         })
 
@@ -105,6 +99,7 @@ class ExploreInvestmentsFragment : Fragment() {
             override fun onInvestmentClick(investment: Investment) {
                 // Handle click event
 //                FragmentHelper(requireActivity().supportFragmentManager,requireContext()).loadFragment(InvestmentProfileFragment())
+                InvestmentManager.setCurrentInvestment(investment)
                 showPlayerBottomSheetDialog()
 
             }

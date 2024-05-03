@@ -1,5 +1,6 @@
 package com.se.fintechadvise.DataClasses
 
+
 data class Investment(
     val id: String,
     val name: String,

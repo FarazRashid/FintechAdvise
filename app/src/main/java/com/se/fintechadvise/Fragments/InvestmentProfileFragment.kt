@@ -10,16 +10,22 @@ import android.view.ViewGroup
 import android.view.WindowManager
 import android.widget.Button
 import android.widget.EditText
+import android.widget.ImageView
+import android.widget.TextView
 import androidx.core.content.ContextCompat
+import androidx.fragment.app.DialogFragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.se.fintechadvise.AdapterClasses.InvestmentHistoryAdapter
+import com.se.fintechadvise.DataClasses.Investment
 import com.se.fintechadvise.DataClasses.InvestmentPerformance
 import com.se.fintechadvise.HelperClasses.CustomToastMaker
+import com.se.fintechadvise.ManagerClasses.InvestmentManager
 import com.se.fintechadvise.R
+import com.squareup.picasso.Picasso
 
 class InvestmentProfileFragment : BottomSheetDialogFragment() {
 
@@ -40,17 +46,21 @@ class InvestmentProfileFragment : BottomSheetDialogFragment() {
         }
         return dialog
     }
-    private fun getInvestmentPerformances(): List<InvestmentPerformance> {
-        return listOf(
-            InvestmentPerformance("22/10/2024", 25.0),
-            InvestmentPerformance("10/10/2024", 23.0),
-            InvestmentPerformance("01/10/2024", 20.0),
-            // Add more InvestmentPerformance objects as needed
-        )
-    }
-    private fun setProfileData(view: View) {
-        // Set the profile data in the view
 
+    private fun setProfileData(view: View) {
+        // Set the investment name
+        val investmentNameTextView = view.findViewById<TextView>(R.id.investmentProfileTitle)
+        investmentNameTextView.text = InvestmentManager.getCurrentInvestment()?.name
+
+        // Set the investment current value
+        val investmentCurrentValueTextView = view.findViewById<TextView>(R.id.investmentCurrentValue)
+        investmentCurrentValueTextView.text = InvestmentManager.getCurrentInvestment()?.currentValue.toString()
+
+        // Set the investment image
+        if(InvestmentManager.getCurrentInvestment()?.investmentImageUrl!!.isNotEmpty() && InvestmentManager.getCurrentInvestment()?.investmentImageUrl!!.isNotBlank()) {
+            val investmentImageView = view.findViewById<ImageView>(R.id.currentInvestmentImage)
+            Picasso.get().load(InvestmentManager.getCurrentInvestment()!!.investmentImageUrl).into(investmentImageView)
+        }
     }
 
     private fun handleInvestNowButtonClick(view:View) {
@@ -85,7 +95,8 @@ class InvestmentProfileFragment : BottomSheetDialogFragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view= inflater.inflate(R.layout.fragment_investment_profile, container, false)
-        val investmentPerformances: List<InvestmentPerformance> = getInvestmentPerformances()
+
+        val investmentPerformances: List<InvestmentPerformance> = InvestmentManager.getCurrentInvestmentPerformances()
 
         setProfileData(view)
         handleInvestNowButtonClick(view)
@@ -109,6 +120,28 @@ class InvestmentProfileFragment : BottomSheetDialogFragment() {
 
         //set minimimum height to parent height
         bottomSheetBehavior.peekHeight = resources.displayMetrics.heightPixels
+    }
+
+    override fun onDestroy() {
+        InvestmentManager.resetInvestment()
+        super.onDestroy()
+
+    }
+    override fun onDestroyView() {
+        InvestmentManager.resetInvestment()
+        super.onDestroyView()
+    }
+    override fun onDismiss(dialog: DialogInterface) {
+        InvestmentManager.resetInvestment()
+        super.onDismiss(dialog)
+    }
+    override fun onCancel(dialog: DialogInterface) {
+        InvestmentManager.resetInvestment()
+        super.onCancel(dialog)
+    }
+    override fun onDetach() {
+        InvestmentManager.resetInvestment()
+        super.onDetach()
     }
 
     private fun setupFullHeight(bottomSheet: View) {
