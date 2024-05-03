@@ -4,10 +4,10 @@ package com.se.fintechadvise.DataClasses
 data class Investment(
     val id: String,
     val name: String,
-    var allocation: Double,
+    var allocation: Double =0.0 ,
     val type: InvestmentType,
-    var currentValue: Double,
     val investmentImageUrl: String,
-    val historicalPerformance: List<InvestmentPerformance>,
+    var currentValue: Double,
+    val historicalPerformance: List<InvestmentPerformance> = emptyList(),
     val performanceIndex : Double
 )

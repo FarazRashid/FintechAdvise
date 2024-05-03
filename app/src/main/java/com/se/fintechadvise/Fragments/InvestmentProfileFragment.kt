@@ -13,17 +13,16 @@ import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.content.ContextCompat
-import androidx.fragment.app.DialogFragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.se.fintechadvise.AdapterClasses.InvestmentHistoryAdapter
-import com.se.fintechadvise.DataClasses.Investment
 import com.se.fintechadvise.DataClasses.InvestmentPerformance
 import com.se.fintechadvise.HelperClasses.CustomToastMaker
 import com.se.fintechadvise.ManagerClasses.InvestmentManager
+import com.se.fintechadvise.ManagerClasses.WebserviceManger
 import com.se.fintechadvise.R
 import com.squareup.picasso.Picasso
 
@@ -80,6 +79,8 @@ class InvestmentProfileFragment : BottomSheetDialogFragment() {
                 builder.setMessage("Are you sure you want to invest $${amount} in this stock?")
                 builder.setPositiveButton("Yes") { dialogInterface: DialogInterface, i: Int ->
                     CustomToastMaker().showToast(requireContext(),"Investment Successful")
+                    WebserviceManger.addUserInvestment(requireContext(),"42d996c5-b820-4710-91d1-f6bbd44a7ac6",InvestmentManager.getCurrentInvestment()!!.id,amount.toDouble(),)
+                    view.findViewById<EditText>(R.id.investmentAmount).text.clear()
                     dialogInterface.dismiss()
                 }
                 builder.setNegativeButton("No") { dialogInterface: DialogInterface, i: Int ->

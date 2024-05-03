@@ -11,18 +11,25 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.facebook.shimmer.ShimmerFrameLayout
 import com.google.android.material.navigation.NavigationView
 import com.se.fintechadvise.AdapterClasses.InvestmentAdapter
 import com.se.fintechadvise.DataClasses.Investment
 import com.se.fintechadvise.DataClasses.InvestmentPerformance
 import com.se.fintechadvise.DataClasses.InvestmentType
 import com.se.fintechadvise.DataClasses.Plans
+import com.se.fintechadvise.DataClasses.User
 import com.se.fintechadvise.HelperClasses.FragmentHelper
 import com.se.fintechadvise.ManagerClasses.InvestmentManager
+import com.se.fintechadvise.ManagerClasses.UserManager
+import com.se.fintechadvise.ManagerClasses.WebserviceManger
 import com.se.fintechadvise.R
 import com.smd.surmaiya.Fragments.InvestmentProfileFragment
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -38,6 +45,10 @@ class ExploreInvestmentsFragment : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
+
+    private lateinit var shimmerContainer: ShimmerFrameLayout
+    private lateinit var shimmerContainer1: ShimmerFrameLayout
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -79,8 +90,9 @@ class ExploreInvestmentsFragment : Fragment() {
     }
 
 
-    private fun setupRecyclerView(view: View) {
-        val investments: List<Investment> = getInvestments() // Replace with your actual implementation
+    private fun setupRecyclerView(view: View, investments: List<Investment>) {
+
+        Log.d("Investment", "setupRecyclerView: $investments")
 
         val allInvestmentsRecyclerView = view.findViewById<RecyclerView>(R.id.allInvestmentsRecyclerView)
         allInvestmentsRecyclerView.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
@@ -92,6 +104,26 @@ class ExploreInvestmentsFragment : Fragment() {
                 showPlayerBottomSheetDialog()
             }
         })
+
+        if(UserManager.getCurrentUser()!=null) {
+            val user = UserManager.getCurrentUser()!!
+
+            //filer investments based on user tolerance, if investment.performance index is greater than user tolerance show that to the user
+
+            val investments = investments.filter { investment ->
+                val investmentPerformance = investment.performanceIndex
+                val userTolerance = user.riskTolerance
+
+                if (investmentPerformance != null) {
+                    if (investmentPerformance > userTolerance.toDouble()) {
+                        return@filter true
+                    }
+                }
+                return@filter false
+
+            }
+        }
+
 
         val recommendedInvestmentsRecyclerView = view.findViewById<RecyclerView>(R.id.recommendedInvestmentsRecyclerView)
         recommendedInvestmentsRecyclerView.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
@@ -111,45 +143,31 @@ class ExploreInvestmentsFragment : Fragment() {
         investmentProfileFragment.show(requireActivity().supportFragmentManager, investmentProfileFragment.tag)
         Log.d("InvestmentProfileFragment", "showPlayerBottomSheetDialog: ")
     }
-    private fun getInvestments(): List<Investment> {
-            val investments = listOf(
-            Investment(
-                id = "1",
-                name = "Investment 1",
-                allocation = 50.0,
-                type = InvestmentType.STOCK, // Replace with actual type
-                currentValue = 10.0,
-                investmentImageUrl = "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c1/Google_%22G%22_logo.svg/1200px-Google_%22G%22_logo.svg.png",
-                historicalPerformance = listOf(InvestmentPerformance("22/10/2024",25.0)
-                    ,InvestmentPerformance("10/10/2024",23.0)),
-                performanceIndex = 1.0
-            ),
-            Investment(
-                id = "2",
-                name = "Investment 2",
-                allocation = 30.0,
-                type = InvestmentType.STOCK, // Replace with actual type
-                currentValue = 20.0,
-                investmentImageUrl = "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c1/Google_%22G%22_logo.svg/1200px-Google_%22G%22_logo.svg.png",
-                historicalPerformance = listOf(InvestmentPerformance("22/10/2024",25.0)
-                    ,InvestmentPerformance("10/10/2024",23.0)),
-                performanceIndex = 1.2
-            ),
-                Investment(
-                id = "3",
-                name = "Investment 3",
-                allocation = 20.0,
-                type = InvestmentType.STOCK, // Replace with actual type
-                currentValue = 30.0,
-                investmentImageUrl = "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c1/Google_%22G%22_logo.svg/1200px-Google_%22G%22_logo.svg.png",
-                historicalPerformance = listOf(InvestmentPerformance("22/10/2024",25.0)
-                    ,InvestmentPerformance("10/10/2024",23.0)),
-                performanceIndex = 1.3
-            )
-            // Add more investments as needed
-        )
+    private fun getInvestments() {
 
-        return investments
+        Log.d("Investment", "gettingInvestments")
+        shimmerContainer.startShimmer()
+        shimmerContainer1.startShimmer()
+        var investments1= listOf<Investment>()
+        WebserviceManger.getInvestments(requireContext()) { investments,string ->
+            if (investments != null) {
+                investments1=investments
+            }
+
+            for (investment in investments1) {
+                Log.d("Investment", "Investment: $investment")
+            }
+
+            shimmerContainer.stopShimmer()
+            shimmerContainer.visibility = View.GONE
+
+            shimmerContainer1.stopShimmer()
+            shimmerContainer1.visibility = View.GONE
+
+            view?.let { setupRecyclerView(it,investments1) }
+
+        }
+
     }
 
     override fun onCreateView(
@@ -158,8 +176,19 @@ class ExploreInvestmentsFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_explore_investments, container, false)
+
+        shimmerContainer = view.findViewById(R.id.shimmer_view_container)
+        shimmerContainer1 = view.findViewById(R.id.shimmer_view_container1)
+
         setupMenuOpener(view)
-        setupRecyclerView(view)
+        // Start a coroutine to fetch the data
+        lifecycleScope.launch {
+            getInvestments()
+            delay(5000) // Delay for 500 milliseconds. Adjust this value as needed.
+        }
+
+
+
         return view
     }
 

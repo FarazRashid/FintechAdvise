@@ -35,7 +35,7 @@ object LinkTokenRequester {
 //      .map { it.link_token }
 
   val token
-    get() = Single.just("link-sandbox-b91d5c54-b48b-447e-85b0-367fea31cd4d")
+    get() = Single.just("link-sandbox-99bacd79-6b6e-4097-9c87-abb84ad95cef")
 
 }
 

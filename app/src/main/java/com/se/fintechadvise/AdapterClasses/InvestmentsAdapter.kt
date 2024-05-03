@@ -10,7 +10,6 @@ import com.se.fintechadvise.DataClasses.Investment
 import com.se.fintechadvise.R
 import com.squareup.picasso.Picasso
 
-
 class InvestmentAdapter(private val investments: List<Investment>, private val listener: OnInvestmentClickListener) : RecyclerView.Adapter<InvestmentAdapter.InvestmentViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): InvestmentViewHolder {
