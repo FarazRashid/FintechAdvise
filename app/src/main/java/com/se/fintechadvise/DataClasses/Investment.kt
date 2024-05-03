@@ -6,6 +6,7 @@ data class Investment(
     var allocation: Double,
     val type: InvestmentType,
     var currentValue: Double,
+    val investmentImageUrl: String,
     val historicalPerformance: List<InvestmentPerformance>,
     val performanceIndex : Double
 )
