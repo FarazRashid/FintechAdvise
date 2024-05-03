@@ -151,7 +151,7 @@ def login():
         with DatabaseConnection() as conn:
             cursor = conn.cursor()
             user = request.get_json()
-            query = "SELECT * FROM users1 WHERE email = %s and password = %s"
+            query = "SELECT * FROM users WHERE email = %s and password = %s"
             values = (user['email'], user['password'])
             cursor.execute(query, values)
             result = cursor.fetchone()

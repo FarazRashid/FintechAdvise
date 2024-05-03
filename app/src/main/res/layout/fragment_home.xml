@@ -273,5 +273,6 @@
             app:itemTextAppearanceActiveBoldEnabled="true"
             app:itemTextColor="@color/white"
             app:menu="@menu/navigation_menu_drawer" />
+
     </androidx.drawerlayout.widget.DrawerLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

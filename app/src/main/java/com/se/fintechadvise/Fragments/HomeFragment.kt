@@ -1,6 +1,9 @@
 package com.se.fintechadvise.Fragments
 
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -37,45 +40,55 @@ class HomeFragment : Fragment() {
         }
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-//        return inflater.inflate(R.layout.fragment_home, container, false)
-        // add on click listener for goals card view
-        val view = inflater.inflate(R.layout.fragment_home, container, false)
+    private fun setupGoalsCardView(view: View) {
         val goalsCardView = view.findViewById<CardView>(R.id.goalsCardView)
         goalsCardView.setOnClickListener {
-            // navigate to goals fragment
-            FragmentHelper(requireActivity().supportFragmentManager).loadFragment(PlanningFragment())
+            FragmentHelper(requireActivity().supportFragmentManager, requireContext()).loadFragment(PlanningFragment())
         }
+    }
 
+    private fun setupMenuOpener(view: View) {
         val menuOpener = view.findViewById<ImageView>(R.id.menu_opener)
         val drawerLayout = view.findViewById<DrawerLayout>(R.id.drawer_layout)
 
         menuOpener.setOnClickListener {
             drawerLayout.openDrawer(GravityCompat.START)
+            setupNavigationView()
         }
+    }
+
+    private fun setupNavigationView() {
         val navigationView = requireActivity().findViewById<NavigationView>(R.id.side_nav)
+        val fragmentHelper = FragmentHelper(requireActivity().supportFragmentManager, requireContext())
+        val drawerLayout = requireActivity().findViewById<DrawerLayout>(R.id.drawer_layout)
         navigationView.setNavigationItemSelectedListener { menuItem ->
             when (menuItem.itemId) {
-                R.id.settingsButton -> {
-                    // android:title="Profile"
+                R.id.settingsButton -> true
+                R.id.monthlyRankingsButton -> true
+                R.id.popularPLaylistsButton -> {
+                    fragmentHelper.closeDrawerWithDelay(drawerLayout, 300) // delay in milliseconds
+                    Handler(Looper.getMainLooper()).postDelayed({
+                        fragmentHelper.loadFragment(SettingsFragment())
+                    }, 300)
+
                     true
                 }
-                R.id.monthlyRankingsButton -> {
-                    //  android:title="Tasks"
-                    true
-                }
-                R.id.notificataionsButton -> {
-                    // android:title="About"
-                    true
-                }
-                // Add more cases for other menu items if needed
+                R.id.notificataionsButton -> true
                 else -> false
             }
         }
+    }
+
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        // Inflate the layout for this fragment
+        val view = inflater.inflate(R.layout.fragment_home, container, false)
+
+        setupGoalsCardView(view)
+        setupMenuOpener(view)
+
         return view
     }
 
