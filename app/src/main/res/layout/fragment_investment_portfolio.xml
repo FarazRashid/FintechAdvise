@@ -77,7 +77,7 @@
                     android:background="@drawable/rounded_square">
 
                     <Button
-                        android:id="@+id/button"
+                        android:id="@+id/investNowButton"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="8dp"
@@ -85,9 +85,12 @@
                         android:background="@drawable/rounded_border"
                         android:capitalize="none"
                         android:fontFamily="@font/poppins_medium"
-                        android:paddingHorizontal="25dp"
-                        android:text="Your Investments"
+                        android:paddingHorizontal="20dp"
+                        android:text="Invest Now"
                         android:textAllCaps="false"
+                        android:drawableEnd="@drawable/rightarrow"
+                        android:drawableTint="@color/add_album"
+                        android:drawablePadding="5dp"
                         android:textColor="@color/add_album"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent" />
@@ -115,7 +118,7 @@
                         android:textSize="20sp"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toStartOf="@+id/button"
-                        app:layout_constraintStart_toStartOf="@+id/textView9"
+                        app:layout_constraintStart_toEndOf="@+id/imageView11"
                         app:layout_constraintTop_toTopOf="@+id/button" />
 
                     <ImageView

@@ -52,8 +52,8 @@
             <ImageView
                 android:id="@+id/planImage"
                 android:layout_width="60dp"
+                android:layout_height="60dp"
                 android:layout_gravity="right"
-                android:layout_height="wrap_content"
                 android:src="@drawable/investment"
                 app:tint="#FFEB3B"
                 app:layout_constraintStart_toStartOf="parent"

@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.ImageView
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
@@ -95,9 +96,19 @@ class InvestmentPortfolioFragment : Fragment() {
         val view =  inflater.inflate(R.layout.fragment_investment_portfolio, container, false)
 
         setupRecyclerView(view)
+        setupButtonNavigation(view)
         setupMenuOpener(view)
 
         return view
+    }
+
+    private fun setupButtonNavigation(view: View?) {
+        val goToExploreButton = view?.findViewById<Button>(R.id.investNowButton)
+        val fragmentHelper = FragmentHelper(requireActivity().supportFragmentManager, requireContext())
+        goToExploreButton?.setOnClickListener {
+            fragmentHelper.loadFragment(ExploreInvestmentsFragment())
+        }
+
     }
 
     companion object {

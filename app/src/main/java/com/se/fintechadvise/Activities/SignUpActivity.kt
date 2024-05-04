@@ -190,7 +190,6 @@ class SignUpActivity : AppCompatActivity() {
 
         }
 
-        // Check if phone number is valid
         if (!phoneNumber.startsWith("+") || phoneNumber.length != 13) {
             phoneNumberEditText.error = "Phone number must begin with + and be 13 digits long"
             phoneNumberEditText.requestFocus()

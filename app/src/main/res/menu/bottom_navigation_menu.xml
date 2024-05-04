@@ -7,8 +7,15 @@
         android:id="@+id/navigation_home"
         android:icon="@drawable/home"
         android:iconTint="@color/icon_secondary"
-        android:title="Home"
+        android:title="Dashboard"
         app:showAsAction="always"/>
+    <item
+        android:id="@+id/navigation_goals"
+        android:icon="@drawable/goals"
+        android:iconTint="@color/icon_secondary"
+        android:title="Goals"
+        app:showAsAction="always"/>
+
     <item
         android:id="@+id/navigation_investment"
         android:icon="@drawable/investment"
@@ -16,11 +23,12 @@
         android:title="Portfolio"
         app:showAsAction="always"/>
     <item
-        android:id="@+id/navigation_exploration"
-        android:icon="@drawable/explore"
+        android:id="@+id/navigation_education"
+        android:icon="@drawable/education"
         android:iconTint="@color/icon_secondary"
-        android:title="Explore"
+        android:title="Education"
         app:showAsAction="always"/>
+
 
 
 </menu>
