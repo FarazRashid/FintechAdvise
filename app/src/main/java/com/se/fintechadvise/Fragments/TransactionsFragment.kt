@@ -1,15 +1,19 @@
 package com.se.fintechadvise.Fragments
 
 import android.app.AlertDialog
+import android.os.Build
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.ImageView
 import android.widget.Spinner
 import android.widget.TextView
+import androidx.annotation.RequiresApi
+
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.se.fintechadvise.AdapterClasses.TransactionsAdapter
@@ -31,6 +35,10 @@ class TransactionsFragment : Fragment(), TransactionsAdapter.OnItemClickListener
     private var param1: String? = null
     private var param2: String? = null
     private var recyclerView: RecyclerView? = null
+    private var transactionsList: List<Transaction>? = null
+    private var currentList: List<Transaction>? = null
+
+    private var activeFilters = mutableMapOf<String, String>()
 
 
 
@@ -43,6 +51,7 @@ class TransactionsFragment : Fragment(), TransactionsAdapter.OnItemClickListener
         }
     }
 
+    @RequiresApi(Build.VERSION_CODES.TIRAMISU)
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -68,10 +77,11 @@ class TransactionsFragment : Fragment(), TransactionsAdapter.OnItemClickListener
 
     private fun setupSortSpinner(view: View) {
         val sortSpinner = view.findViewById<Spinner>(R.id.sortSpinner)
+        val months = resources.getStringArray(R.array.sort_options)
         val adapter = object : ArrayAdapter<String>(
             requireContext(),
             android.R.layout.simple_spinner_item,
-            resources.getStringArray(R.array.sort_options)
+            months
         ) {
             override fun isEnabled(position: Int): Boolean {
                 return position >= 0
@@ -81,21 +91,76 @@ class TransactionsFragment : Fragment(), TransactionsAdapter.OnItemClickListener
 
         sortSpinner.adapter = adapter
 
+        sortSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            @RequiresApi(Build.VERSION_CODES.TIRAMISU)
+            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                val selectedMonth = months[position]
+                filterTransactionsByMonth(selectedMonth)
+            }
+
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+                // Do nothing
+            }
+        }
+
     }
 
-    private fun setupTransactionsRecyclerView(view: View?) {
+    @RequiresApi(Build.VERSION_CODES.TIRAMISU)
+    private fun filterTransactionsByMonth(month: String) {
+        var filteredList = if (month == "All") {
+            transactionsList
+        } else {
+            val monthNumber = monthToNumber(month)
+            transactionsList?.filter {
+                val transactionDate = it.transactionDate
+                val transactionMonth = transactionDate.split("/")[1].toInt()
+                transactionMonth == monthNumber
+            }
+        }
+        for ((category, _) in activeFilters) {
+            filteredList = filteredList?.filter { it.transactionCategory == category }
+        }
+        (recyclerView?.adapter as? TransactionsAdapter)?.updateData(filteredList!!)
+        currentList = filteredList
+    }
+    @RequiresApi(Build.VERSION_CODES.O)
+    private fun monthToNumber(month: String): Int {
+        return when (month) {
+            "January" -> 1
+            "February" -> 2
+            "March" -> 3
+            "April" -> 4
+            "May" -> 5
+            "June" -> 6
+            "July" -> 7
+            "August" -> 8
+            "September" -> 9
+            "October" -> 10
+            "November" -> 11
+            "December" -> 12
+            "This Month" -> getCurrentMonth()
+            else -> 0
+        }
+    }
 
-        val transactionsList = getTransactionsList()
-        var adapter : TransactionsAdapter? = null
-        adapter = TransactionsAdapter(transactionsList,this)
+    @RequiresApi(Build.VERSION_CODES.O)
+    private fun getCurrentMonth(): Int {
+        val currentMonth = java.time.LocalDate.now().monthValue
+        return currentMonth
+    }
+
+    @RequiresApi(Build.VERSION_CODES.TIRAMISU)
+    private fun setupTransactionsRecyclerView(view: View?) {
+        getTransactionsList()
+        val adapter = TransactionsAdapter(currentList!!,this)
         recyclerView = view?.findViewById(R.id.transactionsAllRecyclerView)
         recyclerView?.adapter = adapter
         recyclerView?.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
-
-        filterTransactionClickListener(view, transactionsList, adapter)
+        filterTransactionClickListener(view, adapter)
     }
 
-    private fun filterTransactionClickListener(view: View?, transactionsList: List<Transaction>, adapter: TransactionsAdapter?) {
+    @RequiresApi(Build.VERSION_CODES.TIRAMISU)
+    private fun filterTransactionClickListener(view: View?, adapter: TransactionsAdapter?) {
 
         val spendingImageView = view?.findViewById<ImageView>(R.id.spendingImageView)
         val spendingTextView = view?.findViewById<TextView>(R.id.spendingTextView)
@@ -108,41 +173,57 @@ class TransactionsFragment : Fragment(), TransactionsAdapter.OnItemClickListener
         val viewAllTextView = view?.findViewById<TextView>(R.id.viewAllTextView)
 
         viewAllTextView?.setOnClickListener {
-            adapter!!.updateData(transactionsList)
+           adapter!!.updateData(transactionsList!!)
+            currentList = transactionsList!!
         }
 
         spendingImageView?.setOnClickListener {
-            filterTransactions("Spending", transactionsList, adapter!!)
+            filterTransactions("Spending", adapter!!)
         }
         spendingTextView?.setOnClickListener {
-            filterTransactions("Spending", transactionsList, adapter!!)
+            filterTransactions("Spending", adapter!!)
         }
 
         incomeTextView?.setOnClickListener {
-            filterTransactions("Income", transactionsList, adapter!!)
+            filterTransactions("Income", adapter!!)
         }
         incomeImageView?.setOnClickListener {
-            filterTransactions("Income", transactionsList, adapter!!)
+            filterTransactions("Income", adapter!!)
         }
 
         billsTextView?.setOnClickListener {
-            filterTransactions("Bills", transactionsList, adapter!!)
+            filterTransactions("Bills", adapter!!)
         }
         billsImageView?.setOnClickListener {
-            filterTransactions("Bills", transactionsList, adapter!!)
+            filterTransactions("Bills", adapter!!)
         }
 
         savingsTextView?.setOnClickListener {
-            filterTransactions("Savings", transactionsList, adapter!!)
+            filterTransactions("Savings", adapter!!)
         }
         savingsImageView?.setOnClickListener {
-            filterTransactions("Savings", transactionsList, adapter!!)
+            filterTransactions("Savings", adapter!!)
         }
     }
 
-    private fun filterTransactions(category: String, transactionsList: List<Transaction>, adapter: TransactionsAdapter) {
-        val filteredList = transactionsList.filter { it.transactionCategory == category }
-        adapter.updateData(filteredList)
+    @RequiresApi(Build.VERSION_CODES.O)
+    private fun filterTransactions(category: String, adapter: TransactionsAdapter) {
+        val month = (view?.findViewById<Spinner>(R.id.sortSpinner)?.selectedItem ?: "All") as String
+        var filteredList = if (month == "All") {
+            transactionsList
+        } else {
+            val monthNumber = monthToNumber(month)
+            transactionsList?.filter {
+                val transactionDate = it.transactionDate
+                val transactionMonth = transactionDate.split("/")[1].toInt()
+                transactionMonth == monthNumber
+            }
+        }
+        filteredList = filteredList?.filter { it.transactionCategory == category }
+        if (filteredList != null) {
+            adapter.updateData(filteredList)
+        }
+        currentList = filteredList
     }
     override fun onItemClick(position: Int, transaction: Transaction) {
         // Create and show the dialog
@@ -161,7 +242,7 @@ class TransactionsFragment : Fragment(), TransactionsAdapter.OnItemClickListener
             override fun isEnabled(position: Int): Boolean {
                 // Disable the first item from Spinner
                 // First item will be used for hint
-                return position != 0
+                return position >= 0
             }
         }
         // Specify the layout to use when the list of choices appears
@@ -169,47 +250,41 @@ class TransactionsFragment : Fragment(), TransactionsAdapter.OnItemClickListener
 
         spinner.adapter = adapter
 
-        builder.setPositiveButton("Confirm") { dialog, which ->
+        builder.setPositiveButton("Confirm") { _, _ ->
             val selectedCategory = spinner.selectedItem.toString()
             transaction.transactionCategory = selectedCategory
             // Notify the adapter that the data has changed
             recyclerView?.adapter?.notifyItemChanged(position)
         }
 
-        builder.setNegativeButton("Cancel") { dialog, which ->
+        builder.setNegativeButton("Cancel") { dialog, _ ->
             dialog.dismiss()
         }
 
         builder.show()
     }
 
-    private fun getTransactionsList(): List<Transaction> {
-        val transactionsList = mutableListOf<Transaction>()
-        transactionsList.add(Transaction("1","Breaker", "", "+$100", "2021-09-01"))
-        transactionsList.add(Transaction("2","Booking" ,"", "-$50", "2021-09-02"))
-        transactionsList.add(Transaction("3","Booking" ,"", "+$100", "2021-09-03"))
-        transactionsList.add(Transaction("4","Amir" ,"", "-$50", "2021-09-04"))
-        transactionsList.add(Transaction("5", "son","", "+$100", "2021-09-05"))
-        transactionsList.add(Transaction("6","ahmad" ,"", "-$50", "2021-09-06"))
-        transactionsList.add(Transaction("7","Ali" ,"", "+$100", "2021-09-07"))
-        transactionsList.add(Transaction("8","Open Ai" ,"", "-$50", "2021-09-08"))
-        transactionsList.add(Transaction("9", "Facebook","", "+$4100", "2021-09-09"))
-        transactionsList.add(Transaction("10","Netflix" ,"", "-$50", "2021-09-10"))
-        return transactionsList.toList()
+    @RequiresApi(Build.VERSION_CODES.TIRAMISU)
+    private fun getTransactionsList() {
+        if(transactionsList == null) {
+            transactionsList =
+                arguments?.getParcelableArrayList("transactionsList", Transaction::class.java)
+            currentList = transactionsList
+            val filteredlist = currentList?.filter {
+                val transactionDate = it.transactionDate
+                val transactionMonth = transactionDate.split("/")[1].toInt()
+                transactionMonth == getCurrentMonth()
+            }
+            currentList = filteredlist
+        }
+        else{
+            currentList = transactionsList
+        }
     }
 
     companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment TransactionsFragment.
-         */
-        // TODO: Rename and change types and number of parameters
         @JvmStatic
-        fun newInstance(param1: String, param2: String) =
+        fun newInstance(param1: String = "", param2: String = "") =
             TransactionsFragment().apply {
                 arguments = Bundle().apply {
                     putString(ARG_PARAM1, param1)

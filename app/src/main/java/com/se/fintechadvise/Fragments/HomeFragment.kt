@@ -40,6 +40,7 @@ class HomeFragment : Fragment(), TransactionsAdapter.OnItemClickListener  {
     private var param1: String? = null
     private var param2: String? = null
     private var recyclerView: RecyclerView? = null
+    private var transactionsList = listOf<Transaction>()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -98,14 +99,19 @@ class HomeFragment : Fragment(), TransactionsAdapter.OnItemClickListener  {
     private fun setupSeeAllTransactions(view: View?) {
         val seeAllTransactions = view?.findViewById<TextView>(R.id.seeAllTransactionsTextView)
         seeAllTransactions?.setOnClickListener {
-            val fragmentHelper = FragmentHelper(requireActivity().supportFragmentManager, requireContext())
-            fragmentHelper.loadFragment(TransactionsFragment())
-        }
 
+            val transactionsFragment = TransactionsFragment.newInstance()
+            val bundle = Bundle()
+            bundle.putParcelableArrayList("transactionsList", ArrayList(transactionsList))
+            transactionsFragment.arguments = bundle
+
+            val fragmentHelper = FragmentHelper(requireActivity().supportFragmentManager, requireContext())
+            fragmentHelper.loadFragment(transactionsFragment)
+        }
     }
 
     private fun setupTransactionsRecyclerView(view: View?) {
-        val transactionsList = getTransactionsList()
+        getTransactionsList()
         recyclerView = view?.findViewById(R.id.transactionsRecyclerView)
         val adapter = TransactionsAdapter(transactionsList,this)
         recyclerView?.adapter = adapter
@@ -130,7 +136,7 @@ class HomeFragment : Fragment(), TransactionsAdapter.OnItemClickListener  {
             override fun isEnabled(position: Int): Boolean {
                 // Disable the first item from Spinner
                 // First item will be used for hint
-                return position != 0
+                return position >=0
             }
         }
         // Specify the layout to use when the list of choices appears
@@ -141,6 +147,13 @@ class HomeFragment : Fragment(), TransactionsAdapter.OnItemClickListener  {
         builder.setPositiveButton("Confirm") { dialog, which ->
             val selectedCategory = spinner.selectedItem.toString()
             transaction.transactionCategory = selectedCategory
+
+            // Find the transaction in transactionsList and update it
+            val index = transactionsList.indexOfFirst { it.transactionId == transaction.transactionId }
+            if (index != -1) {
+                transactionsList[index].transactionCategory = selectedCategory
+            }
+
             // Notify the adapter that the data has changed
             recyclerView?.adapter?.notifyItemChanged(position)
         }
@@ -151,20 +164,23 @@ class HomeFragment : Fragment(), TransactionsAdapter.OnItemClickListener  {
 
         builder.show()
     }
-    private fun getTransactionsList(): List<Transaction> {
-        val transactionsList = mutableListOf<Transaction>()
-        transactionsList.add(Transaction("1","Breaker", "", "+$100", "2021-09-01"))
-        transactionsList.add(Transaction("2","Booking" ,"", "-$50", "2021-09-02"))
-        transactionsList.add(Transaction("3","Booking" ,"", "+$100", "2021-09-03"))
-        transactionsList.add(Transaction("4","Amir" ,"", "-$50", "2021-09-04"))
-        transactionsList.add(Transaction("5", "son","", "+$100", "2021-09-05"))
-        transactionsList.add(Transaction("6","ahmad" ,"", "-$50", "2021-09-06"))
-        transactionsList.add(Transaction("7","Ali" ,"", "+$100", "2021-09-07"))
-        transactionsList.add(Transaction("8","Open Ai" ,"", "-$50", "2021-09-08"))
-        transactionsList.add(Transaction("9", "Facebook","", "+$4100", "2021-09-09"))
-        transactionsList.add(Transaction("10","Netflix" ,"", "-$50", "2021-09-10"))
-        return transactionsList.toList()
-       }
+    private fun getTransactionsList() {
+        val transactionList = mutableListOf<Transaction>()
+        val categories = arrayOf("Income", "Spending", "Bills", "Savings") // Add your categories here
+
+        for (i in 1..100) {
+            val id = i.toString()
+            val name = if (i % 2 == 0) "Booking" else "Breaker"
+            val random = java.util.Random()
+            val randomAmount = random.nextInt(200) / 2
+            val amount = if (i % 2 == 0) "-$$randomAmount" else "+$$randomAmount"
+            val category = if (i % 5 == 0) categories[random.nextInt(categories.size)] else ""
+            val month = ((i - 1) % 12) + 1
+            val date = "01/$month/2021"
+            transactionList.add(Transaction(id, name, category, amount, date))
+        }
+        transactionsList = transactionList
+    }
 
     companion object {
         /**
