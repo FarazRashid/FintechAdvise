@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageButton
 import android.widget.ImageView
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
@@ -67,6 +68,12 @@ class ExploreInvestmentsFragment : Fragment() {
         }
     }
 
+    private fun setupYourInvestmentsButton(view:View){
+        val yourInvestmentsButton = view.findViewById<ImageButton>(R.id.yourInvestmentsButton)
+        yourInvestmentsButton.setOnClickListener {
+            FragmentHelper(requireActivity().supportFragmentManager,requireContext()).loadFragment(YourInvestmentsFragment())
+        }
+    }
     private fun setupNavigationView() {
         val navigationView = requireActivity().findViewById<NavigationView>(R.id.side_nav)
         val fragmentHelper = FragmentHelper(requireActivity().supportFragmentManager, requireContext())
@@ -138,6 +145,8 @@ class ExploreInvestmentsFragment : Fragment() {
         })
 
     }
+
+
     private fun showPlayerBottomSheetDialog() {
         val investmentProfileFragment = InvestmentProfileFragment()
         investmentProfileFragment.show(requireActivity().supportFragmentManager, investmentProfileFragment.tag)
@@ -168,6 +177,8 @@ class ExploreInvestmentsFragment : Fragment() {
 
         }
 
+        InvestmentManager.setInvestments(investments1)
+
     }
 
     override fun onCreateView(
@@ -177,6 +188,7 @@ class ExploreInvestmentsFragment : Fragment() {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_explore_investments, container, false)
 
+        setupYourInvestmentsButton(view)
         shimmerContainer = view.findViewById(R.id.shimmer_view_container)
         shimmerContainer1 = view.findViewById(R.id.shimmer_view_container1)
 

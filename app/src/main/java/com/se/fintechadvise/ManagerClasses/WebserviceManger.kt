@@ -216,7 +216,7 @@
         fun loginUser(email: String, password: String, context: Context, Callback:(Boolean, User?)->Unit) {
             val params = JSONObject()
             params.put("email", email)
-
+            Log.d("Email", email)
             // we need to encrypt the password before sending it to the server
 
             val (key1,iv1) = SecurityHelper.getKeyAndIvFromSharedPreferences(context)
@@ -239,6 +239,8 @@
             val encryptedPasswordString2 = Base64.encodeToString(encryptedPassword1, Base64.DEFAULT)
 
             params.put("password", encryptedPasswordString2)
+            Log.d("Encrypted Password", encryptedPasswordString2)
+            Log.d("Password", password)
 
             postRequest("login", params, context,
                 successHandler = { response ->

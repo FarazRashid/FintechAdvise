@@ -69,6 +69,7 @@ class LoginActivity : AppCompatActivity() {
         loginButton.setOnClickListener {
             verifyFields { isValid ->
                 if (isValid) {
+                    Log.d("LoginActivity", "Login button clicked")
                     WebserviceManger.getInstance().loginUser(
                         emailEditText.text.toString(),
                         passwordEditText.text.toString(),

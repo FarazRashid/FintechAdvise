@@ -187,17 +187,16 @@ def get_users_investments():
         with DatabaseConnection() as conn:
             cursor = conn.cursor(dictionary=True)
             user = request.get_json()
-            query = "SELECT * FROM UsersInvestments WHERE user_id = %s"
+            query = "SELECT investment_id FROM UsersInvestments WHERE user_id = %s"
             values = (user['user_id'],)
             cursor.execute(query, values)
-            user_investments = cursor.fetchall()
+            investment_ids = [row['investment_id'] for row in cursor.fetchall()]
             cursor.close()
-            return jsonify(user_investments), 200
+            return jsonify(investment_ids), 200
     except mysql.connector.Error as err:
         print(f'Error: {err}')
         print(f'Request data: {request.data}')
         return jsonify({'error': f'Failed to get user investments: {err}'}), 400
-
 
 
 @app.route('/get_investment_performance', methods=['POST'])
