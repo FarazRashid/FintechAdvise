@@ -1,6 +1,7 @@
 package com.se.fintechadvise.Fragments
 
 import android.app.AlertDialog
+import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
@@ -22,6 +23,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.navigation.NavigationView
+import com.se.fintechadvise.Activities.PrivacyPolicy
 import com.se.fintechadvise.AdapterClasses.BudgetAdapter
 import com.se.fintechadvise.AdapterClasses.TransactionsAdapter
 import com.se.fintechadvise.DataClasses.Budget
@@ -84,7 +86,11 @@ class HomeFragment : Fragment(), TransactionsAdapter.OnItemClickListener  {
 
                     true
                 }
-                R.id.notificataionsButton -> true
+                R.id.notificataionsButton -> {
+                    val intent = Intent(requireContext(), PrivacyPolicy::class.java)
+                    startActivity(intent)
+                    true
+                }
                 else -> false
             }
         }
