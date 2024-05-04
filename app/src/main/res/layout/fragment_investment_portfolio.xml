@@ -118,7 +118,7 @@
                         android:textSize="20sp"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toStartOf="@+id/button"
-                        app:layout_constraintStart_toStartOf="@+id/textView9"
+                        app:layout_constraintStart_toEndOf="@+id/imageView11"
                         app:layout_constraintTop_toTopOf="@+id/button" />
 
                     <ImageView
