@@ -26,10 +26,10 @@ class TransactionsAdapter(private var transactions: List<Transaction>, private v
 //        holder.transactionAmountTextView.text = transaction.transactionAmount
         if (transaction.transactionAmount.contains("+")) {
             holder.transactionAmountTextView.text = transaction.transactionAmount
-            holder.transactionAmountTextView.setTextColor(ContextCompat.getColor(holder.itemView.context, R.color.add_album))
+            holder.transactionAmountTextView.setTextColor(ContextCompat.getColor(holder.itemView.context, R.color.positive))
         } else if (transaction.transactionAmount.contains("-")) {
             holder.transactionAmountTextView.text = transaction.transactionAmount
-            holder.transactionAmountTextView.setTextColor(ContextCompat.getColor(holder.itemView.context, android.R.color.holo_red_dark))
+            holder.transactionAmountTextView.setTextColor(ContextCompat.getColor(holder.itemView.context, R.color.negative))
         }
         holder.transactionNameTextView.text = transaction.name
 

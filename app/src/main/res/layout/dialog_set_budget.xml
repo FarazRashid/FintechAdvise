@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:background="@drawable/edittext_stroke"
+    android:padding="16dp">
+
+    <TextView
+        android:layout_gravity="center_horizontal"
+        android:id="@+id/goalNameEditText"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:layout_marginTop="30dp"
+        android:drawablePadding="10dp"
+        android:fontFamily="@font/poppins_medium"
+        android:text="Set Your Budget"
+        android:paddingStart="10dp"
+        android:paddingEnd="10dp"
+        android:textColor="@color/icon_secondary"
+        android:textColorHint="@color/text_secondary"
+        android:textSize="25sp"
+        app:layout_constraintEnd_toEndOf="@+id/imageView"
+        app:layout_constraintStart_toStartOf="@+id/imageView"
+        app:layout_constraintTop_toBottomOf="@+id/textView4" />
+
+    <EditText
+        android:layout_gravity="center_horizontal"
+        android:id="@+id/phoneOtpEditText"
+        android:layout_width="300dp"
+        android:layout_height="40dp"
+        android:paddingLeft="20dp"
+        android:drawablePadding="15dp"
+        android:textSize="18dp"
+        android:hint="Enter Amount In Dollars"
+        android:textColorHint="@color/icon_secondary"
+        android:layout_marginTop="24dp"
+        android:background="@drawable/edittext_stroke"
+        android:paddingHorizontal="10dp"
+        android:paddingStart="30dp"
+        android:paddingEnd="10dp" />
+
+
+</LinearLayout>
