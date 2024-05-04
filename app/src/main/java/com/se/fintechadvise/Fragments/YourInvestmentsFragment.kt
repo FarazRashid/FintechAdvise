@@ -19,6 +19,7 @@ import com.se.fintechadvise.R
 import com.smd.surmaiya.Fragments.InvestmentProfileFragment
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import org.json.JSONArray
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -35,6 +36,7 @@ class YourInvestmentsFragment : Fragment() {
     private var param1: String? = null
     private var param2: String? = null
     private lateinit var shimmerContainer: ShimmerFrameLayout
+    private lateinit var assestAllocation: List<Pair<String, Double>>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -90,6 +92,9 @@ class YourInvestmentsFragment : Fragment() {
         WebserviceManger.getUserInvestments(requireContext(), UserManager.getCurrentUser()!!.id) { userInvestments, error ->
             if (userInvestments != null) {
                 Log.d("Your Investment", "Investment IDs: $userInvestments")
+
+                assestAllocation = userInvestments
+                InvestmentManager.setAssetAllocation(assestAllocation)
                 val userInvestmentIds = userInvestments.map { it.first } // Extract only the IDs
 
                 val allInvestments = InvestmentManager.getInvestments()
