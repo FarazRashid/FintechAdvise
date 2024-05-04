@@ -211,7 +211,7 @@
                         android:capitalize="none"
                         android:fontFamily="@font/poppins_medium"
                         android:paddingHorizontal="25dp"
-                        android:text="Invest now"
+                        android:text="Link now"
                         android:textAllCaps="false"
                         android:textColor="@color/add_album"
                         app:layout_constraintBottom_toBottomOf="parent"

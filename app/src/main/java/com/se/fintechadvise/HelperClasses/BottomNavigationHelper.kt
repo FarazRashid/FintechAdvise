@@ -11,6 +11,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.se.fintechadvise.Fragments.ExploreInvestmentsFragment
 import com.se.fintechadvise.Fragments.HomeFragment
 import com.se.fintechadvise.Fragments.InvestmentPortfolioFragment
+import com.se.fintechadvise.Fragments.PlanningFragment
 import com.se.fintechadvise.R
 
 
@@ -30,9 +31,14 @@ class BottomNavigationHelper(private val activity: AppCompatActivity) {
                     Log.d("BottomNavigationHelper", "Investment Portfolio Fragment loaded")
                     return@setOnNavigationItemSelectedListener true
                 }
-                R.id.navigation_exploration -> {
-                    loadFragment(ExploreInvestmentsFragment())
+                R.id.navigation_goals -> {
+                    loadFragment(PlanningFragment())
                     Log.d("BottomNavigationHelper", "Explorations Fragment loaded")
+                    return@setOnNavigationItemSelectedListener true
+                }
+                R.id.navigation_education -> {
+//                    loadFragment(ExploreInvestmentsFragment())
+                    Log.d("BottomNavigationHelper", "Education Fragment loaded")
                     return@setOnNavigationItemSelectedListener true
                 }
 
