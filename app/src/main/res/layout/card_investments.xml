@@ -51,9 +51,9 @@
                 android:text="$20/stock"
                 android:textColor="@color/black"
                 android:textSize="12sp"
+                android:layout_marginEnd="30dp"
                 app:layout_constraintBottom_toBottomOf="@+id/investmentName"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/investmentName"
                 app:layout_constraintTop_toTopOf="@+id/investmentName" />
 
 
