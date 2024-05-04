@@ -47,6 +47,7 @@ class PlanVisualizationFragment : Fragment() {
     private var transactionsList: List<Transaction>? = null
     private var currentList: List<Transaction>? = null
     private var overallbalance: TextView? = null
+    private var categoryTextView: TextView? = null
 
     private var activeFilters = mutableMapOf<String, String>()
     private lateinit var barChart: BarChart
@@ -82,6 +83,7 @@ class PlanVisualizationFragment : Fragment() {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_plan_visualization, container, false)
         overallbalance = view.findViewById<TextView>(R.id.bankBalanceTextView)
+        categoryTextView = view.findViewById<TextView>(R.id.textView17)
 
         getTransactionsList()
         barChart = view.findViewById<BarChart>(R.id.barChart)
@@ -207,6 +209,7 @@ class PlanVisualizationFragment : Fragment() {
         }
     }
 
+
     @RequiresApi(Build.VERSION_CODES.O)
     private fun filterTransactions(category: String) {
         val month = (view?.findViewById<Spinner>(R.id.sortSpinner)?.selectedItem ?: "All") as String
@@ -263,10 +266,14 @@ class PlanVisualizationFragment : Fragment() {
         val barData = BarData(dataSet)
         barChart.data = barData
         overallbalance?.text = "$${amounts.sum()}"
+        categoryTextView?.text = "$category Balance"
         barChart.invalidate() // refresh
+
 
         currentList = filteredList
     }
+
+
     @RequiresApi(Build.VERSION_CODES.O)
     private fun filterTransactionsByMonth(month: String) {
         var filteredList = if (month == "All") {
@@ -369,6 +376,7 @@ class PlanVisualizationFragment : Fragment() {
         val barData = BarData(dataSet)
         barChart.data = barData
         overallbalance?.text = "$${amounts.sum()}"
+        categoryTextView?.text = "Overall Balance"
         barChart.invalidate() // refresh
     }
 
