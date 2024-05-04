@@ -11,6 +11,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.EditText
+import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.Spinner
 import android.widget.TextView
@@ -98,6 +99,8 @@ class HomeFragment : Fragment(), TransactionsAdapter.OnItemClickListener  {
         val view = inflater.inflate(R.layout.fragment_home, container, false)
 
         getTransactionsList()
+        setupPlanButton(view)
+
         setupTransactionsRecyclerView(view)
         setupBudgetRecyclerView(view)
         setupSeeAllTransactions(view)
@@ -117,6 +120,20 @@ class HomeFragment : Fragment(), TransactionsAdapter.OnItemClickListener  {
 
             val fragmentHelper = FragmentHelper(requireActivity().supportFragmentManager, requireContext())
             fragmentHelper.loadFragment(transactionsFragment)
+        }
+    }
+    private fun setupPlanButton(view: View?) {
+        val planButton = view?.findViewById<ImageButton>(R.id.viewPlanButton)
+        planButton?.setOnClickListener {
+            val planFragment = PlanVisualizationFragment()
+            val bundle = Bundle()
+            bundle.putParcelableArrayList("transactionsList",
+                transactionsList?.let { it1 -> ArrayList(it1) })
+            planFragment.arguments = bundle
+            requireActivity().supportFragmentManager.beginTransaction()
+                .replace(R.id.fragment_container, planFragment)
+                .addToBackStack(null)
+                .commit()
         }
     }
 
