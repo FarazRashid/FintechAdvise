@@ -23,6 +23,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
+
+
             <ImageView
                 android:id="@+id/menu_opener"
                 android:layout_width="30dp"
@@ -61,202 +63,128 @@
                     android:textSize="30sp" />
             </LinearLayout>
 
-            <androidx.cardview.widget.CardView
-                android:id="@+id/goalsCardView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="80dp"
-                android:elevation="20dp"
-                app:cardCornerRadius="20dp"
-                app:layout_constraintStart_toStartOf="@+id/view3"
-                app:layout_constraintTop_toTopOf="@+id/view3">
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:padding="20dp"
-                    app:layout_constraintStart_toStartOf="@+id/linearLayout"
-                    tools:layout_editor_absoluteY="199dp">
-
-                    <ImageView
-                        android:id="@+id/imageView7"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:src="@drawable/goals"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_marginTop="10dp"
-                        android:fontFamily="@font/poppins_medium"
-                        android:text="Goals"
-                        android:textColor="@color/text_primary"
-                        android:textSize="20sp" />
-                </LinearLayout>
-            </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/cardView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="80dp"
-                android:layout_marginEnd="20dp"
-                android:elevation="20dp"
-                app:cardCornerRadius="20dp"
-                app:layout_constraintEnd_toEndOf="@+id/view3"
-                app:layout_constraintTop_toTopOf="@+id/view3">
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:padding="20dp"
-                    app:layout_constraintStart_toStartOf="@+id/linearLayout"
-                    tools:layout_editor_absoluteY="199dp">
-
-                    <ImageView
-                        android:id="@+id/imageView6"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:src="@drawable/goals"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_marginTop="10dp"
-                        android:fontFamily="@font/poppins_medium"
-                        android:text="Other"
-                        android:textColor="@color/text_primary"
-                        android:textSize="20sp" />
-                </LinearLayout>
-            </androidx.cardview.widget.CardView>
-
-            <androidx.cardview.widget.CardView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="80dp"
-                android:elevation="20dp"
-                app:cardCornerRadius="20dp"
-                app:layout_constraintEnd_toStartOf="@+id/cardView"
-                app:layout_constraintStart_toEndOf="@+id/goalsCardView"
-                app:layout_constraintTop_toTopOf="@+id/view3">
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:padding="20dp"
-                    app:layout_constraintStart_toStartOf="@+id/linearLayout"
-                    tools:layout_editor_absoluteY="199dp">
-
-                    <ImageView
-                        android:id="@+id/imageView8"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:src="@drawable/goals"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_marginTop="10dp"
-                        android:fontFamily="@font/poppins_medium"
-                        android:text="Other"
-                        android:textColor="@color/text_primary"
-                        android:textSize="20sp" />
-                </LinearLayout>
-            </androidx.cardview.widget.CardView>
-
-            <View
-                android:id="@+id/view3"
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:background="@drawable/rounded_top"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHeight_percent="0.67"
-                app:layout_constraintStart_toStartOf="parent" />
-
-            <FrameLayout
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                app:layout_constraintBottom_toTopOf="@+id/view3"
+                android:layout_height="150dp"
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginVertical="20dp"
+                app:cardBackgroundColor="@color/black"
+                app:cardCornerRadius="30dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/linearLayout">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_margin="15dp"
-                    android:background="@drawable/rounded_square">
-
-                    <Button
-                        android:id="@+id/button"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginEnd="8dp"
-                        android:layout_marginBottom="8dp"
-                        android:background="@drawable/rounded_border"
-                        android:capitalize="none"
-                        android:fontFamily="@font/poppins_medium"
-                        android:paddingHorizontal="25dp"
-                        android:text="Link now"
-                        android:textAllCaps="false"
-                        android:textColor="@color/add_album"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent" />
+                    android:layout_height="match_parent">
 
                     <TextView
-                        android:id="@+id/textView9"
+                        android:id="@+id/textView17"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="15dp"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginTop="20dp"
                         android:fontFamily="@font/poppins_medium"
-                        android:text="Your Total Asset Portfolio"
+                        android:text="Total Balance"
                         android:textColor="@color/white"
-                        android:textSize="20sp"
-                        app:layout_constraintBottom_toTopOf="@+id/totalassetportfolio"
+                        android:textSize="16sp"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <TextView
-                        android:id="@+id/totalassetportfolio"
+                        android:id="@+id/bankBalanceTextView"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
                         android:fontFamily="@font/poppins_medium"
-                        android:text="$320,432"
+                        android:text="$12031.20"
                         android:textColor="@color/white"
-                        android:textSize="20sp"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toStartOf="@+id/button"
-                        app:layout_constraintStart_toStartOf="@+id/textView9"
-                        app:layout_constraintTop_toTopOf="@+id/button" />
+                        android:textSize="24sp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/textView17" />
 
-                    <ImageView
-                        android:id="@+id/imageView11"
+                    <View
+                        android:layout_width="88dp"
+                        android:layout_height="86dp"
+                        android:background="@drawable/circle"
+                        android:backgroundTint="@color/add_album"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toStartOf="@+id/textView17"
+                        app:layout_constraintHorizontal_bias="0.36"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="parent"
+                        app:layout_constraintVertical_bias="0.625" />
+
+                    <View
+                        android:layout_width="88dp"
+                        android:layout_height="86dp"
+                        android:background="@drawable/circle"
+                        android:backgroundTint="@color/add_album"
+                        app:layout_constraintBottom_toTopOf="@+id/textView17"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.36"
+                        app:layout_constraintStart_toEndOf="@+id/viewWalletButton"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintVertical_bias="0.625" />
+                    <TextView
+                        android:id="@+id/textView18"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="10dp"
+                        android:fontFamily="@font/poppins_medium"
+                        android:text="My Wallet"
+                        android:textColor="@color/white"
+                        android:textSize="16sp"
+                        app:layout_constraintBottom_toBottomOf="@+id/viewWalletButton"
+                        app:layout_constraintEnd_toStartOf="@+id/viewWalletButton"
+                        app:layout_constraintTop_toTopOf="@+id/viewWalletButton" />
+                    <ImageButton
+                        android:id="@+id/viewWalletButton"
                         android:layout_width="40dp"
                         android:layout_height="40dp"
-                        android:src="@drawable/graph_up"
-                        app:layout_constraintBottom_toBottomOf="@+id/totalassetportfolio"
-                        app:layout_constraintStart_toStartOf="@+id/textView9"
-                        app:layout_constraintTop_toTopOf="@+id/totalassetportfolio" />
+                        android:background="@drawable/circle"
+                        android:backgroundTint="@color/white"
+                        android:elevation="25dp"
+                        android:padding="20dp"
+                        android:layout_marginEnd="20dp"
+                        android:src="@drawable/rightarrow"
+                        android:textAllCaps="false"
+                        android:textColor="@color/white"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/bankBalanceTextView"
+                        app:tint="@color/black" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
-            </FrameLayout>
+            </androidx.cardview.widget.CardView>
 
 
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/transactionsRecyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginVertical="5dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHeight_percent="0.28"
+                app:layout_constraintStart_toStartOf="parent"
+            />
+
+            <TextView
+                android:id="@+id/textsoadnfoaView17"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins_medium"
+                android:text="Transaction History"
+                android:textColor="@color/text_primary"
+                android:textSize="20sp"
+                app:layout_constraintBottom_toTopOf="@+id/transactionsRecyclerView"
+                app:layout_constraintStart_toStartOf="@+id/transactionsRecyclerView"
+            />
         </androidx.constraintlayout.widget.ConstraintLayout>
+
 
 
         <com.google.android.material.navigation.NavigationView

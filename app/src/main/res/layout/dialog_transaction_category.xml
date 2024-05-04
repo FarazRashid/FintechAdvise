@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:padding="16dp">
+
+
+    <TextView
+        android:id="@+id/goalDateEditText"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:drawablePadding="10dp"
+        android:text="Please Select a Transaction Type"
+        android:fontFamily="@font/poppins_medium"
+        android:inputType="textEmailAddress"
+        android:paddingStart="10dp"
+        android:paddingEnd="10dp"
+        android:textColor="@color/text_secondary"
+        android:textColorHint="@color/text_secondary"
+        android:textSize="18sp" />
+    <Spinner
+        android:id="@+id/transactionTypeEditText"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginTop="24dp"
+        android:background="@drawable/transaction_spinner_bkg"
+        android:paddingHorizontal="10dp"
+        android:paddingStart="30dp"
+        android:paddingEnd="10dp" />
+
+
+
+
+
+
+</LinearLayout>
