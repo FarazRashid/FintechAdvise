@@ -100,6 +100,7 @@ class ExploreInvestmentsFragment : Fragment() {
     private fun setupRecyclerView(view: View, investments: List<Investment>) {
 
         Log.d("Investment", "setupRecyclerView: $investments")
+        InvestmentManager.setInvestments(investments)
 
         val allInvestmentsRecyclerView = view.findViewById<RecyclerView>(R.id.allInvestmentsRecyclerView)
         allInvestmentsRecyclerView.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
@@ -173,11 +174,11 @@ class ExploreInvestmentsFragment : Fragment() {
             shimmerContainer1.stopShimmer()
             shimmerContainer1.visibility = View.GONE
 
+
             view?.let { setupRecyclerView(it,investments1) }
 
         }
 
-        InvestmentManager.setInvestments(investments1)
 
     }
 

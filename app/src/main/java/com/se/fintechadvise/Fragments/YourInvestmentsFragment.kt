@@ -64,8 +64,6 @@ class YourInvestmentsFragment : Fragment() {
 
         Log.d("Investment", "setupRecyclerView: $investments")
 
-
-
         val yourInvestmentsRecyclerView = view.findViewById<RecyclerView>(R.id.recommendedInvestmentsRecyclerView)
         yourInvestmentsRecyclerView.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
         yourInvestmentsRecyclerView.adapter = InvestmentAdapter(investments, object : InvestmentAdapter.OnInvestmentClickListener {
@@ -89,21 +87,24 @@ class YourInvestmentsFragment : Fragment() {
     private fun getYourInvestments(){
         Log.d("Investment", "gettingInvestments")
         shimmerContainer.startShimmer()
-        var userInvestmentsIds : List<String> = listOf()
-        WebserviceManger.getUserInvestments(requireContext(), UserManager.getCurrentUser()!!.id) { investments,string ->
-            if (investments != null) {
-                userInvestmentsIds = investments
+        WebserviceManger.getUserInvestments(requireContext(), UserManager.getCurrentUser()!!.id) { userInvestments, error ->
+            if (userInvestments != null) {
+                Log.d("Your Investment", "Investment IDs: $userInvestments")
+                val userInvestmentIds = userInvestments.map { it.first } // Extract only the IDs
+
+                val allInvestments = InvestmentManager.getInvestments()
+                Log.d("Your Investment", "All Investments: $allInvestments")
+                val usersInvestments = allInvestments.filter { it.id in userInvestmentIds }
+
+                Log.d("Your Investment", "User Investments: $usersInvestments")
+
+                shimmerContainer.stopShimmer()
+                shimmerContainer.visibility = View.GONE
+
+                view?.let { setupRecyclerView(it, usersInvestments) }
+            } else {
+                Log.e("Investment", "Error getting user investments: $error")
             }
-
-            var investments1= listOf<Investment>()
-
-            investments1.filter { it.id in userInvestmentsIds }
-
-            shimmerContainer.stopShimmer()
-            shimmerContainer.visibility = View.GONE
-
-            view?.let { setupRecyclerView(it,investments1) }
-
         }
     }
 
