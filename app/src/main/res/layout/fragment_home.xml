@@ -169,8 +169,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHeight_percent="0.28"
-                app:layout_constraintStart_toStartOf="parent"
-            />
+                app:layout_constraintStart_toStartOf="parent" />
 
             <TextView
                 android:id="@+id/textsoadnfoaView17"
@@ -183,6 +182,19 @@
                 app:layout_constraintBottom_toTopOf="@+id/transactionsRecyclerView"
                 app:layout_constraintStart_toStartOf="@+id/transactionsRecyclerView"
             />
+
+            <TextView
+                android:id="@+id/seeAllTransactionsTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins_medium"
+                android:text="See All"
+                android:textColor="@color/text_primary"
+                android:textSize="18sp"
+                app:layout_constraintBottom_toTopOf="@+id/transactionsRecyclerView"
+                app:layout_constraintEnd_toEndOf="@+id/transactionsRecyclerView"
+                app:layout_constraintTop_toTopOf="@+id/textsoadnfoaView17" />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
 
 

@@ -1,5 +1,6 @@
 package com.se.fintechadvise.AdapterClasses
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,7 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.se.fintechadvise.DataClasses.Transaction
 import com.se.fintechadvise.R
 
-class TransactionsAdapter(private val transactions: List<Transaction>, private val onItemClickListener: OnItemClickListener?) : RecyclerView.Adapter<TransactionsAdapter.TransactionViewHolder>() {
+class TransactionsAdapter(private var transactions: List<Transaction>, private val onItemClickListener: OnItemClickListener?) : RecyclerView.Adapter<TransactionsAdapter.TransactionViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TransactionViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.card_transactions, parent, false)
@@ -69,10 +70,18 @@ class TransactionsAdapter(private val transactions: List<Transaction>, private v
         holder.itemView.setOnClickListener {
             onItemClickListener?.onItemClick(position, transaction)
         }
+
+
     }
 
     override fun getItemCount() = transactions.size
-
+    fun updateData(newList: List<Transaction>) {
+        Log.d("TransactionsAdapter", "updateData: $newList")
+        Log.d("TransactionsAdapter", "oldData: $transactions")
+        transactions = newList
+        Log.d("TransactionsAdapter", "newData: $transactions")
+        notifyDataSetChanged()
+    }
     interface OnItemClickListener {
         fun onItemClick(position: Int, transaction: Transaction)
     }

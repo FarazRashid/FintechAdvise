@@ -2,9 +2,6 @@ package com.se.fintechadvise.Fragments
 
 import android.app.AlertDialog
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -13,16 +10,10 @@ import android.widget.ArrayAdapter
 import android.widget.ImageView
 import android.widget.Spinner
 import android.widget.TextView
-import androidx.cardview.widget.CardView
-import androidx.core.view.GravityCompat
-import androidx.drawerlayout.widget.DrawerLayout
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.google.android.material.navigation.NavigationView
 import com.se.fintechadvise.AdapterClasses.TransactionsAdapter
 import com.se.fintechadvise.DataClasses.Transaction
-import com.se.fintechadvise.HelperClasses.BottomNavigationHelper
-import com.se.fintechadvise.HelperClasses.FragmentHelper
 import com.se.fintechadvise.R
 
 // TODO: Rename parameter arguments, choose names that match
@@ -32,14 +23,18 @@ private const val ARG_PARAM2 = "param2"
 
 /**
  * A simple [Fragment] subclass.
- * Use the [HomeFragment.newInstance] factory method to
+ * Use the [TransactionsFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
-class HomeFragment : Fragment(), TransactionsAdapter.OnItemClickListener  {
+class TransactionsFragment : Fragment(), TransactionsAdapter.OnItemClickListener {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
     private var recyclerView: RecyclerView? = null
+
+
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -48,70 +43,106 @@ class HomeFragment : Fragment(), TransactionsAdapter.OnItemClickListener  {
         }
     }
 
-
-    private fun setupMenuOpener(view: View) {
-        val menuOpener = view.findViewById<ImageView>(R.id.menu_opener)
-        val drawerLayout = view.findViewById<DrawerLayout>(R.id.drawer_layout)
-
-        menuOpener.setOnClickListener {
-            drawerLayout.openDrawer(GravityCompat.START)
-            setupNavigationView()
-        }
-    }
-
-    private fun setupNavigationView() {
-        val navigationView = requireActivity().findViewById<NavigationView>(R.id.side_nav)
-        val fragmentHelper = FragmentHelper(requireActivity().supportFragmentManager, requireContext())
-        val drawerLayout = requireActivity().findViewById<DrawerLayout>(R.id.drawer_layout)
-        navigationView.setNavigationItemSelectedListener { menuItem ->
-            when (menuItem.itemId) {
-                R.id.settingsButton -> true
-                R.id.monthlyRankingsButton -> true
-                R.id.popularPLaylistsButton -> {
-                    fragmentHelper.closeDrawerWithDelay(drawerLayout, 300) // delay in milliseconds
-                    Handler(Looper.getMainLooper()).postDelayed({
-                        fragmentHelper.loadFragment(SettingsFragment())
-                    }, 300)
-
-                    true
-                }
-                R.id.notificataionsButton -> true
-                else -> false
-            }
-        }
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        val view = inflater.inflate(R.layout.fragment_home, container, false)
+        val view = inflater.inflate(R.layout.fragment_transactions, container, false)
 
+        setupSortSpinner(view)
         setupTransactionsRecyclerView(view)
-        setupSeeAllTransactions(view)
-        setupMenuOpener(view)
+        setupBackButton(view)
+
+
 
         return view
     }
 
-    private fun setupSeeAllTransactions(view: View?) {
-        val seeAllTransactions = view?.findViewById<TextView>(R.id.seeAllTransactionsTextView)
-        seeAllTransactions?.setOnClickListener {
-            val fragmentHelper = FragmentHelper(requireActivity().supportFragmentManager, requireContext())
-            fragmentHelper.loadFragment(TransactionsFragment())
+    private fun setupBackButton(view: View?) {
+        val backButton = view?.findViewById<ImageView>(R.id.backButtonTran)
+        backButton?.setOnClickListener {
+            requireActivity().onBackPressedDispatcher.onBackPressed()
         }
+    }
+
+    private fun setupSortSpinner(view: View) {
+        val sortSpinner = view.findViewById<Spinner>(R.id.sortSpinner)
+        val adapter = object : ArrayAdapter<String>(
+            requireContext(),
+            android.R.layout.simple_spinner_item,
+            resources.getStringArray(R.array.sort_options)
+        ) {
+            override fun isEnabled(position: Int): Boolean {
+                return position >= 0
+            }
+        }
+        adapter.setDropDownViewResource(R.layout.spinner_item)
+
+        sortSpinner.adapter = adapter
 
     }
 
     private fun setupTransactionsRecyclerView(view: View?) {
+
         val transactionsList = getTransactionsList()
-        recyclerView = view?.findViewById(R.id.transactionsRecyclerView)
-        val adapter = TransactionsAdapter(transactionsList,this)
+        var adapter : TransactionsAdapter? = null
+        adapter = TransactionsAdapter(transactionsList,this)
+        recyclerView = view?.findViewById(R.id.transactionsAllRecyclerView)
         recyclerView?.adapter = adapter
         recyclerView?.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
 
+        filterTransactionClickListener(view, transactionsList, adapter)
+    }
 
+    private fun filterTransactionClickListener(view: View?, transactionsList: List<Transaction>, adapter: TransactionsAdapter?) {
+
+        val spendingImageView = view?.findViewById<ImageView>(R.id.spendingImageView)
+        val spendingTextView = view?.findViewById<TextView>(R.id.spendingTextView)
+        val incomeImageView = view?.findViewById<ImageView>(R.id.incomeImageView)
+        val incomeTextView = view?.findViewById<TextView>(R.id.incomeTextView)
+        val billsImageView = view?.findViewById<ImageView>(R.id.billsImageView)
+        val billsTextView = view?.findViewById<TextView>(R.id.billsTextView)
+        val savingsImageView = view?.findViewById<ImageView>(R.id.savingsImageView)
+        val savingsTextView = view?.findViewById<TextView>(R.id.savingsTextView)
+        val viewAllTextView = view?.findViewById<TextView>(R.id.viewAllTextView)
+
+        viewAllTextView?.setOnClickListener {
+            adapter!!.updateData(transactionsList)
+        }
+
+        spendingImageView?.setOnClickListener {
+            filterTransactions("Spending", transactionsList, adapter!!)
+        }
+        spendingTextView?.setOnClickListener {
+            filterTransactions("Spending", transactionsList, adapter!!)
+        }
+
+        incomeTextView?.setOnClickListener {
+            filterTransactions("Income", transactionsList, adapter!!)
+        }
+        incomeImageView?.setOnClickListener {
+            filterTransactions("Income", transactionsList, adapter!!)
+        }
+
+        billsTextView?.setOnClickListener {
+            filterTransactions("Bills", transactionsList, adapter!!)
+        }
+        billsImageView?.setOnClickListener {
+            filterTransactions("Bills", transactionsList, adapter!!)
+        }
+
+        savingsTextView?.setOnClickListener {
+            filterTransactions("Savings", transactionsList, adapter!!)
+        }
+        savingsImageView?.setOnClickListener {
+            filterTransactions("Savings", transactionsList, adapter!!)
+        }
+    }
+
+    private fun filterTransactions(category: String, transactionsList: List<Transaction>, adapter: TransactionsAdapter) {
+        val filteredList = transactionsList.filter { it.transactionCategory == category }
+        adapter.updateData(filteredList)
     }
     override fun onItemClick(position: Int, transaction: Transaction) {
         // Create and show the dialog
@@ -151,6 +182,7 @@ class HomeFragment : Fragment(), TransactionsAdapter.OnItemClickListener  {
 
         builder.show()
     }
+
     private fun getTransactionsList(): List<Transaction> {
         val transactionsList = mutableListOf<Transaction>()
         transactionsList.add(Transaction("1","Breaker", "", "+$100", "2021-09-01"))
@@ -164,7 +196,7 @@ class HomeFragment : Fragment(), TransactionsAdapter.OnItemClickListener  {
         transactionsList.add(Transaction("9", "Facebook","", "+$4100", "2021-09-09"))
         transactionsList.add(Transaction("10","Netflix" ,"", "-$50", "2021-09-10"))
         return transactionsList.toList()
-       }
+    }
 
     companion object {
         /**
@@ -173,12 +205,12 @@ class HomeFragment : Fragment(), TransactionsAdapter.OnItemClickListener  {
          *
          * @param param1 Parameter 1.
          * @param param2 Parameter 2.
-         * @return A new instance of fragment HomeFragment.
+         * @return A new instance of fragment TransactionsFragment.
          */
         // TODO: Rename and change types and number of parameters
         @JvmStatic
         fun newInstance(param1: String, param2: String) =
-            HomeFragment().apply {
+            TransactionsFragment().apply {
                 arguments = Bundle().apply {
                     putString(ARG_PARAM1, param1)
                     putString(ARG_PARAM2, param2)
