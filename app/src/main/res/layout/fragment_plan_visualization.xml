@@ -4,13 +4,75 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Fragments.TransactionsFragment">
+    tools:context=".Fragments.PlanVisualizationFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="20dp"
         android:background="@color/white">
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="20dp"
+            app:cardBackgroundColor="@color/icon_secondary"
+            app:layout_constraintTop_toTopOf="@id/sortSpinner"
+            app:cardCornerRadius="15dp"
+            android:elevation="30dp"
+            android:translationZ="30dp"
+            app:layout_constraintStart_toStartOf="parent"
+            >
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="10dp">
+
+                <TextView
+                    android:id="@+id/textView17"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginTop="10dp"
+                    android:drawableStart="@drawable/card"
+                    android:drawablePadding="8dp"
+                    android:drawableTint="@color/white"
+                    android:fontFamily="@font/avenirnext_regular"
+                    android:paddingEnd="20dp"
+                    android:text="Overall Balance"
+                    android:textColor="@color/white"
+                    android:textSize="18sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/bankBalanceTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppins_medium"
+                    android:text="$500.00"
+                    android:textColor="@color/white"
+                    android:textSize="25sp"
+                    app:layout_constraintStart_toStartOf="@+id/textView17"
+                    app:layout_constraintTop_toBottomOf="@+id/textView17" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.cardview.widget.CardView>
+
+
+        <com.github.mikephil.charting.charts.BarChart
+            android:id="@+id/barChart"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="5dp"
+            app:layout_constraintBottom_toTopOf="@id/gridLayout"
+            app:layout_constraintTop_toBottomOf="@+id/cardView"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
         <ImageView
             android:id="@+id/backButtonTran"
             android:layout_width="40dp"
@@ -23,12 +85,13 @@
             android:id="@+id/textsoadnfoaView17"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="40dp"
+            android:layout_marginTop="16dp"
             android:fontFamily="@font/poppins_medium"
             android:text="Transactions"
             android:textColor="@color/text_primary"
             android:textSize="24sp"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.498"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -66,6 +129,8 @@
                     android:textColor="@color/black"
                     android:textSize="16sp" />
             </LinearLayout>
+
+
 
             <LinearLayout
                 android:layout_width="90dp"

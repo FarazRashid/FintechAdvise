@@ -219,16 +219,29 @@ class HomeFragment : Fragment(), TransactionsAdapter.OnItemClickListener  {
     private fun getTransactionsList() {
         val transactionList = mutableListOf<Transaction>()
         val categories = arrayOf("Income", "Spending", "Bills", "Savings") // Add your categories here
+        val names = arrayOf("Booking", "Breaker", "Transfer", "Deposit", "Withdrawal") // Add your transaction names here
+        val random = java.util.Random()
 
-        for (i in 1..100) {
+
+        for (i in 1..365) {
             val id = i.toString()
-            val name = if (i % 2 == 0) "Booking" else "Breaker"
-            val random = java.util.Random()
-            val randomAmount = random.nextInt(200) / 2
-            val amount = if (i % 2 == 0) "-$$randomAmount" else "+$$randomAmount"
-            val category = if (i % 5 == 0) categories[random.nextInt(categories.size)] else ""
-            val month = ((i - 1) % 12) + 1
-            val date = "01/$month/2021"
+
+            // Select a random name
+            val name = names[random.nextInt(names.size)]
+
+            // Generate a random amount between -100 and 100
+            val randomAmount = random.nextInt(200) - 100
+            val amount = if (randomAmount >= 0) "+$$randomAmount" else "-$$randomAmount"
+
+            // Select a random category
+            val category = categories[random.nextInt(categories.size)]
+
+            // Calculate the month and day for the current iteration
+            val month = (i / 30 % 12) + 1  // Approximate day of the month, not accurate
+            val day = (i % 30) + 1  // Approximate day of the month, not accurate
+
+            val date = "$day/$month/2021"
+            Log.d("date",date)
             transactionList.add(Transaction(id, name, category, amount, date))
         }
         transactionsList = transactionList
