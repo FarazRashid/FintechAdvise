@@ -64,7 +64,18 @@ class InvestmentProfileFragment : BottomSheetDialogFragment() {
 
     private fun handleInvestNowButtonClick(view:View) {
         // Handle the Invest Now button click
+
         val investButton = view.findViewById<Button>(R.id.investButton)
+        val investmentAmountEditText = view.findViewById<EditText>(R.id.investmentAmount)
+
+        // Check if the current investment's ID exists in the assetAllocation list
+        val currentInvestmentId = InvestmentManager.getCurrentInvestment()?.id
+        val userAllocation = InvestmentManager.getAssetAllocation().find { it.first == currentInvestmentId }?.second
+
+        // If it does, set the EditText's value to the corresponding allocation
+        if (userAllocation != null) {
+            investmentAmountEditText.setText(userAllocation.toString())
+        }
         investButton?.setOnClickListener {
                 val amount = view.findViewById<EditText>(R.id.investmentAmount).text.toString()
             if(amount.isEmpty()||amount.isBlank()){

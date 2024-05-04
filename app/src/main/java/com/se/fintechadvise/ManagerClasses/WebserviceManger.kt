@@ -216,7 +216,7 @@
         fun loginUser(email: String, password: String, context: Context, Callback:(Boolean, User?)->Unit) {
             val params = JSONObject()
             params.put("email", email)
-
+            Log.d("Email", email)
             // we need to encrypt the password before sending it to the server
 
             val (key1,iv1) = SecurityHelper.getKeyAndIvFromSharedPreferences(context)
@@ -239,6 +239,8 @@
             val encryptedPasswordString2 = Base64.encodeToString(encryptedPassword1, Base64.DEFAULT)
 
             params.put("password", encryptedPasswordString2)
+            Log.d("Encrypted Password", encryptedPasswordString2)
+            Log.d("Password", password)
 
             postRequest("login", params, context,
                 successHandler = { response ->
@@ -382,7 +384,41 @@
             queue.add(jsonObjectRequest)
         }
 
-        fun getUserInvestments(context: Context, userId: String, callback: (List<String>?, String?) -> Unit) {
+//        fun getUserInvestments(context: Context, userId: String, callback: (List<String>?, String?) -> Unit) {
+//            val queue = Volley.newRequestQueue(context)
+//
+//            val url = BASE_URL + "get_users_investments"
+//
+//            val params = JSONObject()
+//            params.put("user_id", userId)
+//
+//            val jsonArrayRequest = object : JsonArrayRequest(
+//                Request.Method.POST, url, JSONArray().put(params),
+//                { response ->
+//                    val investmentIds = ArrayList<String>()
+//                    for (i in 0 until response.length()) {
+//                        val item = response.getJSONObject(i)
+//                        val investmentId = item.getString("investment_id")
+//                        investmentIds.add(investmentId)
+//                    }
+//                    callback(investmentIds, null)
+//                },
+//                { error ->
+//                    callback(null, error.toString())
+//                }
+//            ) {
+//                @Throws(AuthFailureError::class)
+//                override fun getHeaders(): Map<String, String> {
+//                    val headers = HashMap<String, String>()
+//                    headers["Content-Type"] = "application/json"
+//                    return headers
+//                }
+//            }
+//
+//            queue.add(jsonArrayRequest)
+//        }
+
+        fun getUserInvestments(context: Context, userId: String, callback: (List<Pair<String, Double>>?, String?) -> Unit) {
             val queue = Volley.newRequestQueue(context)
 
             val url = BASE_URL + "get_users_investments"
@@ -390,16 +426,16 @@
             val params = JSONObject()
             params.put("user_id", userId)
 
-            val jsonArrayRequest = object : JsonArrayRequest(
-                Request.Method.POST, url, JSONArray().put(params),
+            val jsonObjectRequest = object : JsonObjectRequest(
+                Request.Method.POST, url, params,
                 { response ->
-                    val investmentIds = ArrayList<String>()
-                    for (i in 0 until response.length()) {
-                        val item = response.getJSONObject(i)
-                        val investmentId = item.getString("investment_id")
-                        investmentIds.add(investmentId)
+                    val investmentIds = response.getJSONArray("investment_ids")
+                    val allocations = response.getJSONArray("allocations")
+                    val investments = ArrayList<Pair<String, Double>>()
+                    for (i in 0 until investmentIds.length()) {
+                        investments.add(Pair(investmentIds.getString(i), allocations.getDouble(i)))
                     }
-                    callback(investmentIds, null)
+                    callback(investments, null)
                 },
                 { error ->
                     callback(null, error.toString())
@@ -413,10 +449,8 @@
                 }
             }
 
-            queue.add(jsonArrayRequest)
+            queue.add(jsonObjectRequest)
         }
-
-
 
 
 

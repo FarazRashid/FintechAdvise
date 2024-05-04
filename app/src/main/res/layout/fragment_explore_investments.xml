@@ -26,6 +26,35 @@
             android:layout_height="match_parent">
 
 
+            <TextView
+                android:id="@+id/textView18"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins_semi_bold"
+                android:text="Your Investments"
+                android:textColor="@color/text_primary"
+                android:textFontWeight="200"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/yourInvestmentsButton" />
+
+            <ImageButton
+                android:id="@+id/yourInvestmentsButton"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:background="@drawable/circle"
+                android:backgroundTint="@color/icon_secondary"
+                android:elevation="25dp"
+                android:padding="20dp"
+                android:src="@drawable/rightarrow"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                app:layout_constraintBottom_toBottomOf="@+id/textView13"
+                app:layout_constraintEnd_toEndOf="@+id/textView18"
+                app:layout_constraintStart_toStartOf="@+id/textView18"
+                app:layout_constraintTop_toTopOf="@+id/textView13"
+                app:tint="@color/white" />
+
             <ImageView
                 android:id="@+id/menu_opener"
                 android:layout_width="30dp"
@@ -38,7 +67,7 @@
 
             <TextView
                 android:id="@+id/textView13"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="25dp"

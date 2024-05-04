@@ -62,13 +62,12 @@
             android:id="@+id/investmentCurrentValue"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
             android:fontFamily="@font/poppins_semi_bold"
             android:text="$50"
             android:textColor="@color/text_primary"
             android:textSize="20sp"
-            app:layout_constraintEnd_toEndOf="@+id/investmentProfileTitle"
-            app:layout_constraintTop_toBottomOf="@+id/investmentProfileTitle" />
+            app:layout_constraintEnd_toEndOf="@+id/investButton"
+            app:layout_constraintTop_toTopOf="@+id/textView14" />
 
 
         <Button
@@ -140,6 +139,7 @@
             android:layout_width="110dp"
             android:layout_height="wrap_content"
             android:hint="Amount in $"
+            android:textAlignment="center"
             android:backgroundTint="#D8D7D7"
             android:inputType="numberDecimal"
             app:layout_constraintBottom_toTopOf="@+id/investButton"

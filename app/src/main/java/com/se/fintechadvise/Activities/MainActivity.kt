@@ -26,7 +26,8 @@ class MainActivity : AppCompatActivity() {
         // startActivity(Intent(this@MainActivity, ConnectBankActivity::class.java))
         // startActivity(Intent(this@MainActivity, PlanningActivity::class.java))
 //            startActivity(Intent(this@MainActivity, HomeActivity::class.java))
-            startActivity(Intent(this@MainActivity, HomeActivity::class.java))
+//            startActivity(Intent(this@MainActivity, HomeActivity::class.java))
+            startActivity(Intent(this@MainActivity, LoginOrSignupActivity::class.java))
             finish()
         }, MainActivity.SPLASH_DELAY)
     }
