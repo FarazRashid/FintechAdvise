@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.Spinner
 import android.widget.TextView
@@ -58,6 +59,7 @@ class TransactionsFragment : Fragment(), TransactionsAdapter.OnItemClickListener
     ): View? {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_transactions, container, false)
+
 
         setupSortSpinner(view)
         setupTransactionsRecyclerView(view)
@@ -225,6 +227,8 @@ class TransactionsFragment : Fragment(), TransactionsAdapter.OnItemClickListener
         }
         currentList = filteredList
     }
+
+
     override fun onItemClick(position: Int, transaction: Transaction) {
         // Create and show the dialog
         val builder = AlertDialog.Builder(requireContext())
