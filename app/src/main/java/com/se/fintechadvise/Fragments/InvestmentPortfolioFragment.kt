@@ -14,10 +14,13 @@ import androidx.drawerlayout.widget.DrawerLayout
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.navigation.NavigationView
+import com.se.fintechadvise.AdapterClasses.ArticleAdapter
 import com.se.fintechadvise.AdapterClasses.PlanAdapter
+import com.se.fintechadvise.DataClasses.Article
 import com.se.fintechadvise.DataClasses.Plans
 import com.se.fintechadvise.HelperClasses.FragmentHelper
 import com.se.fintechadvise.R
+import kotlin.random.Random
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -33,6 +36,8 @@ class InvestmentPortfolioFragment : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
+    private var articleList = mutableListOf<Article>()
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -78,6 +83,7 @@ class InvestmentPortfolioFragment : Fragment() {
             Plans("Platinum", "Invest in mutual funds", "@drawable/investment.xml", "200"),
             Plans("Gold", "Invest in stocks", "@drawable/investment.xml", "130"),
             Plans("Silver", "Invest in bonds", "@drawable/investment.xml", "50"),
+            Plans("Bronze", "Invest in estate", "@drawable/investment.xml", "20")
         )
     }
 
@@ -96,12 +102,28 @@ class InvestmentPortfolioFragment : Fragment() {
         val view =  inflater.inflate(R.layout.fragment_investment_portfolio, container, false)
 
         setupRecyclerView(view)
+        setupKnowledgeRecyclerView(view)
         setupButtonNavigation(view)
         setupMenuOpener(view)
 
         return view
     }
 
+    private fun setupKnowledgeRecyclerView(view: View?) {
+        getArticles()
+        val knowledgeRecyclerView = view?.findViewById<RecyclerView>(R.id.knowledgeRecyclerView)
+        knowledgeRecyclerView?.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+        knowledgeRecyclerView?.adapter = ArticleAdapter(articleList)
+    }
+
+    private fun getArticles() {
+        val difficulties = listOf("Easy", "Medium", "Hard")
+        for (i in 1..5) {
+            val difficulty = difficulties[Random.nextInt(difficulties.size)]
+            val completion = "${Random.nextInt(100)}%"
+            articleList.add(Article("Article $i", "Description $i", difficulty, "10 minutes", completion))
+        }
+    }
     private fun setupButtonNavigation(view: View?) {
         val goToExploreButton = view?.findViewById<Button>(R.id.investNowButton)
         val fragmentHelper = FragmentHelper(requireActivity().supportFragmentManager, requireContext())

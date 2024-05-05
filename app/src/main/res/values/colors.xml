@@ -46,6 +46,7 @@
     <color name="goldColorDark">#BA7600</color>
     <color name="silverColor">#B6B6B6</color>
     <color name="silverColorDark">#616161</color>
-
+    <color name="bronzeColor">#D5AC84</color>
+    <color name="bronzeColorDark">#5A3A1D</color>
 
 </resources>

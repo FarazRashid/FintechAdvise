@@ -92,6 +92,7 @@ class HomeFragment : Fragment(), TransactionsAdapter.OnItemClickListener  {
                     startActivity(intent)
                     true
                 }
+
                 else -> false
             }
         }
