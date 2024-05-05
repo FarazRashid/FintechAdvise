@@ -9,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.se.fintechadvise.Fragments.CourseDetailFragment
+import com.se.fintechadvise.Fragments.EducationHomeFragment
 import com.se.fintechadvise.Fragments.ExploreInvestmentsFragment
 import com.se.fintechadvise.Fragments.HomeFragment
 import com.se.fintechadvise.Fragments.InvestmentPortfolioFragment
@@ -47,8 +48,8 @@ class BottomNavigationHelper(private val activity: AppCompatActivity) {
                 }
                 R.id.navigation_education -> { loadFragment(ExploreInvestmentsFragment())
                     Log.d("BottomNavigationHelper", "Education Fragment loaded")
-                    if (activity.supportFragmentManager.findFragmentById(R.id.fragment_container) !is CourseDetailFragment) {
-                        loadFragment(CourseDetailFragment())
+                    if (activity.supportFragmentManager.findFragmentById(R.id.fragment_container) !is EducationHomeFragment) {
+                        loadFragment(EducationHomeFragment())
                     }
 //                    loadFragment(CourseDetailFragment())
                     return@setOnNavigationItemSelectedListener true
