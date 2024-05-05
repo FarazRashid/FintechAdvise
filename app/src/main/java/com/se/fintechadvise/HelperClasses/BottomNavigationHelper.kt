@@ -36,8 +36,7 @@ class BottomNavigationHelper(private val activity: AppCompatActivity) {
                     Log.d("BottomNavigationHelper", "Explorations Fragment loaded")
                     return@setOnNavigationItemSelectedListener true
                 }
-                R.id.navigation_education -> {
-//                    loadFragment(ExploreInvestmentsFragment())
+                R.id.navigation_education -> { loadFragment(ExploreInvestmentsFragment())
                     Log.d("BottomNavigationHelper", "Education Fragment loaded")
                     return@setOnNavigationItemSelectedListener true
                 }

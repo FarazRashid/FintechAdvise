@@ -1,0 +1,419 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:backgroundTint="#F3F3F3"
+    tools:context=".Fragments.EducationHomeFragment">
+
+    <androidx.drawerlayout.widget.DrawerLayout
+        android:id="@+id/drawer_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        android:fitsSystemWindows="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardView"
+                android:layout_width="250dp"
+                android:layout_height="90dp"
+                android:layout_marginHorizontal="20dp"
+                android:elevation="35dp"
+                android:translationZ="30dp"
+                android:layout_marginVertical="10dp"
+                app:cardBackgroundColor="@color/icon_secondary"
+                app:cardCornerRadius="15dp"
+                app:layout_constraintEnd_toEndOf="@id/bluewallet"
+                app:layout_constraintStart_toStartOf="@id/bluewallet"
+                app:layout_constraintTop_toBottomOf="@id/bankBalanceTextView"
+                >
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:id="@+id/textView200"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="28dp"
+                        android:fontFamily="@font/poppins_semi_bold"
+                        android:text="BEGIN YOUR \nPERSONALISED \nLEARNING"
+                        android:textColor="@color/white"
+                        android:textFontWeight="200"
+                        android:textSize="17sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <ImageButton
+                        android:id="@+id/personalisedLearningButton"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_marginEnd="16dp"
+                        android:background="@drawable/circle"
+                        android:backgroundTint="@color/white"
+                        android:elevation="25dp"
+                        android:padding="20dp"
+                        android:src="@drawable/rightarrow"
+                        android:textAllCaps="false"
+                        android:textColor="@color/white"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:tint="@color/black" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <ImageView
+                android:id="@+id/imageView6"
+                android:layout_width="0dp"
+                android:layout_height="246dp"
+                android:layout_marginTop="46dp"
+                android:background="@drawable/union"
+                android:backgroundTint="#FFB23F"
+                app:layout_constraintEnd_toEndOf="@+id/bluewallet"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/bluewallet"
+                app:layout_constraintTop_toBottomOf="@+id/gridLayout" />
+
+            <TextView
+                android:id="@+id/textView52"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins_semi_bold"
+                android:text="COURSES"
+                android:textColor="@color/white"
+                android:elevation="25dp"
+                android:textSize="20sp"
+                app:layout_constraintStart_toStartOf="@+id/textView41"
+                app:layout_constraintTop_toBottomOf="@+id/textView41" />
+
+            <TextView
+                android:id="@+id/bankBalanceTextView5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins_semi_bold"
+                android:text="FINANCES"
+                android:textColor="@color/white"
+                android:elevation="25dp"
+                android:textSize="20sp"
+                app:layout_constraintStart_toStartOf="@+id/textView37"
+                app:layout_constraintTop_toBottomOf="@+id/textView37" />
+
+            <TextView
+                android:id="@+id/textView41"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="90dp"
+                android:elevation="35dp"
+                android:fontFamily="@font/avenirnext_regular"
+                android:text="21"
+                android:textColor="@color/white"
+                android:textFontWeight="200"
+                android:textSize="18sp"
+                app:layout_constraintEnd_toEndOf="@+id/imageView6"
+                app:layout_constraintTop_toTopOf="@+id/textView37"
+                app:layout_goneMarginStart="50dp" />
+
+
+            <TextView
+                android:id="@+id/bankBalanceTextView3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins_semi_bold"
+                android:text="INVESTMENTS"
+                android:textColor="@color/white"
+                android:elevation="25dp"
+                android:textSize="20sp"
+                app:layout_constraintStart_toStartOf="@+id/imageView6"
+                app:layout_constraintTop_toBottomOf="@+id/imageView6" />
+
+            <TextView
+                android:id="@+id/textView37"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginStart="10dp"
+                android:elevation="15dp"
+                android:fontFamily="@font/avenirnext_regular"
+                android:text="120 Lectures"
+                android:textColor="@color/white"
+                android:textFontWeight="200"
+                android:textSize="18sp"
+                app:layout_constraintStart_toStartOf="@id/imageView6"
+                app:layout_constraintTop_toTopOf="@id/imageView6" />
+
+
+
+            <ImageView
+                android:id="@+id/imageView8"
+                android:layout_width="35dp"
+                android:layout_height="6dp"
+                android:layout_marginStart="144dp"
+                android:layout_marginEnd="154dp"
+
+                android:background="@drawable/union_top"
+                android:backgroundTint="#FFB23F"
+                app:layout_constraintBottom_toTopOf="@+id/imageView6"
+                app:layout_constraintEnd_toEndOf="@+id/imageView6"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/imageView6" />
+
+            <ImageView
+                android:id="@+id/imageView7"
+                android:layout_width="0dp"
+                android:layout_height="206dp"
+                android:layout_marginTop="90dp"
+                android:background="@drawable/union"
+                android:backgroundTint="#E0533D"
+                android:elevation="15dp"
+                app:layout_constraintEnd_toEndOf="@+id/bluewallet"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/bluewallet"
+                app:layout_constraintTop_toTopOf="@+id/imageView6" />
+
+            <TextView
+                android:id="@+id/textView31"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="90dp"
+                android:elevation="35dp"
+                android:fontFamily="@font/avenirnext_regular"
+                android:text="13"
+                android:textColor="@color/white"
+                android:textFontWeight="200"
+                android:textSize="18sp"
+                app:layout_constraintEnd_toEndOf="@+id/imageView7"
+                app:layout_constraintTop_toTopOf="@+id/textView27"
+                app:layout_goneMarginStart="50dp" />
+
+            <TextView
+                android:id="@+id/textView22"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins_semi_bold"
+                android:text="COURSES"
+                android:textColor="@color/white"
+                android:elevation="25dp"
+                android:textSize="20sp"
+                app:layout_constraintStart_toStartOf="@+id/textView31"
+                app:layout_constraintTop_toBottomOf="@+id/textView31" />
+
+
+
+
+            <TextView
+                android:id="@+id/textView27"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginStart="10dp"
+                android:elevation="15dp"
+                android:fontFamily="@font/avenirnext_regular"
+                android:text="189 Lectures"
+                android:textColor="@color/white"
+                android:textFontWeight="200"
+                android:textSize="18sp"
+                app:layout_constraintStart_toStartOf="@id/imageView7"
+                app:layout_constraintTop_toTopOf="@id/imageView7" />
+
+            <TextView
+                android:id="@+id/bankBalanceTextView2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins_semi_bold"
+                android:text="BUDGETING"
+                android:textColor="@color/white"
+                android:elevation="25dp"
+                android:textSize="20sp"
+                app:layout_constraintStart_toStartOf="@+id/textView27"
+                app:layout_constraintTop_toBottomOf="@+id/textView27" />
+
+
+            <ImageView
+                android:id="@+id/imageView9"
+                android:layout_width="35dp"
+                android:layout_height="6dp"
+                android:layout_marginStart="144dp"
+                android:layout_marginEnd="154dp"
+                android:layout_marginBottom="204dp"
+                android:background="@drawable/union_top"
+                android:elevation="15dp"
+                android:backgroundTint="#E0533D"
+                app:layout_constraintBottom_toBottomOf="@+id/imageView7"
+                app:layout_constraintEnd_toEndOf="@+id/imageView7"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/imageView7" />
+
+            <ImageView
+                android:id="@+id/imageView10"
+                android:layout_width="35dp"
+                android:layout_height="6dp"
+                android:layout_marginStart="144dp"
+                android:background="@drawable/union_top"
+                android:elevation="25dp"
+                android:backgroundTint="#3200E0"
+                app:layout_constraintBottom_toTopOf="@+id/bluewallet"
+                app:layout_constraintEnd_toEndOf="@+id/bluewallet"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/bluewallet" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/gridLayout"
+                android:layout_width="match_parent"
+                android:layout_height="59dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="12dp"
+                app:layout_constraintEnd_toEndOf="@+id/searchView"
+                app:layout_constraintStart_toStartOf="@+id/searchView"
+                app:layout_constraintTop_toBottomOf="@id/searchView" />
+
+
+            <android.widget.SearchView
+                android:id="@+id/searchView"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="24dp"
+                android:background="@drawable/searchviewbackground"
+                android:iconifiedByDefault="false"
+                android:queryBackground="@android:color/transparent"
+                android:queryHint="Search Anything"
+                android:searchIcon="@drawable/greensearch"
+                android:textColor="@color/icon_secondary"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.478"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView19"
+                app:layout_constraintWidth_percent="0.95" />
+
+            <ImageView
+                android:id="@+id/menu_opener"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="20dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/menu" />
+
+
+            <TextView
+                android:id="@+id/textView19"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:fontFamily="@font/poppins_bold"
+                android:text="@string/educationHomeString"
+                android:textColor="@color/text_primary"
+                android:textSize="33sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/menu_opener" />
+
+            <ImageView
+                android:id="@+id/bluewallet"
+                android:layout_width="328dp"
+                android:layout_height="0dp"
+                android:layout_marginTop="90dp"
+                android:background="@drawable/union"
+                android:elevation="25dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/searchView"
+                app:layout_constraintStart_toStartOf="@+id/searchView"
+                app:layout_constraintTop_toTopOf="@+id/imageView7"
+                app:layout_constraintVertical_bias="1.0" />
+
+            <TextView
+                android:id="@+id/textView17"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginStart="10dp"
+                android:elevation="25dp"
+                android:fontFamily="@font/avenirnext_regular"
+                android:text="120 Lectures"
+                android:textColor="@color/white"
+                android:textFontWeight="200"
+                android:textSize="18sp"
+                app:layout_constraintStart_toStartOf="@id/bluewallet"
+                app:layout_constraintTop_toTopOf="@id/bluewallet" />
+
+            <TextView
+                android:id="@+id/textView21"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="90dp"
+                android:elevation="35dp"
+                android:fontFamily="@font/avenirnext_regular"
+                android:text="21"
+                android:textColor="@color/white"
+                android:textFontWeight="200"
+                android:textSize="18sp"
+                app:layout_constraintEnd_toEndOf="@+id/bluewallet"
+                app:layout_constraintTop_toTopOf="@+id/textView17"
+                app:layout_goneMarginStart="50dp" />
+
+            <TextView
+                android:id="@+id/textView42"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins_semi_bold"
+                android:text="COURSES"
+                android:textColor="@color/white"
+                android:elevation="25dp"
+                android:textSize="20sp"
+                app:layout_constraintStart_toStartOf="@+id/textView21"
+                app:layout_constraintTop_toBottomOf="@+id/textView21" />
+
+           <TextView
+                android:id="@+id/bankBalanceTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins_semi_bold"
+                android:text="INVESTMENTS"
+                android:textColor="@color/white"
+                android:elevation="25dp"
+                android:textSize="20sp"
+                app:layout_constraintStart_toStartOf="@+id/textView17"
+                app:layout_constraintTop_toBottomOf="@+id/textView17" />
+
+
+
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+        <com.google.android.material.navigation.NavigationView
+            android:id="@+id/side_nav"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="start"
+            android:background="@color/icon_secondary"
+            android:padding="5dp"
+            app:itemIconPadding="15dp"
+            app:itemIconSize="25dp"
+            app:itemIconTint="@color/white"
+            app:itemTextAppearance="@style/navBarTextStyle"
+            app:itemTextAppearanceActiveBoldEnabled="true"
+            app:itemTextColor="@color/white"
+            app:menu="@menu/navigation_menu_drawer" />
+
+    </androidx.drawerlayout.widget.DrawerLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
