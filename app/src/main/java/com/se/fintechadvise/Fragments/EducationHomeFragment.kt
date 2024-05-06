@@ -80,6 +80,8 @@ class EducationHomeFragment : Fragment() {
         return view
     }
 
+    
+
     private fun initializeViews(view: View){
 
         yellowWalletTopic= view.findViewById(R.id.yellowWalletTopic)
