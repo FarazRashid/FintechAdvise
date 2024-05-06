@@ -8,6 +8,7 @@ import android.widget.Button
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.se.fintechadvise.HelperClasses.Navigator
+import com.se.fintechadvise.ManagerClasses.NotificationsManager
 import com.se.fintechadvise.R
 
 class MainActivity : AppCompatActivity() {
@@ -27,6 +28,7 @@ class MainActivity : AppCompatActivity() {
                 // startActivity(Intent(this@MainActivity, PlanningActivity::class.java))
 //            startActivity(Intent(this@MainActivity, HomeActivity::class.java))
 //            startActivity(Intent(this@MainActivity, HomeActivity::class.java))
+                NotificationsManager.getInstance().createNotificationChannel(this)
                 startActivity(Intent(this@MainActivity, LoginOrSignupActivity::class.java))
                 finish()
             }, MainActivity.SPLASH_DELAY)

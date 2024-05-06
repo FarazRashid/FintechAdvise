@@ -6,7 +6,6 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -22,20 +21,20 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.navigation.NavigationView
-import com.plaid.internal.core.protos.link.workflow.nodes.panes.`ButtonWithCardsPaneOuterClass$ButtonWithCardsPane`.Rendering.Card
 import com.se.fintechadvise.Activities.ConnectBankActivity
 import com.se.fintechadvise.Activities.PrivacyPolicy
 import com.se.fintechadvise.AdapterClasses.BudgetAdapter
 import com.se.fintechadvise.AdapterClasses.TransactionsAdapter
 import com.se.fintechadvise.DataClasses.Budget
 import com.se.fintechadvise.DataClasses.Transaction
-import com.se.fintechadvise.HelperClasses.BottomNavigationHelper
 import com.se.fintechadvise.HelperClasses.FragmentHelper
 import com.se.fintechadvise.ManagerClasses.BankInstanceManager
+import com.se.fintechadvise.ManagerClasses.NotificationsManager
 import com.se.fintechadvise.ManagerClasses.UserManager
 import com.se.fintechadvise.R
 
@@ -286,6 +285,12 @@ class HomeFragment : Fragment(), TransactionsAdapter.OnItemClickListener  {
                     val oldBudget = adapter.budgets.find { it.category == oldBudgetCategory }
                     oldBudget?.let {
                         it.currentAmount -= transactionAmount
+                        if(it.currentAmount>it.maxAmount)
+                        {
+                            NotificationsManager.showNotification(
+                                requireView().context,
+                                (it.category + " Budget").toString() + " has been exceeded")
+                        }
                     }
                 }
             }
@@ -297,6 +302,12 @@ class HomeFragment : Fragment(), TransactionsAdapter.OnItemClickListener  {
                 val newBudget = adapter.budgets.find { it.category == selectedCategory }
                 newBudget?.let {
                     it.currentAmount += transactionAmount
+                    if(it.currentAmount>it.maxAmount)
+                    {
+                        NotificationsManager.showNotification(
+                            requireView().context,
+                            (it.category + " Budget").toString() + " has been exceeded")
+                    }
                 }
             }
 
@@ -397,6 +408,13 @@ class HomeFragment : Fragment(), TransactionsAdapter.OnItemClickListener  {
                     if (newMaxBudget != null) {
                         budget.maxAmount = newMaxBudget
                         // Notify the adapter that the data has changed
+
+                        if(budget.currentAmount>budget.maxAmount)
+                        {
+                            NotificationsManager.showNotification(
+                                requireView().context,
+                                (budget.category + " Budget").toString() + " has been exceeded")
+                        }
                         budgetingRecyclerView?.adapter?.notifyDataSetChanged()
                         dialog.dismiss()
                     }
