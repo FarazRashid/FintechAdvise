@@ -20,6 +20,7 @@ import com.se.fintechadvise.Activities.PrivacyPolicy
 import com.se.fintechadvise.AdapterClasses.ArticleAdapter
 import com.se.fintechadvise.DataClasses.Article
 import com.se.fintechadvise.HelperClasses.FragmentHelper
+import com.se.fintechadvise.ManagerClasses.ArticleManager
 import com.se.fintechadvise.R
 import org.w3c.dom.Text
 import kotlin.random.Random
@@ -101,7 +102,13 @@ class CourseDetailFragment : Fragment() {
 
         val recyclerView = view?.findViewById<RecyclerView>(R.id.lessonsRecyclerView)
         recyclerView?.layoutManager = LinearLayoutManager(requireActivity())
-        recyclerView?.adapter = ArticleAdapter(articleList)
+        recyclerView?.adapter = ArticleAdapter(articleList, object : ArticleAdapter.OnItemClickListener {
+            override fun onItemClick(position: Int, article: Article) {
+                ArticleManager.setCurrentArticle(article)
+               val articleFragment = ArticleFragment()
+                FragmentHelper(requireActivity().supportFragmentManager, requireContext()).loadFragment(articleFragment)
+            }
+        })
 
 
     }
@@ -111,9 +118,27 @@ class CourseDetailFragment : Fragment() {
         for (i in 1..5) {
             val difficulty = difficulties[Random.nextInt(difficulties.size)]
             val completion = "${Random.nextInt(100)}%"
-            articleList.add(Article("Article $i", "Description $i", difficulty, "10 minutes", completion))
+            val title = when(i) {
+                1 -> "The Fundamentals of Budgeting"
+                2 -> "Strategies for Debt Management"
+                3 -> "Exploring Investment Options"
+                4 -> "Understanding Credit Scores"
+                5 -> "Mastering Retirement Planning"
+                else -> "Unknown Title"
+            }
+            val description = when(i) {
+                1 -> "This comprehensive article delves into the fundamentals of budgeting, including creating a budget, tracking expenses, setting financial goals, and developing strategies to save money effectively. Learn practical tips to manage your finances efficiently and achieve financial stability."
+                2 -> "In this in-depth guide, discover proven strategies for effectively managing and reducing debt. Explore techniques such as debt consolidation, prioritizing payments, negotiating with creditors, and adopting responsible spending habits to regain control of your finances and pave the way for a debt-free future."
+                3 -> "Navigate the complex world of investment with this detailed exploration of various options, including stocks, bonds, mutual funds, real estate, and more. Gain insights into risk assessment, diversification strategies, portfolio management techniques, and long-term investment planning to make informed decisions and optimize your financial growth."
+                4 -> "Unlock the mysteries of credit scores and their impact on your financial well-being in this comprehensive article. Learn how credit scores are calculated, factors affecting them, and strategies to improve your score. Discover the importance of maintaining good credit and how it influences loan approvals, interest rates, and overall financial health."
+                5 -> "Prepare for a secure and fulfilling retirement with this expert guide to retirement planning. Explore topics such as pension plans, 401(k)s, IRAs, annuities, and Social Security benefits. Learn how to estimate retirement expenses, create a retirement income strategy, mitigate risks, and adapt your plan over time to enjoy a comfortable and worry-free retirement."
+                else -> "No description available"
+            }
+            articleList.add(Article(title, description, difficulty, "10 minutes", completion))
         }
     }
+
+
     companion object {
         /**
          * Use this factory method to create a new instance of

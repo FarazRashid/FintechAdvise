@@ -27,7 +27,7 @@ class HomeActivity : AppCompatActivity() {
 //        }
 
 
-        BottomNavigationHelper(this).loadFragment(EducationHomeFragment())
+        BottomNavigationHelper(this).loadFragment(HomeFragment())
         BottomNavigationHelper(this).setUpBottomNavigation()
     }
 }

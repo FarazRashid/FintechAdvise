@@ -1,4 +1,4 @@
-from config import host, username, password, db_name, ssl_ca
+from config import host, username, password, db_name
 import mysql.connector
 
 class DatabaseConnection:
@@ -8,7 +8,7 @@ class DatabaseConnection:
             user=username,
             password=password,
             database=db_name,
-            ssl_ca=ssl_ca
+            # ssl_ca=ssl_ca
         )
         return self.conn
 

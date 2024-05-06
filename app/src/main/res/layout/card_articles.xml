@@ -50,16 +50,19 @@
 
             <TextView
                 android:id="@+id/articleName"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginVertical="8dp"
                 android:layout_marginStart="20dp"
                 android:elevation="5dp"
                 android:fontFamily="@font/poppins_bold"
                 android:text="Article Name"
                 android:textColor="@color/text_primary"
-                android:textSize="24sp"
+                android:textSize="20sp"
+                android:layout_marginEnd="15dp"
                 app:layout_constraintBottom_toBottomOf="parent"
 
+                app:layout_constraintEnd_toStartOf="@+id/articleCompletion"
                 app:layout_constraintStart_toEndOf="@id/imageView7"
                 app:layout_constraintTop_toTopOf="parent" />
 

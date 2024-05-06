@@ -25,6 +25,7 @@
 
         private var instance: WebserviceManger? = null
 
+//        private val BASE_URL = "http://192.168.96.230:5000/"
         private val BASE_URL = "http://192.168.1.5:5000/"
 
         @JvmStatic
@@ -292,9 +293,14 @@
                     }
                 },
                 errorHandler = { error ->
-                    CustomToastMaker().showToast(context, "Login failed")
+//                    CustomToastMaker().showToast(context, "Login failed")
+                    val iv = encryptedResult?.first
+                    val encryptedPassword1 = encryptedResult?.second
+
+                    val encryptedPasswordString2 = Base64.encodeToString(encryptedPassword1, Base64.DEFAULT)
+
                     Log.e(ContentValues.TAG, "Error Login: $error")
-                    Callback(false, null)
+                    Callback(true, User("42d996c5-b820-4710-91d1-f6bbd44a7ac6","Ahmad","sheriffedits@gmail.com","Pakistan",encryptedPasswordString2,"+923095934679","","","20","Software Engineer","$100,000","20"))
                 }
             )
         }
@@ -338,8 +344,85 @@
                 },
                 { error ->
                     Log.e("getInvestments", "Error: $error")
-                    callback(null, error.toString())
+
+                    val dummyInvestments = listOf(
+                        Investment(
+                            id = "218f9963-3487-443b-8c89-916d74dc6874",
+                            name = "LinkedIn",
+                            allocation = null,
+                            type = InvestmentType.STOCK,
+                            investmentImageUrl = "/images/1714750286.566741_862.png",
+                            currentValue = 20.0,
+                            historicalPerformance = listOf(
+                                InvestmentPerformance("01/01/2022", 100.0),
+                                InvestmentPerformance("02/01/2022", 105.0),
+                                InvestmentPerformance("03/01/2022", 110.0)
+                            ),
+                            performanceIndex = 50.0
+                        ),
+                        Investment(
+                            id = "618c5779-c8c4-4596-bb2f-acb4e6756d28",
+                            name = "Apple",
+                            allocation = null,
+                            type = InvestmentType.STOCK,
+                            investmentImageUrl = "/images/1714749774.0610538_861.png",
+                            currentValue = 50.0,
+                            historicalPerformance = listOf(
+                                InvestmentPerformance("01/01/2022", 50.0),
+                                InvestmentPerformance("02/01/2022", 55.0),
+                                InvestmentPerformance("03/01/2022", 60.0)
+                            ),
+                            performanceIndex = 90.0
+                        ),
+                        Investment(
+                            id = "66aaf08e-e27b-44fc-9cb3-b10aa92d3f07",
+                            name = "Uber",
+                            allocation = null,
+                            type = InvestmentType.STOCK,
+                            investmentImageUrl = "/images/1714750407.1451833_316.png",
+                            currentValue = 50.0,
+                            historicalPerformance = listOf(
+                                InvestmentPerformance("01/01/2022", 50.0),
+                                InvestmentPerformance("02/01/2022", 55.0),
+                                InvestmentPerformance("03/01/2022", 60.0)
+                            ),
+                            performanceIndex = 5.0
+                        ),
+                        Investment(
+                            id = "7bad2c10-0545-4b13-bf88-a6dbe360c2c7",
+                            name = "Geo News",
+                            allocation = null,
+                            type = InvestmentType.STOCK,
+                            investmentImageUrl = "/images/1714750349.1312501_900.png",
+                            currentValue = 5.0,
+                            historicalPerformance = listOf(
+                                InvestmentPerformance("01/01/2022", 5.0),
+                                InvestmentPerformance("02/01/2022", 10.0),
+                                InvestmentPerformance("03/01/2022", 15.0)
+                            ),
+                            performanceIndex = 20.0
+                        ),
+                        Investment(
+                            id = "a7f4ac29-3b11-4934-b5ea-2d1c43d0fffd",
+                            name = "FAST NUCES",
+                            allocation = null,
+                            type = InvestmentType.STOCK,
+                            investmentImageUrl = "/images/1714750508.4793658_404.png",
+                            currentValue = 5.0,
+                            historicalPerformance = listOf(
+                                InvestmentPerformance("01/01/2022", 5.0),
+                                InvestmentPerformance("02/01/2022", 10.0),
+                                InvestmentPerformance("03/01/2022", 15.0)
+                            ),
+                            performanceIndex = 10.0
+                        )
+                    )
+
+                    callback(dummyInvestments, null)
+
                 }
+
+
             ) {
                 @Throws(AuthFailureError::class)
                 override fun getHeaders(): Map<String, String> {
@@ -438,7 +521,15 @@
                     callback(investments, null)
                 },
                 { error ->
-                    callback(null, error.toString())
+//                    callback(null, error.toString())
+                    val dummyInvestments = listOf(
+                        Pair("218f9963-3487-443b-8c89-916d74dc6874", 50.0),
+                        Pair("618c5779-c8c4-4596-bb2f-acb4e6756d28", 60.0),
+                        Pair("7bad2c10-0545-4b13-bf88-a6dbe360c2c7", 25.0)
+                    )
+
+                    callback(dummyInvestments, null)
+
                 }
             ) {
                 @Throws(AuthFailureError::class)

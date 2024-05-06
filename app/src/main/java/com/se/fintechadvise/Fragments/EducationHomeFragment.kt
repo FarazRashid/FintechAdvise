@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.SearchView
 import android.widget.TextView
+import android.widget.ImageButton
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.se.fintechadvise.DataClasses.Badge
@@ -17,6 +18,7 @@ import com.se.fintechadvise.R
 import com.se.fintechadvise.AdapterClasses.BadgesAdapter
 import com.se.fintechadvise.AdapterClasses.OnBadgeClickListener
 import org.w3c.dom.Text
+import com.se.fintechadvise.HelperClasses.FragmentHelper
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
