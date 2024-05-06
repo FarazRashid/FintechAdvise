@@ -28,17 +28,30 @@ To get started with FinTechAdvise in Android Studio, follow these steps:
 1. **Clone or Download the Repository:** Clone this repository to your local machine using Git or download it as a ZIP file and extract it to your preferred location.
 2. Open your terminal or command prompt and navigate to the directory where you want to clone the repository. Then, run the following command: `git clone https://github.com/FarazRashid/FinTechAdvise.git`
 
+3. **Set Up the Backend Server:** Navigate to the `backend` folder in the project directory. Here, you'll find the server-side code for FinTechAdvise.
+
+    Install the required Python packages by running the following command in your terminal:
+
+    `pip install -r requirements.txt`
+
+    Once the packages are installed, start the server:
+
+    `python app.py`
+
+    Note the URL that the server is running on. You'll need to add this to the `WebserviceManager` class in Android Studio.
+
+4. **Configure the Base URL in Android Studio:** Open the `WebserviceManager` class in Android Studio and replace the existing base URL with the URL of your local server.
 
 
-3. **Open the Project in Android Studio:** Launch Android Studio and select "Open an existing Android Studio project." Navigate to the directory where you cloned or extracted the repository and select the project folder. Android Studio will import the project for you.
+5. **Open the Project in Android Studio:** Launch Android Studio and select "Open an existing Android Studio project." Navigate to the directory where you cloned or extracted the repository and select the project folder. Android Studio will import the project for you.
 
-4. **Set Up the Environment:** Before running the project, ensure that your Android Studio environment is properly configured. Make sure you have the required SDKs, build tools, and dependencies installed. You may need to sync the project with Gradle files if prompted.
+6. **Set Up the Environment:** Before running the project, ensure that your Android Studio environment is properly configured. Make sure you have the required SDKs, build tools, and dependencies installed. You may need to sync the project with Gradle files if prompted.
 
-5. **Run the Project:** Once the project is successfully imported, build and run it on an emulator or a physical device. Android Studio provides options for selecting your target device and running the application.
+7. **Run the Project:** Once the project is successfully imported, build and run it on an emulator or a physical device. Android Studio provides options for selecting your target device and running the application.
 
-6. **Explore and Test:** Once the app is running, explore its features and functionalities. Test different aspects of the app to ensure it meets your requirements.
+8. **Explore and Test:** Once the app is running, explore its features and functionalities. Test different aspects of the app to ensure it meets your requirements.
 
-7. **Start Managing Your Finances:** With FinTechAdvise up and running on your local machine, you're ready to start managing your finances effectively! Explore the personalized financial planning, investment strategies, and real-time monitoring features to take control of your financial well-being.
+9. **Start Managing Your Finances:** With FinTechAdvise up and running on your local machine, you're ready to start managing your finances effectively! Explore the personalized financial planning, investment strategies, and real-time monitoring features to take control of your financial well-being.
 
 Feel free to reach out if you encounter any issues or have any questions during the setup process. Happy coding!
 
