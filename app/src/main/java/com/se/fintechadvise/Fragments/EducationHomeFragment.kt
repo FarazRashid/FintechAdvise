@@ -1,17 +1,21 @@
 package com.se.fintechadvise.Fragments
 
 import android.os.Bundle
+import android.os.TokenWatcher
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
+import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.se.fintechadvise.DataClasses.Badge
 import com.se.fintechadvise.R
 import com.se.fintechadvise.AdapterClasses.BadgesAdapter
 import com.se.fintechadvise.AdapterClasses.OnBadgeClickListener
+import org.w3c.dom.Text
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -29,6 +33,28 @@ class EducationHomeFragment : Fragment() {
     private var param2: String? = null
     private val badges = ArrayList<Badge>()
     private lateinit var badgesRecycler: RecyclerView
+    private lateinit var yellowWalletNumberOfLectures:TextView
+    private lateinit var yellowWalletNumberOfCourses:TextView
+    private lateinit var yellowWalletTopic:TextView
+
+    private lateinit var blueWalletNumberOfLectures:TextView
+    private lateinit var blueWalletNumberOfCourses:TextView
+    private lateinit var blueWalletTopic:TextView
+
+    private lateinit var redWalletNumberOfLectures:TextView
+    private lateinit var redWalletNumberOfCourses:TextView
+    private lateinit var redWalletTopic:TextView
+
+    private lateinit var blueWallet:ImageView
+    private lateinit var yellowWallet:ImageView
+    private lateinit var redWallet:ImageView
+
+    private var redWalletTopicText: String= "Budgeting"
+    private var blueWalletTopicText: String= "Investments"
+    private var yellowWalletTopicText: String = "Finances"
+
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -44,8 +70,55 @@ class EducationHomeFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_education_home, container, false)
         badgesRecycler = view.findViewById<RecyclerView>(R.id.gridLayout)
         initBadges()
+        initializeViews(view)
 
         return view
+    }
+
+    private fun initializeViews(view: View){
+
+        yellowWalletTopic= view.findViewById(R.id.yellowWalletTopic)
+        yellowWalletNumberOfLectures = view.findViewById(R.id.yellowWalletLectures)
+        yellowWalletNumberOfCourses = view.findViewById(R.id.yellowWalletNumberOfCourses)
+
+        blueWalletTopic= view.findViewById(R.id.blueWalletCourse)
+        blueWalletNumberOfLectures= view.findViewById(R.id.blueWalletNumberOfLectures)
+        blueWalletNumberOfCourses= view.findViewById(R.id.blueWalletNumberOfCourses)
+
+        redWalletTopic=view.findViewById(R.id.redWalletTopic)
+        redWalletNumberOfCourses=view.findViewById((R.id.redWalletNumberOfLectures))
+        redWalletNumberOfLectures=view.findViewById(R.id.redWalletNmberOfLectures)
+
+        blueWallet=view.findViewById(R.id.bluewallet)
+        yellowWallet=view.findViewById(R.id.imageView6)
+        redWallet=view.findViewById(R.id.imageView7)
+
+        //add on click listeners for red, yellow, annd blue wallets
+
+        redWallet.setOnClickListener {
+            val courseDetailFragment = CourseDetailFragment.newInstance(redWalletTopicText)
+            val transaction = requireActivity().supportFragmentManager.beginTransaction()
+            transaction.replace(R.id.fragment_container, courseDetailFragment)
+            transaction.addToBackStack(null)
+            transaction.commit()
+        }
+
+        blueWallet.setOnClickListener {
+            val courseDetailFragment = CourseDetailFragment.newInstance(blueWalletTopicText)
+            val transaction = requireActivity().supportFragmentManager.beginTransaction()
+            transaction.replace(R.id.fragment_container, courseDetailFragment)
+            transaction.addToBackStack(null)
+            transaction.commit()
+        }
+
+        yellowWallet.setOnClickListener {
+            val courseDetailFragment = CourseDetailFragment.newInstance(yellowWalletTopicText)
+            val transaction = requireActivity().supportFragmentManager.beginTransaction()
+            transaction.replace(R.id.fragment_container, courseDetailFragment)
+            transaction.addToBackStack(null)
+            transaction.commit()
+        }
+
     }
 
     private fun initBadges() {
@@ -60,11 +133,94 @@ class EducationHomeFragment : Fragment() {
             setBadgeClickListener(object : OnBadgeClickListener {
                 override fun onBadgeClick(position: Int) {
                     Log.d("MainActivity", "Badge clicked at position: $position")
+                    var name=badges[position].name
+
+                    when(name)
+                    {
+                        "Billings"->{
+
+                            redWalletTopicText = "Personal Finance"
+                            blueWalletTopicText = "Corporate Finance"
+                            yellowWalletTopicText = "Public Finance"
+
+
+                            redWalletTopic.text="Personal Finance"
+                            redWalletNumberOfCourses.text="10"
+                            redWalletNumberOfLectures.text="50 Lectures"
+
+                            blueWalletTopic.text="Corporate Finance"
+                            blueWalletNumberOfCourses.text="8"
+                            blueWalletNumberOfLectures.text="40 Lectures"
+
+                            yellowWalletTopic.text="Public Finance"
+                            yellowWalletNumberOfCourses.text="7"
+                            yellowWalletNumberOfLectures.text="35 Lectures"
+                        }
+
+                        "Investments"->{
+
+                            redWalletTopicText = "Equity Investments"
+                            blueWalletTopicText = "Fixed Income Investments"
+                            yellowWalletTopicText = "Derivative Investments"
+
+                            redWalletTopic.text="Equity Investments"
+                            redWalletNumberOfCourses.text="12"
+                            redWalletNumberOfLectures.text="60 Lectures"
+
+                            blueWalletTopic.text="Fixed Income"
+                            blueWalletNumberOfCourses.text="10"
+                            blueWalletNumberOfLectures.text="50 Lectures"
+
+                            yellowWalletTopic.text="Derivative"
+                            yellowWalletNumberOfCourses.text="9"
+                            yellowWalletNumberOfLectures.text="45 Lectures"
+                        }
+                        "Stocks"->{
+
+                            redWalletTopicText = "Stock Basics"
+                            blueWalletTopicText = "Stock Analysis"
+                            yellowWalletTopicText = "Stock Trading"
+
+                            redWalletTopic.text="Stock Basics"
+                            redWalletNumberOfCourses.text="15"
+                            redWalletNumberOfLectures.text="75 Lectures"
+
+                            blueWalletTopic.text="Stock Analysis"
+                            blueWalletNumberOfCourses.text="13"
+                            blueWalletNumberOfLectures.text="65 Lectures"
+
+                            yellowWalletTopic.text="Stock Trading"
+                            yellowWalletNumberOfCourses.text="11"
+                            yellowWalletNumberOfLectures.text="55 Lectures"
+                        }
+
+                        "Banking"->{
+
+                            redWalletTopicText = "Retail Banking"
+                            blueWalletTopicText = "Corporate Banking"
+                            yellowWalletTopicText = "Investment Banking"
+
+
+                            redWalletTopic.text="Retail Banking"
+                            redWalletNumberOfCourses.text="14"
+                            redWalletNumberOfLectures.text="70 Lectures"
+
+                            blueWalletTopic.text="Corporate Banking"
+                            blueWalletNumberOfCourses.text="12"
+                            blueWalletNumberOfLectures.text="60 Lectures"
+
+                            yellowWalletTopic.text="Investment Banking"
+                            yellowWalletNumberOfCourses.text="10"
+                            yellowWalletNumberOfLectures.text="50 Lectures"
+                        }
+                    }
+
+
                 }
             })
         }
-    }
 
+    }
 
     companion object {
         /**

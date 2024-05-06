@@ -37,7 +37,7 @@
                 app:cardCornerRadius="15dp"
                 app:layout_constraintEnd_toEndOf="@id/bluewallet"
                 app:layout_constraintStart_toStartOf="@id/bluewallet"
-                app:layout_constraintTop_toBottomOf="@id/bankBalanceTextView"
+                app:layout_constraintTop_toBottomOf="@id/blueWalletCourse"
                 >
 
                 <androidx.constraintlayout.widget.ConstraintLayout
@@ -100,11 +100,11 @@
                 android:textColor="@color/white"
                 android:elevation="25dp"
                 android:textSize="20sp"
-                app:layout_constraintStart_toStartOf="@+id/textView41"
-                app:layout_constraintTop_toBottomOf="@+id/textView41" />
+                app:layout_constraintStart_toStartOf="@+id/yellowWalletNumberOfCourses"
+                app:layout_constraintTop_toBottomOf="@+id/yellowWalletNumberOfCourses" />
 
             <TextView
-                android:id="@+id/bankBalanceTextView5"
+                android:id="@+id/yellowWalletTopic"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/poppins_semi_bold"
@@ -112,11 +112,11 @@
                 android:textColor="@color/white"
                 android:elevation="25dp"
                 android:textSize="20sp"
-                app:layout_constraintStart_toStartOf="@+id/textView37"
-                app:layout_constraintTop_toBottomOf="@+id/textView37" />
+                app:layout_constraintStart_toStartOf="@+id/yellowWalletLectures"
+                app:layout_constraintTop_toBottomOf="@+id/yellowWalletLectures" />
 
             <TextView
-                android:id="@+id/textView41"
+                android:id="@+id/yellowWalletNumberOfCourses"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="90dp"
@@ -127,12 +127,12 @@
                 android:textFontWeight="200"
                 android:textSize="18sp"
                 app:layout_constraintEnd_toEndOf="@+id/imageView6"
-                app:layout_constraintTop_toTopOf="@+id/textView37"
+                app:layout_constraintTop_toTopOf="@+id/yellowWalletLectures"
                 app:layout_goneMarginStart="50dp" />
 
 
             <TextView
-                android:id="@+id/bankBalanceTextView3"
+                android:id="@+id/blueWalletCourse3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/poppins_semi_bold"
@@ -144,7 +144,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/imageView6" />
 
             <TextView
-                android:id="@+id/textView37"
+                android:id="@+id/yellowWalletLectures"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
@@ -188,7 +188,7 @@
                 app:layout_constraintTop_toTopOf="@+id/imageView6" />
 
             <TextView
-                android:id="@+id/textView31"
+                android:id="@+id/redWalletNumberOfLectures"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="90dp"
@@ -199,11 +199,11 @@
                 android:textFontWeight="200"
                 android:textSize="18sp"
                 app:layout_constraintEnd_toEndOf="@+id/imageView7"
-                app:layout_constraintTop_toTopOf="@+id/textView27"
+                app:layout_constraintTop_toTopOf="@+id/redWalletNmberOfLectures"
                 app:layout_goneMarginStart="50dp" />
 
             <TextView
-                android:id="@+id/textView22"
+                android:id="@+id/redWalletNumberOfCourses"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/poppins_semi_bold"
@@ -211,14 +211,14 @@
                 android:textColor="@color/white"
                 android:elevation="25dp"
                 android:textSize="20sp"
-                app:layout_constraintStart_toStartOf="@+id/textView31"
-                app:layout_constraintTop_toBottomOf="@+id/textView31" />
+                app:layout_constraintStart_toStartOf="@+id/redWalletNumberOfLectures"
+                app:layout_constraintTop_toBottomOf="@+id/redWalletNumberOfLectures" />
 
 
 
 
             <TextView
-                android:id="@+id/textView27"
+                android:id="@+id/redWalletNmberOfLectures"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
@@ -233,7 +233,7 @@
                 app:layout_constraintTop_toTopOf="@id/imageView7" />
 
             <TextView
-                android:id="@+id/bankBalanceTextView2"
+                android:id="@+id/redWalletTopic"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/poppins_semi_bold"
@@ -241,8 +241,8 @@
                 android:textColor="@color/white"
                 android:elevation="25dp"
                 android:textSize="20sp"
-                app:layout_constraintStart_toStartOf="@+id/textView27"
-                app:layout_constraintTop_toBottomOf="@+id/textView27" />
+                app:layout_constraintStart_toStartOf="@+id/redWalletNmberOfLectures"
+                app:layout_constraintTop_toBottomOf="@+id/redWalletNmberOfLectures" />
 
 
             <ImageView
@@ -339,7 +339,7 @@
                 app:layout_constraintVertical_bias="1.0" />
 
             <TextView
-                android:id="@+id/textView17"
+                android:id="@+id/blueWalletNumberOfLectures"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
@@ -354,7 +354,7 @@
                 app:layout_constraintTop_toTopOf="@id/bluewallet" />
 
             <TextView
-                android:id="@+id/textView21"
+                android:id="@+id/blueWalletNumberOfCourses"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="90dp"
@@ -365,7 +365,7 @@
                 android:textFontWeight="200"
                 android:textSize="18sp"
                 app:layout_constraintEnd_toEndOf="@+id/bluewallet"
-                app:layout_constraintTop_toTopOf="@+id/textView17"
+                app:layout_constraintTop_toTopOf="@+id/blueWalletNumberOfLectures"
                 app:layout_goneMarginStart="50dp" />
 
             <TextView
@@ -377,11 +377,11 @@
                 android:textColor="@color/white"
                 android:elevation="25dp"
                 android:textSize="20sp"
-                app:layout_constraintStart_toStartOf="@+id/textView21"
-                app:layout_constraintTop_toBottomOf="@+id/textView21" />
+                app:layout_constraintStart_toStartOf="@+id/blueWalletNumberOfCourses"
+                app:layout_constraintTop_toBottomOf="@+id/blueWalletNumberOfCourses" />
 
            <TextView
-                android:id="@+id/bankBalanceTextView"
+                android:id="@+id/blueWalletCourse"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/poppins_semi_bold"
@@ -389,8 +389,8 @@
                 android:textColor="@color/white"
                 android:elevation="25dp"
                 android:textSize="20sp"
-                app:layout_constraintStart_toStartOf="@+id/textView17"
-                app:layout_constraintTop_toBottomOf="@+id/textView17" />
+                app:layout_constraintStart_toStartOf="@+id/blueWalletNumberOfLectures"
+                app:layout_constraintTop_toBottomOf="@+id/blueWalletNumberOfLectures" />
 
 
 

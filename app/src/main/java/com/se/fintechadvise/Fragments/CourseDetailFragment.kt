@@ -39,6 +39,7 @@ class CourseDetailFragment : Fragment() {
     private var param1: String? = null
     private var param2: String? = null
     private var articleList = mutableListOf<Article>()
+    private lateinit var courseTitle:TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -64,6 +65,9 @@ class CourseDetailFragment : Fragment() {
         setupUIElements(view)
         setupArticleRecyclerView(view)
 
+        val title = arguments?.getString("title")
+        courseTitle.text = title
+
         return view
     }
 
@@ -74,6 +78,8 @@ class CourseDetailFragment : Fragment() {
         val EstimatedTime = view?.findViewById<TextView>(R.id.estimatedTimeTextView)
         val progressText = view?.findViewById<TextView>(R.id.progressText)
         val progress = view?.findViewById<ProgressBar>(R.id.progressBar)
+
+        courseTitle = view?.findViewById(R.id.textsoadnfoaView17)!!
 
         // random values for all the fields
 
@@ -119,11 +125,10 @@ class CourseDetailFragment : Fragment() {
          */
         // TODO: Rename and change types and number of parameters
         @JvmStatic
-        fun newInstance(param1: String, param2: String) =
+        fun newInstance(title: String) =
             CourseDetailFragment().apply {
                 arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
+                    putString("title", title)
                 }
             }
     }
