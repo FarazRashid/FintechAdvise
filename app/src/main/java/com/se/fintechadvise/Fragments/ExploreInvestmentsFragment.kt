@@ -106,19 +106,16 @@ class ExploreInvestmentsFragment : Fragment() {
         allInvestmentsRecyclerView.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
         allInvestmentsRecyclerView.adapter = InvestmentAdapter(investments, object : InvestmentAdapter.OnInvestmentClickListener {
             override fun onInvestmentClick(investment: Investment) {
-                // Handle click event
-//                FragmentHelper(requireActivity().supportFragmentManager,requireContext()).loadFragment(InvestmentProfileFragment())
                 InvestmentManager.setCurrentInvestment(investment)
                 showPlayerBottomSheetDialog()
             }
         })
 
-        if(UserManager.getCurrentUser()!=null) {
-            val user = UserManager.getCurrentUser()!!
+        var filteredInvestments = investments
 
-            //filer investments based on user tolerance, if investment.performance index is greater than user tolerance show that to the user
-
-            val investments = investments.filter { investment ->
+        UserManager.getCurrentUser()?.let { user ->
+            // Filter investments based on user tolerance, if investment.performance index is greater than user tolerance show that to the user
+            filteredInvestments = investments.filter { investment ->
                 val investmentPerformance = investment.performanceIndex
                 val userTolerance = user.riskTolerance
 
@@ -128,23 +125,17 @@ class ExploreInvestmentsFragment : Fragment() {
                     }
                 }
                 return@filter false
-
             }
         }
 
-
         val recommendedInvestmentsRecyclerView = view.findViewById<RecyclerView>(R.id.recommendedInvestmentsRecyclerView)
         recommendedInvestmentsRecyclerView.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
-        recommendedInvestmentsRecyclerView.adapter = InvestmentAdapter(investments, object : InvestmentAdapter.OnInvestmentClickListener {
+        recommendedInvestmentsRecyclerView.adapter = InvestmentAdapter(filteredInvestments, object : InvestmentAdapter.OnInvestmentClickListener {
             override fun onInvestmentClick(investment: Investment) {
-                // Handle click event
-//                FragmentHelper(requireActivity().supportFragmentManager,requireContext()).loadFragment(InvestmentProfileFragment())
                 InvestmentManager.setCurrentInvestment(investment)
                 showPlayerBottomSheetDialog()
-
             }
         })
-
     }
 
 

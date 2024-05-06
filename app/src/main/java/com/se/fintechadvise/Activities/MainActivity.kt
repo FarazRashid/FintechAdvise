@@ -29,7 +29,7 @@ class MainActivity : AppCompatActivity() {
 //            startActivity(Intent(this@MainActivity, HomeActivity::class.java))
 //            startActivity(Intent(this@MainActivity, HomeActivity::class.java))
                 NotificationsManager.getInstance().createNotificationChannel(this)
-                startActivity(Intent(this@MainActivity, LoginOrSignupActivity::class.java))
+                startActivity(Intent(this@MainActivity, OnboardingActivity::class.java))
                 finish()
             }, MainActivity.SPLASH_DELAY)
 //        }
