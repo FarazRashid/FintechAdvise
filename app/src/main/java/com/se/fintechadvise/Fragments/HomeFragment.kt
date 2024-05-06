@@ -14,9 +14,11 @@ import android.widget.ArrayAdapter
 import android.widget.EditText
 import android.widget.ImageButton
 import android.widget.ImageView
+import android.widget.ProgressBar
 import android.widget.Spinner
 import android.widget.TextView
 import androidx.cardview.widget.CardView
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
@@ -24,6 +26,8 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.navigation.NavigationView
+import com.plaid.internal.core.protos.link.workflow.nodes.panes.`ButtonWithCardsPaneOuterClass$ButtonWithCardsPane`.Rendering.Card
+import com.se.fintechadvise.Activities.ConnectBankActivity
 import com.se.fintechadvise.Activities.PrivacyPolicy
 import com.se.fintechadvise.AdapterClasses.BudgetAdapter
 import com.se.fintechadvise.AdapterClasses.TransactionsAdapter
@@ -31,6 +35,8 @@ import com.se.fintechadvise.DataClasses.Budget
 import com.se.fintechadvise.DataClasses.Transaction
 import com.se.fintechadvise.HelperClasses.BottomNavigationHelper
 import com.se.fintechadvise.HelperClasses.FragmentHelper
+import com.se.fintechadvise.ManagerClasses.BankInstanceManager
+import com.se.fintechadvise.ManagerClasses.UserManager
 import com.se.fintechadvise.R
 
 // TODO: Rename parameter arguments, choose names that match
@@ -105,15 +111,108 @@ class HomeFragment : Fragment(), TransactionsAdapter.OnItemClickListener  {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_home, container, false)
 
+        view?.findViewById<TextView>(R.id.usernameTextView)?.text = UserManager.getCurrentUser()?.name!!.split(" ")[0]
         getTransactionsList()
         setupPlanButton(view)
-
+        setupBankAccount(view)
         setupTransactionsRecyclerView(view)
         setupBudgetRecyclerView(view)
         setupSeeAllTransactions(view)
         setupMenuOpener(view)
 
         return view
+    }
+
+    private fun setupBankAccount(view: View?) {
+        // Connect to bank
+//        val bankBalanceTextView = view?.findViewById<TextView>(R.id.bankBalanceTextView)
+        val viewWalletButton = view?.findViewById<ImageButton>(R.id.viewWalletButton)
+//        val totalButton = view?.findViewById<TextView>(R.id.textView17)
+//        val myWallet = view?.findViewById<TextView>(R.id.textView18)
+
+        if (BankInstanceManager.isBankConnected()) {
+            turnOnUiForBank(view)
+//            bankBalanceTextView?.visibility = View.VISIBLE
+        } else {
+//            bankBalanceTextView?.visibility = View.GONE
+            turnOffUiForBank(view)
+        }
+
+        viewWalletButton?.setOnClickListener {
+            BankInstanceManager.connectBank()
+            val intent = Intent(requireContext(), ConnectBankActivity::class.java)
+            startActivity(intent)
+            // wait for the bank to connect
+            Handler(Looper.getMainLooper()).postDelayed({
+                if (BankInstanceManager.isBankConnected()) {
+                    turnOnUiForBank(view)
+                }
+            }, 5000)
+
+        }
+    }
+
+    private fun turnOffUiForBank(view: View?) {
+        val bankBalanceTextView = view?.findViewById<TextView>(R.id.bankBalanceTextView)
+        val viewWalletButton = view?.findViewById<ImageButton>(R.id.viewWalletButton)
+        val totalButton = view?.findViewById<TextView>(R.id.textView17)
+        val myWallet = view?.findViewById<TextView>(R.id.textView18)
+
+        totalButton?.text = "To Access All of the Features,"
+        bankBalanceTextView?.text = "Connect Your \nBank Account"
+        myWallet?.text = "Connect Now"
+        bankBalanceTextView?.textSize = 24f
+
+        view?.findViewById<CardView>(R.id.cardView2)?.visibility = View.GONE
+        view?.findViewById<ConstraintLayout>(R.id.constraintLayout2)?.visibility = View.GONE
+        view?.findViewById<View>(R.id.viewthing)?.visibility = View.GONE
+        view?.findViewById<View>(R.id.viewthing2)?.visibility = View.GONE
+        view?.findViewById<View>(R.id.viewthing3)?.visibility = View.GONE
+        view?.findViewById<TextView>(R.id.textView172)?.visibility = View.GONE
+        view?.findViewById<TextView>(R.id.progressSoFarTextView)?.visibility = View.GONE
+        view?.findViewById<ProgressBar>(R.id.progressBar)?.visibility = View.GONE
+        view?.findViewById<TextView>(R.id.totalProgress)?.visibility = View.GONE
+        view?.findViewById<TextView>(R.id.totaldays)?.visibility = View.GONE
+        view?.findViewById<TextView>(R.id.textView182)?.visibility = View.GONE
+        view?.findViewById<ImageButton>(R.id.viewPlanButton)?.visibility = View.GONE
+        view?.findViewById<TextView>(R.id.textsoadnfoaView18)?.visibility = View.GONE
+        view?.findViewById<TextView>(R.id.textsoadnfoaView17)?.visibility = View.GONE
+        view?.findViewById<RecyclerView>(R.id.budgetingRecyclerView)?.visibility = View.GONE
+        view?.findViewById<TextView>(R.id.seeAllTransactionsTextView)?.visibility = View.GONE
+        view?.findViewById<RecyclerView>(R.id.transactionsRecyclerView)?.visibility = View.GONE
+
+
+    }
+
+    private fun turnOnUiForBank(view:View?){
+        val bankBalanceTextView = view?.findViewById<TextView>(R.id.bankBalanceTextView)
+        val viewWalletButton = view?.findViewById<ImageButton>(R.id.viewWalletButton)
+        val totalButton = view?.findViewById<TextView>(R.id.textView17)
+        val myWallet = view?.findViewById<TextView>(R.id.textView18)
+        bankBalanceTextView?.text = "$25,000.40" // replace with actual bank balance
+//            viewWalletButton.setImageResource(R.drawable.rightArrow) // replace with actual image resource
+        totalButton?.text = "Total Balance"
+        myWallet?.text = "My Wallet"
+        bankBalanceTextView?.textSize = 35f
+
+        view?.findViewById<CardView>(R.id.cardView2)?.visibility = View.VISIBLE
+        view?.findViewById<ConstraintLayout>(R.id.constraintLayout2)?.visibility = View.VISIBLE
+        view?.findViewById<View>(R.id.viewthing)?.visibility = View.VISIBLE
+        view?.findViewById<View>(R.id.viewthing2)?.visibility = View.VISIBLE
+        view?.findViewById<View>(R.id.viewthing3)?.visibility = View.VISIBLE
+        view?.findViewById<TextView>(R.id.textView172)?.visibility = View.VISIBLE
+        view?.findViewById<TextView>(R.id.progressSoFarTextView)?.visibility = View.VISIBLE
+        view?.findViewById<ProgressBar>(R.id.progressBar)?.visibility = View.VISIBLE
+        view?.findViewById<TextView>(R.id.totalProgress)?.visibility = View.VISIBLE
+        view?.findViewById<TextView>(R.id.totaldays)?.visibility = View.VISIBLE
+        view?.findViewById<TextView>(R.id.textView182)?.visibility = View.VISIBLE
+        view?.findViewById<ImageButton>(R.id.viewPlanButton)?.visibility = View.VISIBLE
+        view?.findViewById<TextView>(R.id.textsoadnfoaView18)?.visibility = View.VISIBLE
+        view?.findViewById<TextView>(R.id.textsoadnfoaView17)?.visibility = View.VISIBLE
+        view?.findViewById<RecyclerView>(R.id.budgetingRecyclerView)?.visibility = View.VISIBLE
+        view?.findViewById<TextView>(R.id.seeAllTransactionsTextView)?.visibility = View.VISIBLE
+        view?.findViewById<RecyclerView>(R.id.transactionsRecyclerView)?.visibility = View.VISIBLE
+
     }
 
     private fun setupSeeAllTransactions(view: View?) {
