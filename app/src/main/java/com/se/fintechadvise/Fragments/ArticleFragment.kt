@@ -5,6 +5,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageButton
+import android.widget.ImageView
 import android.widget.TextView
 import com.se.fintechadvise.DataClasses.Article
 import com.se.fintechadvise.ManagerClasses.ArticleManager
@@ -43,14 +45,26 @@ class ArticleFragment : Fragment() {
 
         currentArticle =ArticleManager.getCurrentArticle()
 
+        setupBackButton(view)
+
         setupArticle(view)
 
         return view
     }
 
+    private fun setupBackButton(view: View?) {
+        val backButton = view?.findViewById<ImageView>(R.id.backButtonTran)
+        backButton?.setOnClickListener {
+            requireActivity().onBackPressedDispatcher.onBackPressed()
+        }
+    }
     private fun setupArticle(view: View?) {
         val title = view?.findViewById<TextView>(R.id.articleTitle)
         val content = view?.findViewById<TextView>(R.id.articleContent)
+
+        title?.text = currentArticle?.title
+        content?.text = currentArticle?.description
+
 
     }
 

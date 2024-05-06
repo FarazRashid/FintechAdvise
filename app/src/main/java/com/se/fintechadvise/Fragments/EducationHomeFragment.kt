@@ -6,12 +6,14 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageButton
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.se.fintechadvise.DataClasses.Badge
 import com.se.fintechadvise.R
 import com.se.fintechadvise.AdapterClasses.BadgesAdapter
 import com.se.fintechadvise.AdapterClasses.OnBadgeClickListener
+import com.se.fintechadvise.HelperClasses.FragmentHelper
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -44,6 +46,11 @@ class EducationHomeFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_education_home, container, false)
         badgesRecycler = view.findViewById<RecyclerView>(R.id.gridLayout)
         initBadges()
+
+        view.findViewById<ImageButton>(R.id.personalisedLearningButton).setOnClickListener {
+            Log.d("MainActivity", "Personalised Learning Button clicked")
+            FragmentHelper(requireActivity().supportFragmentManager,requireContext()).loadFragment(CourseDetailFragment())
+        }
 
         return view
     }
