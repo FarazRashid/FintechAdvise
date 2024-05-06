@@ -1,7 +1,7 @@
 package com.se.fintechadvise.ManagerClasses
 
 object BankInstanceManager {
-    var isConnected : Boolean = false
+    private var isConnected : Boolean = false
     fun isBankConnected(): Boolean {
         return isConnected
     }

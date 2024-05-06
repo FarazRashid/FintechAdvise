@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Fragments.PersonalisedLearningQuestionareFragment">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingHorizontal="16dp"
+        android:layout_marginBottom="10dp">
+
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <ImageView
+                android:id="@+id/backButton"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginTop="20dp"
+                android:src="@drawable/left_arrow" />
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:src="@drawable/logo_home"
+                android:layout_gravity="center"
+                android:layout_marginBottom="25dp"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="32sp"
+                android:text="Personalised Learning"
+                android:fontFamily="@font/avenirnext_regular"
+                android:textColor="@color/text_primary"
+                android:textStyle="bold"
+                android:layout_gravity="center"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="32sp"
+                android:text="Assessment"
+                android:fontFamily="@font/avenirnext_regular"
+                android:textColor="@color/text_primary"
+                android:textStyle="bold"
+                android:layout_gravity="center"
+                android:layout_marginBottom="25dp"
+                />
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Learning Goals:"
+                android:fontFamily="@font/avenirnext_regular"
+                android:textColor="@color/text_primary"
+                android:textColorHint="@color/text_secondary"
+                android:textSize="18sp"
+                android:layout_marginTop="15dp"
+                android:textStyle="bold"
+                />
+
+            <EditText
+                android:id="@+id/goalsEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:fontFamily="@font/avenirnext_regular"
+                android:textColor="@color/text_primary"
+                android:textColorHint="@color/text_secondary"
+                android:hint="What are your primary learning goals?"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
+                android:text="Please answer the following questions to help us understand your current knowledge of financial concepts."
+                android:fontFamily="@font/avenirnext_regular"
+                android:textColor="@color/text_primary"
+                android:layout_marginTop="15dp"
+                android:layout_gravity="center" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="1. What is compound interest and how does it work?"
+                android:fontFamily="@font/avenirnext_regular"
+                android:textColor="@color/text_primary"
+                android:textSize="18sp"
+                android:layout_marginTop="15dp"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/compoundInterestAnswer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:fontFamily="@font/avenirnext_regular"
+                android:textColor="@color/text_primary"
+                android:textColorHint="@color/text_secondary"
+                android:hint="Your answer here" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="2. Define diversification and explain its importance in investment."
+                android:fontFamily="@font/avenirnext_regular"
+                android:textColor="@color/text_primary"
+                android:textSize="18sp"
+                android:layout_marginTop="15dp"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/diversificationAnswer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:fontFamily="@font/avenirnext_regular"
+                android:textColor="@color/text_primary"
+                android:textColorHint="@color/text_secondary"
+                android:hint="Your answer here" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="3. Explain the concept of risk-return tradeoff in investment."
+                android:fontFamily="@font/avenirnext_regular"
+                android:textColor="@color/text_primary"
+                android:textSize="18sp"
+                android:layout_marginTop="15dp"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/riskReturnTradeoffAnswer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:fontFamily="@font/avenirnext_regular"
+                android:textColor="@color/text_primary"
+                android:textColorHint="@color/text_secondary"
+                android:hint="Your answer here" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="4. Scenario:"
+                android:fontFamily="@font/avenirnext_regular"
+                android:textColor="@color/text_primary"
+                android:textColorHint="@color/text_secondary"
+                android:layout_marginTop="15dp"
+
+                android:textSize="18sp"
+                android:textStyle="bold"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="You have invested in a stock that has been performing poorly for the past few months. What would you do?"
+                android:textSize="16sp"
+                android:textColor="@color/text_secondary"
+                android:layout_marginTop="8dp"
+                />
+            <RadioGroup
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/riskToleranceRadioGroup"
+                android:layout_marginTop="5dp"
+                android:orientation="vertical"
+                >
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Sell all of the stock"
+                    android:fontFamily="@font/avenirnext_regular"
+                    android:textColor="@color/text_primary"
+                    android:textColorHint="@color/text_secondary"
+                    android:textSize="16sp"
+                    />
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Sell some of the stock"
+                    android:fontFamily="@font/avenirnext_regular"
+                    android:textColor="@color/text_primary"
+                    android:textColorHint="@color/text_secondary"
+                    android:textSize="16sp"
+                    />
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Hold on to the stock"
+                    android:fontFamily="@font/avenirnext_regular"
+                    android:textColor="@color/text_primary"
+                    android:textColorHint="@color/text_secondary"
+                    android:textSize="16sp"
+                    />
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Buy more of the stock"
+                    android:fontFamily="@font/avenirnext_regular"
+                    android:textColor="@color/text_primary"
+                    android:textColorHint="@color/text_secondary"
+                    android:textSize="16sp"
+                    />
+            </RadioGroup>
+
+
+            <Button
+                android:id="@+id/submitFormButton"
+                android:layout_gravity="center"
+                android:layout_width="wrap_content"
+                android:paddingHorizontal="20dp"
+                android:layout_margin="20dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/rounded_border"
+                android:backgroundTint="@color/icon_secondary"
+                android:paddingTop="8dp"
+                android:paddingBottom="8dp"
+                android:text="Submit your Assessment"
+                android:elevation="25dp"
+                android:textAllCaps="false"
+                android:textColor="@color/white"/>
+
+        </LinearLayout>
+
+    </ScrollView>
+</FrameLayout>

@@ -11,6 +11,8 @@ import android.widget.ImageView
 import android.widget.SearchView
 import android.widget.TextView
 import android.widget.ImageButton
+import androidx.cardview.widget.CardView
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.se.fintechadvise.DataClasses.Badge
@@ -19,6 +21,7 @@ import com.se.fintechadvise.AdapterClasses.BadgesAdapter
 import com.se.fintechadvise.AdapterClasses.OnBadgeClickListener
 import org.w3c.dom.Text
 import com.se.fintechadvise.HelperClasses.FragmentHelper
+import com.se.fintechadvise.ManagerClasses.PersonalisedLearningManager
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -73,14 +76,38 @@ class EducationHomeFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.fragment_education_home, container, false)
+        checkPersonalisedLearning(view)
+
         badgesRecycler = view.findViewById<RecyclerView>(R.id.gridLayout)
+
         initBadges()
         initializeViews(view)
 
         return view
     }
 
-    
+    private fun checkPersonalisedLearning(view:View) {
+        if(PersonalisedLearningManager.isPersonalisedLearningEnabled()){
+            view.findViewById<TextView>(R.id.textView200).visibility = View.GONE
+            view.findViewById<ImageButton>(R.id.personalisedLearningButton).visibility = View.GONE
+            view.findViewById<ConstraintLayout>(R.id.constraintLayout).visibility = View.GONE
+            view.findViewById<CardView>(R.id.cardView).visibility = View.GONE
+        }
+        else{
+            view.findViewById<TextView>(R.id.textView200).visibility = View.VISIBLE
+            view.findViewById<ImageButton>(R.id.personalisedLearningButton).visibility = View.VISIBLE
+            view.findViewById<ConstraintLayout>(R.id.constraintLayout).visibility = View.VISIBLE
+            view.findViewById<CardView>(R.id.cardView).visibility = View.VISIBLE
+        }
+    }
+
+    private fun setupPersonalizedLearningQuestionare(view:View?) {
+       view?.findViewById<ImageButton>(R.id.personalisedLearningButton)?.setOnClickListener {
+            val fragment = PersonalisedLearningQuestionareFragment()
+            FragmentHelper(requireActivity().supportFragmentManager,requireContext()).loadFragment(fragment)
+
+       }
+    }
 
     private fun initializeViews(view: View){
 
@@ -142,6 +169,9 @@ class EducationHomeFragment : Fragment() {
                 return false
             }
         })
+
+
+        setupPersonalizedLearningQuestionare(view)
 
     }
 
