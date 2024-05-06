@@ -9,6 +9,8 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import com.google.android.material.navigation.NavigationView
+import com.se.fintechadvise.Fragments.EducationHomeFragment
+import com.se.fintechadvise.Fragments.CourseDetailFragment
 import com.se.fintechadvise.Fragments.HomeFragment
 import com.se.fintechadvise.HelperClasses.BottomNavigationHelper
 import com.se.fintechadvise.R

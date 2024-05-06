@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Fragments.TransactionsFragment">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="20dp"
+        >
+
+        <ImageView
+            android:id="@+id/backButtonTran"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="20dp"
+            android:src="@drawable/left_arrow"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginEnd="20dp"
+            app:layout_constraintHeight_percent="0.92"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/backButtonTran">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/articleTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:fontFamily="@font/poppins_bold"
+                    android:text="Title"
+                    android:textColor="@color/text_primary"
+
+                    android:textSize="33sp"
+                    app:layout_constraintStart_toEndOf="@+id/backButtonTran"
+                    app:layout_constraintTop_toBottomOf="@+id/backButtonTran" />
+
+                <TextView
+                    android:id="@+id/articleContent"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:text="Content"
+                    android:textColor="@color/text_secondary"
+                    android:fontFamily="@font/poppins_medium"
+                    android:textSize="18sp"
+                    app:layout_constraintStart_toStartOf="@+id/articleTitle"
+                    app:layout_constraintTop_toBottomOf="@+id/articleTitle" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:textSize="20sp"
+                    android:text="Was this article helpful?" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+
+                    <Button
+                        android:id="@+id/yesButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:background="@drawable/rounded_border"
+                        android:backgroundTint="@color/icon_secondary"
+                        android:elevation="25dp"
+                        android:paddingTop="2dp"
+                        android:paddingBottom="2dp"
+                        android:text="Yes"
+                        android:textAllCaps="false"
+                        android:textColor="@color/white"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/textView14" />
+
+                    <Button
+                        android:id="@+id/noButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginTop="10dp"
+                        android:background="@drawable/rounded_border"
+                        android:backgroundTint="@color/icon_secondary"
+                        android:elevation="25dp"
+                        android:text="No"
+                        android:textAllCaps="false"
+                        android:textColor="@color/white"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/textView14" />
+
+                </LinearLayout>
+            </LinearLayout>
+        </ScrollView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</FrameLayout>
+

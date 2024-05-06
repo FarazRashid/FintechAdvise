@@ -36,6 +36,10 @@ class PlanAdapter(private val plans: List<Plans>) : RecyclerView.Adapter<PlanAda
                 holder.planImage.setColorFilter(ContextCompat.getColor(holder.itemView.context, R.color.silverColor))
                 holder.cardView.setCardBackgroundColor(ContextCompat.getColor(holder.itemView.context, R.color.silverColorDark))
             }
+            "Bronze" -> {
+                holder.planImage.setColorFilter(ContextCompat.getColor(holder.itemView.context, R.color.bronzeColor))
+                holder.cardView.setCardBackgroundColor(ContextCompat.getColor(holder.itemView.context, R.color.bronzeColorDark))
+            }
             else -> {
                 holder.planImage.setColorFilter(ContextCompat.getColor(holder.itemView.context, R.color.white))
 

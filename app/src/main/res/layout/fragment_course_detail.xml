@@ -1,0 +1,273 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Fragments.TransactionsFragment">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="20dp"
+        android:background="@color/white">
+
+        <ImageView
+            android:id="@+id/backButtonTran"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="10dp"
+            android:src="@drawable/left_arrow"
+            app:layout_constraintStart_toStartOf="@+id/textsoadnfoaView17"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/textsoadnfoaView17"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/poppins_semi_bold"
+            android:text="Course Title"
+            android:textColor="@color/text_primary"
+            android:textSize="28sp"
+            app:layout_constraintStart_toEndOf="@+id/backButtonTran"
+            app:layout_constraintStart_toStartOf="@+id/cardView3"
+            app:layout_constraintTop_toBottomOf="@+id/backButtonTran" />
+
+        <TextView
+            android:id="@+id/CompletionPercent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/poppins_semi_bold"
+            android:text="70% Complete"
+            android:textColor="@color/silverColorDark"
+            android:textSize="20sp"
+            app:layout_constraintStart_toStartOf="@+id/cardView3"
+            app:layout_constraintTop_toBottomOf="@+id/textsoadnfoaView17" />
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardView3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginTop="10dp"
+            app:cardBackgroundColor="@color/white"
+            app:cardCornerRadius="25dp"
+            app:cardElevation="5dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/CompletionPercent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="20dp"
+                    android:fontFamily="@font/poppins_semi_bold"
+                    android:text="Overview"
+                    android:textColor="#ED2E7E"
+                    android:textSize="20sp" />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:id="@+id/linearLayout3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+
+                        android:padding="10dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent">
+
+                        <TextView
+                            android:id="@+id/estimatedTimeTextView"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginBottom="5dp"
+                            android:fontFamily="@font/poppins_semi_bold"
+                            android:text="20:30"
+                            android:textColor="#E3508B"
+                            android:textSize="20sp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/poppins_semi_bold"
+                            android:text="Estimated Time"
+                            android:textColor="#E3508B"
+                            android:textSize="12sp" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="10dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toStartOf="@+id/linearLayout4"
+                        app:layout_constraintStart_toEndOf="@+id/linearLayout3"
+                        app:layout_constraintTop_toTopOf="parent">
+
+                        <TextView
+                            android:id="@+id/difficultyTextView"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginBottom="5dp"
+                            android:fontFamily="@font/poppins_semi_bold"
+                            android:text="3"
+
+                            android:textColor="#3F51B5"
+                            android:textSize="20sp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/poppins_semi_bold"
+                            android:text="Difficulty"
+                            android:textColor="#3F51B5"
+
+                            android:textSize="12sp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/linearLayout4"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="10dp"
+                        android:orientation="vertical"
+                        android:padding="10dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent">
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content">
+
+                            <ProgressBar
+                                android:id="@+id/progressBar"
+                                style="@android:style/Widget.ProgressBar.Horizontal"
+                                android:layout_width="110dp"
+                                android:layout_height="110dp"
+                                android:layout_centerInParent="true"
+                                android:elevation="6dp"
+                                android:progress="70"
+                                android:progressDrawable="@drawable/progress_bar_circle"
+                                android:rotation="0"
+                                android:translationZ="8dp"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+                            <ImageView
+                                android:id="@+id/imageView6"
+                                android:layout_width="60dp"
+                                android:layout_height="60dp"
+                                android:elevation="2dp"
+                                android:src="@drawable/circle"
+
+                                android:translationZ="2dp"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:tint="@color/text_primary" />
+
+                            <TextView
+                                android:id="@+id/progressText"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_centerInParent="true"
+                                android:elevation="8dp"
+                                android:fontFamily="@font/poppins_semi_bold"
+                                android:text="70%"
+                                android:textColor="@color/white"
+
+                                android:textSize="20sp"
+                                android:translationZ="8dp"
+                                app:layout_constraintBottom_toBottomOf="@+id/imageView6"
+                                app:layout_constraintEnd_toEndOf="@+id/imageView6"
+                                app:layout_constraintStart_toStartOf="@+id/imageView6"
+                                app:layout_constraintTop_toTopOf="@+id/imageView6" />
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+                    </LinearLayout>
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_margin="20dp"
+            app:cardBackgroundColor="@color/white"
+            app:cardCornerRadius="25dp"
+            app:cardElevation="6dp"
+            app:layout_constraintHeight_percent="0.44"
+            app:layout_constraintBottom_toBottomOf="@+id/pink"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/cardView3">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="15dp"
+                    android:fontFamily="@font/poppins_semi_bold"
+                    android:text="Articles"
+                    android:textColor="#ED2E7E"
+                    android:textSize="20sp" />
+                <androidx.recyclerview.widget.RecyclerView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/lessonsRecyclerView"
+                    android:padding="15dp"
+                />
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <ImageView
+            android:id="@+id/pink"
+            android:layout_width="match_parent"
+            android:layout_height="350dp"
+            android:src="@drawable/pink"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:scaleType="centerCrop"
+            android:elevation="3dp"
+            />
+        <ImageView
+            android:id="@+id/brown"
+            android:layout_width="match_parent"
+            android:layout_height="350dp"
+            android:src="@drawable/brown"
+            android:scaleType="centerCrop"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</FrameLayout>

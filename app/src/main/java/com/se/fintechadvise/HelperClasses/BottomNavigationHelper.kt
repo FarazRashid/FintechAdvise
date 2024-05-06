@@ -8,6 +8,8 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.se.fintechadvise.Fragments.CourseDetailFragment
+import com.se.fintechadvise.Fragments.EducationHomeFragment
 import com.se.fintechadvise.Fragments.ExploreInvestmentsFragment
 import com.se.fintechadvise.Fragments.HomeFragment
 import com.se.fintechadvise.Fragments.InvestmentPortfolioFragment
@@ -22,23 +24,34 @@ class BottomNavigationHelper(private val activity: AppCompatActivity) {
         bottomNavigationView.setOnNavigationItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.navigation_home -> {
-                    loadFragment(HomeFragment())
+                    //if not current
+                    if(activity.supportFragmentManager.findFragmentById(R.id.fragment_container) !is HomeFragment) {
+                        loadFragment(HomeFragment())
+                    }
                     Log.d("BottomNavigationHelper", "Home Fragment loaded")
                     return@setOnNavigationItemSelectedListener true
                 }
                 R.id.navigation_investment -> {
-                    loadFragment(InvestmentPortfolioFragment())
+                    if (activity.supportFragmentManager.findFragmentById(R.id.fragment_container) !is InvestmentPortfolioFragment) {
+                        loadFragment(InvestmentPortfolioFragment())
+                    }
                     Log.d("BottomNavigationHelper", "Investment Portfolio Fragment loaded")
                     return@setOnNavigationItemSelectedListener true
                 }
                 R.id.navigation_goals -> {
-                    loadFragment(PlanningFragment())
+                    if(activity.supportFragmentManager.findFragmentById(R.id.fragment_container) !is PlanningFragment) {
+                        loadFragment(PlanningFragment())
+                    }
+//                    loadFragment(PlanningFragment())
                     Log.d("BottomNavigationHelper", "Explorations Fragment loaded")
                     return@setOnNavigationItemSelectedListener true
                 }
-                R.id.navigation_education -> {
-//                    loadFragment(ExploreInvestmentsFragment())
+                R.id.navigation_education -> { loadFragment(ExploreInvestmentsFragment())
                     Log.d("BottomNavigationHelper", "Education Fragment loaded")
+                    if (activity.supportFragmentManager.findFragmentById(R.id.fragment_container) !is EducationHomeFragment) {
+                        loadFragment(EducationHomeFragment())
+                    }
+//                    loadFragment(CourseDetailFragment())
                     return@setOnNavigationItemSelectedListener true
                 }
 

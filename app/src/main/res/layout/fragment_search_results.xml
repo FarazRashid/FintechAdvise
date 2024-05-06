@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/icon_secondary"
+    tools:context=".Fragments.SearchResultsFragment">
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+
+        <Button
+            android:id="@+id/imageView10"
+            android:layout_width="43dp"
+            android:layout_height="36dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="26dp"
+            android:elevation="5dp"
+            android:tint="@color/white"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:backgroundTint="@color/white"
+            android:background="@drawable/left_arrow" />
+
+
+        <TextView
+            android:id="@+id/textView20"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:fontFamily="@font/poppins_bold"
+            android:text="Search Results"
+            android:textColor="@color/white"
+            android:textSize="35sp"
+            app:layout_constraintStart_toStartOf="@+id/imageView10"
+            app:layout_constraintTop_toBottomOf="@+id/imageView10" />
+
+        <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_margin="0dp"
+        app:cardBackgroundColor="@color/white"
+        app:cardCornerRadius="25dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/textView20"
+            app:layout_constraintHeight_percent="0.75"
+
+        >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/noResultsFoundTextView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="20dp"
+                    android:visibility="gone"
+                    android:fontFamily="@font/poppins_semi_bold"
+                    android:text="We found No Results! Try Again!"
+                    android:textColor="#191818"
+                    android:textSize="35sp"
+                    app:layout_constraintStart_toStartOf="@+id/imageView10"
+                    app:layout_constraintTop_toBottomOf="@+id/imageView10" />
+
+                <TextView
+                    android:id="@+id/articlesTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="24dp"
+                    android:fontFamily="@font/poppins_semi_bold"
+                    android:text="Articles"
+                    android:textColor="@color/text_secondary"
+                    android:textSize="24sp" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/lessonsRecyclerView"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="15dp" />
+            </LinearLayout>
+
+
+
+        </androidx.cardview.widget.CardView>
+
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:src="@drawable/rounded_border"
+            android:background="@color/white"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+
+            />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</FrameLayout>
