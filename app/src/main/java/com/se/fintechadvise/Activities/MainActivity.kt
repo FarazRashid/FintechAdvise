@@ -17,19 +17,20 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        if(UserManager.getInstance().getUserLoggedInSP(getSharedPreferences("USER_LOGIN", MODE_PRIVATE))){
-            Navigator.navigateToActivity(this@MainActivity,HomeActivity::class.java)
-            finish()
-        }
-
-        Handler().postDelayed(Runnable {
-        // startActivity(Intent(this@MainActivity, ConnectBankActivity::class.java))
-        // startActivity(Intent(this@MainActivity, PlanningActivity::class.java))
+//        if(UserManager.getInstance().getUserLoggedInSP(getSharedPreferences("USER_LOGIN", MODE_PRIVATE))){
+//            Navigator.navigateToActivity(this@MainActivity,HomeActivity::class.java)
+//            finish()
+//        }
+//        else {
+            Handler().postDelayed(Runnable {
+                // startActivity(Intent(this@MainActivity, ConnectBankActivity::class.java))
+                // startActivity(Intent(this@MainActivity, PlanningActivity::class.java))
 //            startActivity(Intent(this@MainActivity, HomeActivity::class.java))
 //            startActivity(Intent(this@MainActivity, HomeActivity::class.java))
-            startActivity(Intent(this@MainActivity, HomeActivity::class.java))
-            finish()
-        }, MainActivity.SPLASH_DELAY)
+                startActivity(Intent(this@MainActivity, LoginOrSignupActivity::class.java))
+                finish()
+            }, MainActivity.SPLASH_DELAY)
+//        }
     }
     companion object {
         private const val SPLASH_DELAY: Long = 2000 // 2 seconds

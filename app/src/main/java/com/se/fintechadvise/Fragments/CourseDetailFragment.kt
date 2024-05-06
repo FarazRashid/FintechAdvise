@@ -20,6 +20,7 @@ import com.se.fintechadvise.Activities.PrivacyPolicy
 import com.se.fintechadvise.AdapterClasses.ArticleAdapter
 import com.se.fintechadvise.DataClasses.Article
 import com.se.fintechadvise.HelperClasses.FragmentHelper
+import com.se.fintechadvise.ManagerClasses.ArticleManager
 import com.se.fintechadvise.R
 import org.w3c.dom.Text
 import kotlin.random.Random
@@ -95,7 +96,13 @@ class CourseDetailFragment : Fragment() {
 
         val recyclerView = view?.findViewById<RecyclerView>(R.id.lessonsRecyclerView)
         recyclerView?.layoutManager = LinearLayoutManager(requireActivity())
-        recyclerView?.adapter = ArticleAdapter(articleList)
+        recyclerView?.adapter = ArticleAdapter(articleList, object : ArticleAdapter.OnItemClickListener {
+            override fun onItemClick(position: Int, article: Article) {
+                ArticleManager.setCurrentArticle(article)
+               val articleFragment = ArticleFragment()
+                FragmentHelper(requireActivity().supportFragmentManager, requireContext()).loadFragment(articleFragment)
+            }
+        })
 
 
     }

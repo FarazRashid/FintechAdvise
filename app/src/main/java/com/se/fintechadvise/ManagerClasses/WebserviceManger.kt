@@ -25,7 +25,7 @@
 
         private var instance: WebserviceManger? = null
 
-        private val BASE_URL = "http://192.168.1.5:5000/"
+        private val BASE_URL = "http://192.168.96.230:5000/"
 
         @JvmStatic
         fun getInstance(): WebserviceManger {

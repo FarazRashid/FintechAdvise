@@ -19,6 +19,7 @@ import com.se.fintechadvise.AdapterClasses.PlanAdapter
 import com.se.fintechadvise.DataClasses.Article
 import com.se.fintechadvise.DataClasses.Plans
 import com.se.fintechadvise.HelperClasses.FragmentHelper
+import com.se.fintechadvise.ManagerClasses.ArticleManager
 import com.se.fintechadvise.R
 import kotlin.random.Random
 
@@ -113,7 +114,13 @@ class InvestmentPortfolioFragment : Fragment() {
         getArticles()
         val knowledgeRecyclerView = view?.findViewById<RecyclerView>(R.id.knowledgeRecyclerView)
         knowledgeRecyclerView?.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
-        knowledgeRecyclerView?.adapter = ArticleAdapter(articleList)
+        knowledgeRecyclerView?.adapter = ArticleAdapter(articleList, object : ArticleAdapter.OnItemClickListener {
+            override fun onItemClick(position: Int, article: Article) {
+                ArticleManager.setCurrentArticle(article)
+                val articleFragment = ArticleFragment()
+                FragmentHelper(requireActivity().supportFragmentManager, requireContext()).loadFragment(articleFragment)
+            }
+        })
     }
 
     private fun getArticles() {
