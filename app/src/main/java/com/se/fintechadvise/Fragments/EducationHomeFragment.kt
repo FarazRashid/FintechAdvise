@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.SearchView
 import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -53,6 +54,8 @@ class EducationHomeFragment : Fragment() {
     private var blueWalletTopicText: String= "Investments"
     private var yellowWalletTopicText: String = "Finances"
 
+    private  lateinit var searchView:SearchView
+
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -93,6 +96,8 @@ class EducationHomeFragment : Fragment() {
         yellowWallet=view.findViewById(R.id.imageView6)
         redWallet=view.findViewById(R.id.imageView7)
 
+        searchView=view.findViewById(R.id.searchView)
+
         //add on click listeners for red, yellow, annd blue wallets
 
         redWallet.setOnClickListener {
@@ -119,7 +124,24 @@ class EducationHomeFragment : Fragment() {
             transaction.commit()
         }
 
+        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                val courseDetailFragment = SearchResultsFragment.newInstance(query!!)
+                val transaction = requireActivity().supportFragmentManager.beginTransaction()
+                transaction.replace(R.id.fragment_container, courseDetailFragment)
+                transaction.addToBackStack(null)
+                transaction.commit()
+                return true
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                return false
+            }
+        })
+
     }
+
+
 
     private fun initBadges() {
         badges.add(Badge("All", false))
