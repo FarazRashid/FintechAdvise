@@ -26,7 +26,7 @@
         private var instance: WebserviceManger? = null
 
 //        private val BASE_URL = "http://192.168.96.230:5000/"
-        private val BASE_URL = "http://192.168.1.5:5000/"
+        private val BASE_URL = "http://172.16.140.67:5000"
 
         @JvmStatic
         fun getInstance(): WebserviceManger {
@@ -357,7 +357,7 @@
                             name = "LinkedIn",
                             allocation = null,
                             type = InvestmentType.STOCK,
-                            investmentImageUrl = "/images/1714750286.566741_862.png",
+                            investmentImageUrl =  BASE_URL +"/images/1714750286.566741_862.png",
                             currentValue = 20.0,
                             historicalPerformance = listOf(
                                 InvestmentPerformance("01/01/2022", 100.0),
@@ -371,7 +371,7 @@
                             name = "Apple",
                             allocation = null,
                             type = InvestmentType.STOCK,
-                            investmentImageUrl = "/images/1714749774.0610538_861.png",
+                            investmentImageUrl =  BASE_URL +"/images/1714749774.0610538_861.png",
                             currentValue = 50.0,
                             historicalPerformance = listOf(
                                 InvestmentPerformance("01/01/2022", 50.0),
@@ -385,7 +385,7 @@
                             name = "Uber",
                             allocation = null,
                             type = InvestmentType.STOCK,
-                            investmentImageUrl = "/images/1714750407.1451833_316.png",
+                            investmentImageUrl =  BASE_URL +"/images/1714750407.1451833_316.png",
                             currentValue = 50.0,
                             historicalPerformance = listOf(
                                 InvestmentPerformance("01/01/2022", 50.0),
@@ -399,7 +399,7 @@
                             name = "Geo News",
                             allocation = null,
                             type = InvestmentType.STOCK,
-                            investmentImageUrl = "/images/1714750349.1312501_900.png",
+                            investmentImageUrl =  BASE_URL +"/images/1714750349.1312501_900.png",
                             currentValue = 5.0,
                             historicalPerformance = listOf(
                                 InvestmentPerformance("01/01/2022", 5.0),
@@ -413,7 +413,7 @@
                             name = "FAST NUCES",
                             allocation = null,
                             type = InvestmentType.STOCK,
-                            investmentImageUrl = "/images/1714750508.4793658_404.png",
+                            investmentImageUrl =  BASE_URL +"/images/1714750508.4793658_404.png",
                             currentValue = 5.0,
                             historicalPerformance = listOf(
                                 InvestmentPerformance("01/01/2022", 5.0),
